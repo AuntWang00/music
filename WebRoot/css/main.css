@@ -1,0 +1,89 @@
+body{
+	font-family:"Microsoft Yahei",΢���ź�,"Helvetica Neue",Arial,sans-serif;
+	font-size:16px;
+	background:url(../images/bg.jpg) center no-repeat;
+}
+a{
+	color: #777;
+	text-decoration:none;
+}
+a:focus,
+a:hover {
+	color: #8b4513;
+}
+header{
+	height:50px;
+}
+
+header .account>a{
+	float:right;
+	padding-right:50px;
+	line-height: 30px;
+	color:black;
+	
+}
+
+header .logo{
+	height:89px;
+	background: url(../images/logo.png) center no-repeat;
+	background-color:#54BDA8;
+	filter:alpha(opacity=80);
+	opacity:0.5;
+}
+
+main{
+	margin-top:45px;
+	margin-left:10px;
+}
+
+main .search-go{
+	margin-right:215px;
+	padding:4px 15px;
+	font-family:"Microsoft Yahei",微软雅黑,"Helvetica Neue",Arial,sans-serif;
+	border:1px solid white;
+	border-radius:3px;
+	font-size:14px;
+	color:white;
+	background:#31a8e6;
+	
+}
+
+main .search{
+	margin-left:1px;
+	border:2px solid #31a8e6;
+	border-radius:5px;
+	font-size:14px;
+	height:24px;
+	width:200px;
+	
+	
+}
+
+main table{
+	text-align:center;
+	margin:0 auto;
+	border:1px solid #31a8e6;
+	width:500px;
+	
+}
+main table th{
+	
+	height:50px;
+	
+}
+main table td{
+	
+	text-align:center;
+	height:40px;
+}
+
+main div{
+	text-align:center;
+	height:40px;
+	
+}
+
+main p{
+	text-align:center;
+
+}
