@@ -2,21 +2,32 @@ package com.music.model;
 
 import java.util.HashSet;
 import java.util.Set;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import org.hibernate.annotations.GenericGenerator;
 
 /**
  * Customer entity. @author MyEclipse Persistence Tools
  */
-
+@Entity
+@Table(name = "music_customer", catalog = "music")
 public class Customer implements java.io.Serializable {
 
 	// Fields
 
 	private Integer customerid;
 	private String name;
-	private String password;
 	private Integer number;
-	private Set orders = new HashSet(0);
-	private Set orders_1 = new HashSet(0);
+	private String password;
+	private Set<Order> musicOrders = new HashSet<Order>(0);
+	private Set<Order> musicOrders_1 = new HashSet<Order>(0);
+	private Set<Order> musicOrders_2 = new HashSet<Order>(0);
 
 	// Constructors
 
@@ -25,23 +36,29 @@ public class Customer implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public Customer(String name, String password) {
+	public Customer(String name, Integer number, String password) {
 		this.name = name;
+		this.number = number;
 		this.password = password;
 	}
 
 	/** full constructor */
-	public Customer(String name, String password, Integer number, Set orders,
-			Set orders_1) {
+	public Customer(String name, Integer number, String password,
+			Set<Order> musicOrders, Set<Order> musicOrders_1,
+			Set<Order> musicOrders_2) {
 		this.name = name;
-		this.password = password;
 		this.number = number;
-		this.orders = orders;
-		this.orders_1 = orders_1;
+		this.password = password;
+		this.musicOrders = musicOrders;
+		this.musicOrders_1 = musicOrders_1;
+		this.musicOrders_2 = musicOrders_2;
 	}
 
 	// Property accessors
-
+	@GenericGenerator(name = "generator", strategy = "increment")
+	@Id
+	@GeneratedValue(generator = "generator")
+	@Column(name = "customerid", unique = true, nullable = false)
 	public Integer getCustomerid() {
 		return this.customerid;
 	}
@@ -50,6 +67,7 @@ public class Customer implements java.io.Serializable {
 		this.customerid = customerid;
 	}
 
+	@Column(name = "name", nullable = false, length = 20)
 	public String getName() {
 		return this.name;
 	}
@@ -58,14 +76,7 @@ public class Customer implements java.io.Serializable {
 		this.name = name;
 	}
 
-	public String getPassword() {
-		return this.password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
+	@Column(name = "number", nullable = false)
 	public Integer getNumber() {
 		return this.number;
 	}
@@ -74,20 +85,40 @@ public class Customer implements java.io.Serializable {
 		this.number = number;
 	}
 
-	public Set getOrders() {
-		return this.orders;
+	@Column(name = "password", nullable = false, length = 40)
+	public String getPassword() {
+		return this.password;
 	}
 
-	public void setOrders(Set orders) {
-		this.orders = orders;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
-	public Set getOrders_1() {
-		return this.orders_1;
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "customer")
+	public Set<Order> getMusicOrders() {
+		return this.musicOrders;
 	}
 
-	public void setOrders_1(Set orders_1) {
-		this.orders_1 = orders_1;
+	public void setMusicOrders(Set<Order> musicOrders) {
+		this.musicOrders = musicOrders;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "customer")
+	public Set<Order> getMusicOrders_1() {
+		return this.musicOrders_1;
+	}
+
+	public void setMusicOrders_1(Set<Order> musicOrders_1) {
+		this.musicOrders_1 = musicOrders_1;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "customer")
+	public Set<Order> getMusicOrders_2() {
+		return this.musicOrders_2;
+	}
+
+	public void setMusicOrders_2(Set<Order> musicOrders_2) {
+		this.musicOrders_2 = musicOrders_2;
 	}
 
 }

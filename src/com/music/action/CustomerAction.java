@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 
 
 @Controller @Scope("prototype")
+//@Results(value = { @Result(name = "fail", value = "/checkPerfail.jsp") })
 public class CustomerAction extends ActionSupport implements SessionAware{
 	
 @Resource CustomerDao customerDao;

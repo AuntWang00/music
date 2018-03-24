@@ -13,7 +13,24 @@
 			<generator class="increment"></generator>
 		</primary-key>
 	</table>
-<table name="songs" catalog="music" class="com.music.model.Songs">
+	<table name="songs" catalog="music" class="com.music.model.Songs">
+		<primary-key>
+			<generator class="increment"></generator>
+		</primary-key>
+	</table>
+	<table name="music_customer" catalog="music"
+		class="com.music.model.Customer">
+		<primary-key>
+			<generator class="increment"></generator>
+		</primary-key>
+	</table>
+	<table name="music_order" catalog="music"
+		class="com.music.model.Order">
+		<primary-key>
+			<generator class="increment"></generator>
+		</primary-key>
+	</table>
+<table name="singer" catalog="music" class="com.music.model.Singer">
 	<primary-key>
 		<generator class="increment"></generator>
 	</primary-key>

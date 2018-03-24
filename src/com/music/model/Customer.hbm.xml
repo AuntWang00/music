@@ -19,6 +19,7 @@
         <property name="number" type="java.lang.Integer">
             <column name="number" />
         </property>
+        
         <set name="orders" inverse="true">
             <key>
                 <column name="customer" />

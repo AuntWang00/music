@@ -33,9 +33,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     
     <s:form action="customer/customer_reg" method="post">
     <tr>
-    <td> <s:textfield name = "customer.name" label="用户名">用户名</s:textfield></td>
-    <td><s:textfield name = "customer.password" label="密码">密码</s:textfield></td>
-    <td><s:textfield name = "customer.number" label="账号">账号</s:textfield></td>
+    <td> <s:textfield name = "customer.bab" label="昵称">用户昵称</s:textfield></td>
+    <td><s:password name = "customer.password" label="密码">密码</s:password></td>
+    
     </tr>
     <tr>
     <th><s:submit value="提交"></s:submit></th>
@@ -43,6 +43,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </tr>
     </s:form>
     </table>
+    <li><span>还没有账户？</span><a href="login.jsp">注册一个</a><span>|</span></li>
     </main>
   <!--  
   <main class="bg">

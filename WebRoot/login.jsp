@@ -33,8 +33,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <s:form action="customer/customer_login" method="post">
     <s:textfield name = "customer.name" label="用户名"></s:textfield>
     <s:password name = "customer.password" label="密码"></s:password>
+    <s:textfield name = "customer.realname" label="真实姓名">真实姓名</s:textfield>
+    <s:textfield name = "customer.sex" label="性别">性别</s:textfield>
+  <s:textfield name = "customer.birthday" label="生日">生日</s:textfield>
+    <s:textfield name = "customer.country" label="国家">国家</s:textfield>
     <s:submit value="提交"></s:submit>   
     </s:form>
+    <li><span>还没有账户？</span><a href="reg.jsp">注册一个</a><span>|</span></li>
     </main>
   <!--  
   <main class="bg">
