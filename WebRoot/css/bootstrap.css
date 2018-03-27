@@ -1097,13 +1097,14 @@ textarea {
   line-height: inherit;
 }
 a {
-  color: #337ab7;
+  color: #473231;
   text-decoration: none;
+  font-weight:bold;
 }
 a:hover,
 a:focus {
-  color: #23527c;
-  text-decoration: underline;
+  color: #4e92b4;
+  text-decoration: none;
 }
 a:focus {
   outline: 5px auto -webkit-focus-ring-color;
@@ -1964,7 +1965,7 @@ pre code {
     width: 33.33333333%;
   }
   .col-md-3 {
-    width: 25%;
+    width: 50%;
   }
   .col-md-2 {
     width: 16.66666667%;
@@ -3229,8 +3230,8 @@ fieldset[disabled] .btn-success.focus {
 }
 .btn-info {
   color: #fff;
-  background-color: #5bc0de;
-  border-color: #46b8da;
+  background-color: #067749;
+  border-color: #067749;
 }
 .btn-info:focus,
 .btn-info.focus {
@@ -3819,9 +3820,10 @@ tbody.collapse.in {
   border-collapse: separate;
 }
 .input-group[class*="col-"] {
+	    margin-top: 20px;
   float: none;
-  padding-right: 0;
-  padding-left: 0;
+  padding-right: auto;
+  padding-left: auto;
 }
 .input-group .form-control {
   position: relative;
@@ -3972,7 +3974,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   margin-left: -1px;
 }
 .nav {
-  padding-left: 0;
+  padding-left: 20px;
   margin-bottom: 0;
   list-style: none;
 }
@@ -4519,7 +4521,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .navbar-default .navbar-nav > .active > a:hover,
 .navbar-default .navbar-nav > .active > a:focus {
   color: #555;
-  background-color: #e7e7e7;
+  background-color: #E0F0E6;
 }
 .navbar-default .navbar-nav > .disabled > a,
 .navbar-default .navbar-nav > .disabled > a:hover,
