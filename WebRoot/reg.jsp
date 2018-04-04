@@ -1,6 +1,5 @@
 ﻿<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib uri="/struts-tags" prefix="s"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -18,54 +17,129 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="expires" content="0">    
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
-	<link rel="stylesheet" type="text/css" href="css/main.css">
-	<link rel="stylesheet" href="<%=basePath%>css/bootstrap.css">
+	
+	<link rel="stylesheet" href="<%=basePath%>css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="<%=basePath%>css/font-awesome.css">
+	<link rel="stylesheet" type="text/css" href="<%=basePath%>css/main.css">
+	<!-- ------------以下这个css是bootstrap Validator插件的css-------------- -->
+	<link rel="stylesheet" type="text/css" href="<%=basePath%>css/bootstrapValidator.css">
+	
 	<link rel="shortcut icon" href="<%=basePath%>images/logo.png">
+	
   </head>
   
   <body>
-  <header>
-  		<div class="logo"></div>
-		    
-    </header>
-    <main>
-    <table>
+    <header>
+        <div >
+       		<h1 class="maige-title">
+       			<a href="main.jsp"><img srcset="images/title.png" alt="title logo" class="maige-logo"></a>					
+  			</h1>
+  		</div>	    
+    </header>  
+    <main class="bg">
     
-    <s:form action="customer/customer_reg" method="post">
-    <tr>
-    <td> <s:textfield name = "customer.bab" label="昵称">用户昵称</s:textfield></td>
-    <td><s:password name = "customer.password" label="密码">密码</s:password></td>
-    
-    </tr>
-    <tr>
-    <th><s:submit value="提交"></s:submit></th>
-    <th><s:reset value = "重填"></s:reset></th>
-    </tr>
-    </s:form>
-    </table>
-    <li><span>还没有账户？</span><a href="login.jsp">注册一个</a><span>|</span></li>
+	    <!-- <s:form action="customer/customer_reg" method="post" cssClass="login" validate="true">
+	      <h3>注&nbsp;&nbsp;&nbsp;&nbsp;册</h3>
+	      <div class="form-group">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                <s:textfield name="customer.name"></s:textfield> -->
+                <!--<input type="text" name="customer.name" pattern="^[a-zA-Z]\w{5,15}$" class="form-control" placeholder="请输入用户名" required>  -->
+                <!--<input type="email" name="customer.name" class="form-control" placeholder="请输入您的邮箱" required>  -->
+                <!--<input type="text" name="customer.name" class="form-control" placeholder="请输入用户名" required>  -->
+             <!--  </div>
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                <input type="password" name="customer.password" class="form-control" placeholder="请输入密码" required>
+              </div>
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-home"></i></span>
+                <input type="text" name="customer.address" class="form-control" placeholder="请输入您的地址">
+              </div>
+          </div>
+	      <button type="submit" class="btn btn-success btn-login">注&nbsp;&nbsp;册 </button>
+	    </s:form> -->
+	    <s:form action="customer/customer_reg" id="defaultForm" method="post" cssClass="login" validate="true">
+	      <h3>注&nbsp;&nbsp;&nbsp;&nbsp;册</h3>
+	       <div class="form-group">
+	         <div class="input-group">
+                 <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                 <input type="text" class="form-control" name="customer.name" />
+             </div>
+           </div>
+           <div class="form-group">
+	         <div class="input-group">
+                 <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                 <input type="text" class="form-control" name="customer.password" />
+             </div>
+           </div>
+           <div class="form-group">
+	         <div class="input-group">
+                 <span class="input-group-addon"><i class="fa fa-home"></i></span>
+                 <input type="text" class="form-control" name="customer.address" />
+             </div>
+           </div>
+           <div class="form-group">
+             <div class="input-group">
+               <button type="submit" class="btn btn-success btn-login">注&nbsp;&nbsp;册 </button>
+             </div>
+           </div>
+	    </s:form>
+	    
     </main>
-  <!--  
-  <main class="bg">
- <s:form action="customer/customer_login" method="post" cssclass="login">
- <h3>注册页面</h3>
- <div class="form-group">
- <div class="input-group">
- <span class="input-group-addon"><i class="fa fa-ul fa-lock"></i></span>
- <input type="text" name="customer.name" class="form-control" placeholder="用户名" required>
- </div>
- <div class="input-group">
- <span class="input-group-addon"><i class="fa fa-ul fa-lock"></i></span>
- <input type="password" name="customer.password" class="form-control" placeholder="密码" required>
-      </div>
-      <div class="input-group">
- <span class="input-group-addon"><i class="fa fa-ul fa-lock"></i></span>
- <input type="password" name="customer.password" class="form-control" placeholder="验证密码" required>
-      </div>
-      </div>
-      <button type="submit" class="btn btn-success">注册</button>
-    </s:form>
-    </main>
-    -->
+    <script src="<%=basePath%>js/jquery.min.js"></script>
+    <script src="<%=basePath%>js/bootstrap.min.js"></script>
+    <!-- -------以下这个css是bootstrap Validator插件的css--------- -->
+    <script src="<%=basePath%>js/bootstrapValidator.js"></script>
+    <script type="text/javascript">
+		$(document).ready(function() {
+		    $('#defaultForm')
+		        .bootstrapValidator({
+		            message: '请输入内容',
+		            feedbackIcons: {
+		                valid: 'fa fa-check',
+		                invalid: 'fa fa-remove',
+		                validating: 'fa fa-refresh'
+		            },
+		            fields: {
+		                'customer.name': {
+		                    message: '用户名无效',
+		                    validators: {
+		                        notEmpty: {
+		                            message: '用户名不得为空'
+		                        },
+		                        stringLength: {
+		                            min: 6,
+		                            max: 20,
+		                            message: '用户名必须在6-20个字符之间'
+		                        },
+		                        regexp: {
+		                            regexp: /^[a-zA-Z0-9_\.]+$/,
+		                            message: '用户名只能包含字母、数字、点、下划线 '
+		                        }	                        
+		                    }
+		                },
+		                'customer.password': {
+		                    validators: {
+		                        notEmpty: {
+		                            message: '密码不得为空'
+		                        },
+		                        different: {
+									field: 'customer.name',
+									message: '密码不能与用户名相同'
+									},
+		                    }
+		                },
+		                'customer.address': {
+		                    validators: {
+		                        notEmpty: {
+		                            message: '请输入地址'
+		                        }
+		                    }
+		                }
+		            }
+		        })
+		});
+	</script>
   </body>
 </html>

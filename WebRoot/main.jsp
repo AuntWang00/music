@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+﻿<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib uri="/struts-tags" prefix="s"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%
@@ -27,15 +27,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
  	 <link rel="stylesheet" href="css/buttons.css">
  	 <link href="http://cdn.bootcss.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-		<link type="text/css" rel="stylesheet" href="less/reset.css">
-		<link type="text/css" rel="stylesheet" href="less/slide.css">
-		<link type="text/css" rel="stylesheet" href="less/index.css">
-		
-		
-		<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>	
-			
-		<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
-		<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+ 	 <link type="text/css" rel="stylesheet" href="less/reset.css">
+ 	 <link type="text/css" rel="stylesheet" href="less/slide.css">
+ 	 <link type="text/css" rel="stylesheet" href="less/index.css">
+ 	 
+ 	 <link rel="stylesheet" type="text/css" href="<%=basePath%>css/font-awesome.css">
+ 	 
+ 	 <script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+ 	 
+ 	 <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+ 	 <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	
 	
 	
@@ -56,10 +57,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   			<div class="container2">	
 	  			<div class="menu">  
 			   		<ul>  					
-			  			<li class="active"><a class="fff" href="main.jsp">原创音乐馆</a></li>
-			  			<li><a class="f1" href="query.jsp">MV</a></li>
-			  			<li><a class="f1" href="#">我的音乐</a></li>
-			  			<li><a class="f1" href="#">关于买歌</a></li>			
+			  			<li class="active"><a class="fff" href="main.jsp"><i class="icon-music"></i> 原创音乐馆</a></li>
+			  			<li><a class="f1" href="query.jsp"><i class="icon-film"></i> MV</a></li>
+			  			<li><a class="f1" href="#"><i class="icon-headphones"></i> 我的音乐</a></li>
+			  			<li><a class="f1" href="#"><i class="icon-info"></i> 关于买歌</a></li>			
 			  		</ul>
 	  			</div>	
 	  <!-- 登录和注册按钮 -->
