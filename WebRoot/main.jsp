@@ -67,8 +67,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  		   		<table class="top-table">  		   		
 				   		<tr>
 		  		   			<td>
-		  		   				<a class="top-table-font1" href="reg.jsp">注册</a>
-			  		   			<a class="top-table-font2" href="login.jsp">登录</a>
+		  		   				<a class="top-table-font1" href="login.jsp">注册</a>
+			  		   			<a class="top-table-font2" href="reg.jsp">登录</a>
 			  		   		</td>
 			  		   	</tr>
 	  		  		</table> 

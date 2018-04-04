@@ -23,11 +23,10 @@ public class Customer implements java.io.Serializable {
 
 	private Integer customerid;
 	private String name;
-	private Integer number;
 	private String password;
-	private Set<Order> musicOrders = new HashSet<Order>(0);
-	private Set<Order> musicOrders_1 = new HashSet<Order>(0);
-	private Set<Order> musicOrders_2 = new HashSet<Order>(0);
+	private Integer number;
+	private String filepath;
+	private Set<Order> orders = new HashSet<Order>(0);
 
 	// Constructors
 
@@ -36,22 +35,20 @@ public class Customer implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public Customer(String name, Integer number, String password) {
+	public Customer(String name, String password,String filepath) {
 		this.name = name;
-		this.number = number;
 		this.password = password;
+		this.filepath = filepath;
 	}
 
 	/** full constructor */
-	public Customer(String name, Integer number, String password,
-			Set<Order> musicOrders, Set<Order> musicOrders_1,
-			Set<Order> musicOrders_2) {
+	public Customer(String name, String password, Integer number,
+			Set<Order> orders, String filepath) {
 		this.name = name;
-		this.number = number;
 		this.password = password;
-		this.musicOrders = musicOrders;
-		this.musicOrders_1 = musicOrders_1;
-		this.musicOrders_2 = musicOrders_2;
+		this.number = number;
+		this.orders = orders;
+		this.filepath = filepath;
 	}
 
 	// Property accessors
@@ -76,15 +73,6 @@ public class Customer implements java.io.Serializable {
 		this.name = name;
 	}
 
-	@Column(name = "number", nullable = false)
-	public Integer getNumber() {
-		return this.number;
-	}
-
-	public void setNumber(Integer number) {
-		this.number = number;
-	}
-
 	@Column(name = "password", nullable = false, length = 40)
 	public String getPassword() {
 		return this.password;
@@ -94,31 +82,31 @@ public class Customer implements java.io.Serializable {
 		this.password = password;
 	}
 
+	@Column(name = "number")
+	public Integer getNumber() {
+		return this.number;
+	}
+
+	public void setNumber(Integer number) {
+		this.number = number;
+	}
+	
+	@Column(name = "filepath", nullable = false , length = 100)
+	public String getFilepath() {
+		return this.filepath;
+	}
+
+	public void setFilepath(String filepath) {
+		this.filepath = filepath;
+	}
+
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "customer")
-	public Set<Order> getMusicOrders() {
-		return this.musicOrders;
+	public Set<Order> getOrders() {
+		return this.orders;
 	}
 
-	public void setMusicOrders(Set<Order> musicOrders) {
-		this.musicOrders = musicOrders;
-	}
-
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "customer")
-	public Set<Order> getMusicOrders_1() {
-		return this.musicOrders_1;
-	}
-
-	public void setMusicOrders_1(Set<Order> musicOrders_1) {
-		this.musicOrders_1 = musicOrders_1;
-	}
-
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "customer")
-	public Set<Order> getMusicOrders_2() {
-		return this.musicOrders_2;
-	}
-
-	public void setMusicOrders_2(Set<Order> musicOrders_2) {
-		this.musicOrders_2 = musicOrders_2;
+	public void setOrders(Set<Order> orders) {
+		this.orders = orders;
 	}
 
 }
