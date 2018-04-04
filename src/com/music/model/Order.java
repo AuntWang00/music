@@ -24,6 +24,7 @@ public class Order implements java.io.Serializable {
 	private Songs songs;
 	private Integer songnum;
 	private Double total;
+	private Integer song;
 
 	// Constructors
 
@@ -37,11 +38,13 @@ public class Order implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Order(Customer customer, Songs songs, Integer songnum, Double total) {
+	public Order(Customer customer, Songs songs, Integer songnum, Double total,
+			Integer song) {
 		this.customer = customer;
 		this.songs = songs;
 		this.songnum = songnum;
 		this.total = total;
+		this.song = song;
 	}
 
 	// Property accessors
@@ -57,7 +60,7 @@ public class Order implements java.io.Serializable {
 		this.orderid = orderid;
 	}
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "customer")
 	public Customer getCustomer() {
 		return this.customer;
@@ -67,7 +70,7 @@ public class Order implements java.io.Serializable {
 		this.customer = customer;
 	}
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "songs", nullable = false)
 	public Songs getSongs() {
 		return this.songs;
@@ -93,6 +96,15 @@ public class Order implements java.io.Serializable {
 
 	public void setTotal(Double total) {
 		this.total = total;
+	}
+
+	@Column(name = "song")
+	public Integer getSong() {
+		return this.song;
+	}
+
+	public void setSong(Integer song) {
+		this.song = song;
 	}
 
 }

@@ -10,6 +10,10 @@
 		<mapping resource="com/music/model/Songs.hbm.xml" />
 		<mapping resource="com/music/model/Order.hbm.xml" />
 		<mapping resource="com/music/model/Customer.hbm.xml" />
+		<mapping class="com.music.model.Songs" />
+		<mapping class="com.music.model.Order" />
+		<mapping class="com.music.model.Customer" />
+		<mapping class="com.music.model.Singer" />
 
 	</session-factory>
 
