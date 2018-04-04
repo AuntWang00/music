@@ -58,8 +58,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			   		<ul>  					
 			  			<li class="active"><a class="fff" href="main.jsp">原创音乐馆</a></li>
 			  			<li><a class="f1" href="query.jsp">MV</a></li>
-			  			<li><a class="f1" href="#">我的音乐</a></li>
-			  			<li><a class="f1" href="#">关于买歌</a></li>			
+			  			<li><a class="f1" href="mymusic.jsp">我的音乐</a></li>
+			  			<li><a class="f1" href="">关于买歌</a></li>			
 			  		</ul>
 	  			</div>	
 	  <!-- 登录和注册按钮 -->

@@ -2,6 +2,7 @@ package com.music.action;
 
 import javax.annotation.Resource;
 
+import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.SessionAware;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -11,15 +12,20 @@ import com.music.model.Customer;
 import com.mysql.jdbc.PreparedStatement;
 import com.opensymphony.xwork2.ActionSupport;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 
 @Controller @Scope("prototype")
-//@Results(value = { @Result(name = "fail", value = "/checkPerfail.jsp") })
 public class CustomerAction extends ActionSupport implements SessionAware{
 	
 @Resource CustomerDao customerDao;
@@ -28,7 +34,77 @@ public class CustomerAction extends ActionSupport implements SessionAware{
     
     private Map<String,Object> session;
 	private String prePage;
+	private File customerPhoto;
+	private String customerPhotoFileName;
+	private String customerPhotoContentType;
 
+	public CustomerDao getCustomerDao() {
+		return customerDao;
+	}
+
+	public void setCustomerDao(CustomerDao customerDao) {
+		this.customerDao = customerDao;
+	}
+
+	public File getCustomerPhoto() {
+		return customerPhoto;
+	}
+
+	public void setCustomerPhoto(File customerPhoto) {
+		this.customerPhoto = customerPhoto;
+	}
+
+	public String getCustomerPhotoFileName() {
+		return customerPhotoFileName;
+	}
+
+	public void setCustomerPhotoFileName(String customerPhotoFileName) {
+		this.customerPhotoFileName = customerPhotoFileName;
+	}
+
+	public String getCustomerPhotoContentType() {
+		return customerPhotoContentType;
+	}
+
+	public void setCustomerPhotoContentType(String customerPhotoContentType) {
+		this.customerPhotoContentType = customerPhotoContentType;
+	}
+
+	public String addCustomer() throws Exception{
+		String path = ServletActionContext.getServletContext().getRealPath("/upload"); 
+        /*����ͼƬ�ϴ�*/
+        String customerPhotoFileName = ""; 
+   	 	if(customerPhoto!= null) {
+   	 		InputStream is = new FileInputStream(customerPhoto);
+   			String fileContentType = this.getCustomerPhotoContentType();
+   			System.out.println(fileContentType);
+   			if(fileContentType.equals("image/jpeg")  || fileContentType.equals("image/pjpeg"))
+   				customerPhotoFileName = UUID.randomUUID().toString() +  ".jpg";
+   			else if(fileContentType.equals("image/gif"))
+   				customerPhotoFileName = UUID.randomUUID().toString() +  ".gif";
+   			else if(fileContentType.equals("image/png"))
+   				customerPhotoFileName = UUID.randomUUID().toString() +  ".png";
+
+   			File file = new File(path, customerPhotoFileName);
+   			OutputStream os = new FileOutputStream(file);
+   			byte[] b = new byte[1024];
+   			int bs = 0;
+   			while ((bs = is.read(b)) > 0) {
+   				os.write(b, 0, bs);
+   			}
+   			is.close();
+   			os.close();
+   	 	}
+        if(customerPhoto != null)
+        	customer.setFilepath("upload/" + customerPhotoFileName);
+        else
+        	customer.setFilepath("upload/NoImage.jpg");
+        
+        customerDao.AddCustomer(customer);
+		return "success";
+		
+	}
+	
 	public Customer getCustomer() {
 		return customer;
 	}
@@ -59,6 +135,36 @@ public class CustomerAction extends ActionSupport implements SessionAware{
 	public String reg() throws Exception{
 		customerDao.AddCustomer(customer);
 		session.put("customer", customer);
+		String path = ServletActionContext.getServletContext().getRealPath("/upload"); 
+        /*����ͼƬ�ϴ�*/
+        String customerPhotoFileName = ""; 
+   	 	if(customerPhoto!= null) {
+   	 		InputStream is = new FileInputStream(customerPhoto);
+   			String fileContentType = this.getCustomerPhotoContentType();
+   			System.out.println(fileContentType);
+   			if(fileContentType.equals("image/jpeg")  || fileContentType.equals("image/pjpeg"))
+   				customerPhotoFileName = UUID.randomUUID().toString() +  ".jpg";
+   			else if(fileContentType.equals("image/gif"))
+   				customerPhotoFileName = UUID.randomUUID().toString() +  ".gif";
+   			else if(fileContentType.equals("image/png"))
+   				customerPhotoFileName = UUID.randomUUID().toString() +  ".png";
+
+   			File file = new File(path, customerPhotoFileName);
+   			OutputStream os = new FileOutputStream(file);
+   			byte[] b = new byte[1024];
+   			int bs = 0;
+   			while ((bs = is.read(b)) > 0) {
+   				os.write(b, 0, bs);
+   			}
+   			is.close();
+   			os.close();
+   	 	}
+        if(customerPhoto != null)
+        	customer.setFilepath("upload/" + customerPhotoFileName);
+        else
+        	customer.setFilepath("upload/NoImage.jpg");
+        
+        customerDao.AddCustomer(customer);
 		return "show_view";
 	}
 	

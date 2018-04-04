@@ -18,27 +18,27 @@ import com.music.model.Customer;
 public class CustomerDao {
 	@Resource SessionFactory factory;
 	
-	 /*Ìí¼ÓCustomerÐÅÏ¢*/
+	 /*ï¿½ï¿½ï¿½Customerï¿½ï¿½Ï¢*/
     public void AddCustomer(Customer customer) throws Exception {
     	Session s = factory.getCurrentSession();
     	System.out.println(customer);
     	s.save(customer);
     }
     
-    /*É¾³ýCustomerÐÅÏ¢*/
+    /*É¾ï¿½ï¿½Customerï¿½ï¿½Ï¢*/
     public void DeleteCustomer (Integer customerid) throws Exception {
         Session s = factory.getCurrentSession(); 
         Object customer = s.load(Customer.class, customerid);
         s.delete(customer);
     }
     
-    /*¸üÐÂCustomerÐÅÏ¢*/
+    /*ï¿½ï¿½ï¿½ï¿½Customerï¿½ï¿½Ï¢*/
     public void UpdateCustomer(Customer customer) throws Exception {
         Session s = factory.getCurrentSession();
         s.update(customer);
     }
     
-    /*²éÑ¯ËùÓÐCustomerÐÅÏ¢*/
+    /*ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½Customerï¿½ï¿½Ï¢*/
     public ArrayList<Customer> QueryAllCustomer() {
         Session s = factory.getCurrentSession();
         String hql = "From Customer";
@@ -47,14 +47,14 @@ public class CustomerDao {
         return (ArrayList<Customer>) customerList;
     }
 
-    /*¸ù¾ÝÖ÷¼ü»ñÈ¡¶ÔÏó*/
+    /*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½*/
     public Customer GetCustomerById(Integer customerid) {
         Session s = factory.getCurrentSession();
         Customer customer = (Customer)s.get(Customer.class, customerid);
         return customer;
     }
     
-    /*¸ù¾Ý²éÑ¯Ìõ¼þ²éÑ¯*/
+    /*ï¿½ï¿½Ý²ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¯*/
     public ArrayList<Customer> QueryCustomerInfo(String name) { 	
     	Session s = factory.getCurrentSession();
     	List customerList;
