@@ -32,6 +32,7 @@ public class Songs implements java.io.Serializable {
 	private Set<Order> orders = new HashSet<Order>(0);
 	private Set<Order> orders_1 = new HashSet<Order>(0);
 	private Set<Order> orders_2 = new HashSet<Order>(0);
+	private Set<Order> orders_3 = new HashSet<Order>(0);
 
 	// Constructors
 
@@ -39,15 +40,10 @@ public class Songs implements java.io.Serializable {
 	public Songs() {
 	}
 
-	/** minimal constructor */
-	public Songs(String filepath) {
-		this.filepath = filepath;
-	}
-
 	/** full constructor */
 	public Songs(String songname, Double price, String filepath, String album,
 			String language, String lyrics, Integer singer, Set<Order> orders,
-			Set<Order> orders_1, Set<Order> orders_2) {
+			Set<Order> orders_1, Set<Order> orders_2, Set<Order> orders_3) {
 		this.songname = songname;
 		this.price = price;
 		this.filepath = filepath;
@@ -58,6 +54,7 @@ public class Songs implements java.io.Serializable {
 		this.orders = orders;
 		this.orders_1 = orders_1;
 		this.orders_2 = orders_2;
+		this.orders_3 = orders_3;
 	}
 
 	// Property accessors
@@ -91,7 +88,7 @@ public class Songs implements java.io.Serializable {
 		this.price = price;
 	}
 
-	@Column(name = "filepath", nullable = false, length = 100)
+	@Column(name = "filepath", length = 100)
 	public String getFilepath() {
 		return this.filepath;
 	}
@@ -161,6 +158,15 @@ public class Songs implements java.io.Serializable {
 
 	public void setOrders_2(Set<Order> orders_2) {
 		this.orders_2 = orders_2;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "songs")
+	public Set<Order> getOrders_3() {
+		return this.orders_3;
+	}
+
+	public void setOrders_3(Set<Order> orders_3) {
+		this.orders_3 = orders_3;
 	}
 
 }
