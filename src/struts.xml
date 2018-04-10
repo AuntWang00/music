@@ -35,7 +35,7 @@
 	 <package name="song" namespace="/song" extends="default">
 	 
 	        <action name="song_*" class="songsAction" method="{1}">
-	        	<result name="show_view">/main.jsp</result>
+	        	<result name="show_view">/new.jsp</result>
 	        	<result name="message">/message.jsp</result>
 	        	<result name="detail_view">/detail.jsp</result>
 	        	<result name="edit_view">/edit.jsp</result>

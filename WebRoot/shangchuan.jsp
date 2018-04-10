@@ -30,7 +30,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<link type="text/css" rel="stylesheet" href="less/reset.css">
 		<link type="text/css" rel="stylesheet" href="less/slide.css">
 		<link type="text/css" rel="stylesheet" href="less/index.css">
-		
+		<meta http-equiv="Refresh" content="0;url=song/song_showSong">
 		
 		<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>	
 			
