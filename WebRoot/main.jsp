@@ -90,6 +90,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		 	<c:choose>
 		       <c:when test="${customer.name ==null}"> 您还未登录，登录可开启更多功能！</c:when>
 		       <c:otherwise>
+		        <img src="<%=basePath%><s:property value='filepath'/>">
 		  	   <c:out value="${customer.name}"></c:out>, 欢迎您!
 		       </c:otherwise>
 		     </c:choose>

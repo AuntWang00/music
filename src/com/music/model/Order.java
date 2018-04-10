@@ -32,11 +32,6 @@ public class Order implements java.io.Serializable {
 	public Order() {
 	}
 
-	/** minimal constructor */
-	public Order(Songs songs) {
-		this.songs = songs;
-	}
-
 	/** full constructor */
 	public Order(Customer customer, Songs songs, Integer songnum, Double total,
 			Integer song) {
@@ -71,7 +66,7 @@ public class Order implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "songs", nullable = false)
+	@JoinColumn(name = "songs")
 	public Songs getSongs() {
 		return this.songs;
 	}

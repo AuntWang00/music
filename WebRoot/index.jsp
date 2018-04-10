@@ -22,7 +22,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" href="<%=basePath%>css/bootstrap.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 	<link rel="shortcut icon" href="<%=basePath%>images/logo.png">
-	
+	<meta http-equiv="Refresh" content="0;url=main.jsp">
 	
 	
  	 <link rel="stylesheet" href="css/buttons.css">

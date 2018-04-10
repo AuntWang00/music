@@ -95,47 +95,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!-- 搜索框与登录状态判断语句结束 -->
 	
     
-   <!--  <main>
-	    <s:form action="order/order_queryOrders" method="post">
-	      
-	      <div>
-	         <s:submit value="查 询" cssClass="search-go"></s:submit>
-	         <input class="search" type="text" name="song.songname" placeholder="请输入歌曲名称">
-	      </div>
-	
-	      <h3>我的订单</h3>
-	      <table>
-	        <tr>  
-	          <th>序号</th>  
-	          <th>订单号</th>
-	          <th>歌曲</th>
-	          <th>单价</th> 
-	          <th>购买数</th>  
-	          <th>总价</th>
-	        </tr> 
-	         <s:iterator value="orderList" status="status">
-	          <tr>
-	            <td><s:property value="#status.index+1"></s:property></td>
-	            <td><s:a href="order/order_showDetail?order.orderid=%{orderid}">
-	               <s:property value="orderid"></s:property></s:a>
-	            </td>
-	            <td><s:property value="songs.songname"></s:property></td>
-	            <td><s:property value="songs.price"></s:property></td>
-	            <td><s:property value="songnum"></s:property></td>
-	            <td><s:property value="total"></s:property></td>
-	          </tr>
-	         </s:iterator>
-	      </table>
-	    </s:form>
-	</main>
-  </body> -->
-     <main class="container-fluid">
+  <main class="container-fluid">
       <div class="row">
          <div class="col-md-12">
-		    <s:form action="order/order_queryOrders" method="post">
+		    <s:form action="song/song_showSong" method="post">
 		      <div class="panel panel-info">
 	                 <div class="panel-heading">
-	                    <h3 class="panel-title">我的订单</h3>
+	                    <h3 class="panel-title">最新音乐</h3>
 	                 </div>
 	                 <div class="panel-body panel-body-table">
 	                   <div class="table-responsive" style="overflow-x:hidden">
@@ -143,24 +109,31 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                         <thead>
 	                           <tr>
 	                              <th>序号</th>  
-							       
-	          <th>订单号</th>
-	          <th>歌曲</th>
-	          <th>单价</th> 
-	          <th>购买数</th>  
-	          <th>总价</th>
+	                              <th>歌曲编号</th>
+							          <th>歌曲名称</th>
+							          <th>歌手</th>
+							          <th>价格</th> 
+							          <th>  </th>
+							          <th>  </th>
+							        
 	                              </tr>
 	                          </thead>
 	                          <tbody>
-	                              <s:iterator value="orderList" status="status">
+	                              <s:iterator value="songslist" status="status">
 	                                  <tr>
 	                                      <td><s:property value="#status.index+1"></s:property></td>
-	                                      <td><s:a href="order/order_showDetail?order.orderid=%{orderid}">
-		               <s:property value="orderid"></s:property></s:a></td>
-	                                      <td><s:property value="song.songname"></s:property></td>
-	                                      <td class="center"><s:property value="song.price"></s:property></td>
-	                                      <td class="center"><s:property value="songnum"></s:property></td>
-	                                      <td class="center"><s:property value="total"></s:property></td>
+	                                        <td><s:a href="song/song_showDetail?song.songid=%{songid}">
+		               <s:property value="songid"></s:property></s:a></td>
+	                                   
+	                                      <td><s:property value="songname"></s:property></td>
+	                                        <td ><s:property value="singer"></s:property></td>
+	                                     <td> <s:property value="price"></s:property></td>
+	                                      <td ><s:a href="song/song_showDetail?song.songid=%{songid}">试听</s:a></td>
+            
+            <td ><s:a href="order/order_addOrder?song.songid=%{songid}&customer.name=%{customer.name}">购买</s:a></td>
+	                                     
+	                                    
+	                                     
 	                                  </tr>
 	                              </s:iterator>
 	                          </tbody>
@@ -208,5 +181,4 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
        });
     </script>
   </body>
-   
 </html>

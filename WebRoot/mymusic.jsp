@@ -12,7 +12,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>我的音乐</title>
+    <title>歌曲展示页面</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -62,8 +62,42 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			  			<li><a class="f1" href="">关于买歌</a></li>			
 			  		</ul>
 	  			</div>	
-  
-     <a href="shangchuan.jsp">我上传的音乐</a> 
+	  <!-- 登录和注册按钮 -->
+		  		<div class="header-login">
+	  		   		<table class="top-table">  		   		
+				   		<tr>
+		  		   			<td>
+		  		   				<a class="top-table-font1" href="reg.jsp">注册</a>
+			  		   			<a class="top-table-font2" href="login.jsp">登录</a>
+			  		   		</td>
+			  		   	</tr>
+	  		  		</table> 
+	  		    </div> 
+  		    </div> 			              
+  		</div>	
+  	</div>
+  	<!-- 页面顶部结束 -->
+  	
+  	<!-- 搜索框与登录状态判断语句开始 -->
+  	<div class="container1-1">
+	  	<div class="input-group col-md-3" style="margin-top:0px positon:relative">  
+	       <input type="text" class="form-control search clearable" placeholder="请输入歌曲名或歌手名" / >  
+	       <span class="input-group-btn">  
+	           <button class="btn btn-info btn-search"><i class="fa fa-search"></i></button>             
+	        </span>  
+	 	</div>  
+	 	<div class="login-check">
+		 	<c:choose>
+		       <c:when test="${customer.name ==null}"> 您还未登录，登录可开启更多功能！</c:when>
+		       <c:otherwise>
+		        <img src="<%=basePath%><s:property value='filepath'/>">
+		  	   <c:out value="${customer.name}"></c:out>, 欢迎您!
+		       </c:otherwise>
+		     </c:choose>
+	 	</div>
+  	</div>
+ 
+     <a href="shangchuan.jsp"> 上传</a> 
       <a href="order_main.jsp">我购买的音乐</a>
   </body>
 </html>
