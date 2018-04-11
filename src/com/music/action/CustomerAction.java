@@ -87,7 +87,7 @@ public class CustomerAction extends ActionSupport implements SessionAware{
 			session.put("customer", db_customer); //用户名放到session中
 			//跳转前的页面从session中取出来，取出来后将其置空
 			prePage = (String) session.get("prePage");
-			System.out.println("？？？"+ prePage);
+			System.out.println("取出跳转前的页面"+ prePage);
 			session.remove("prePage");  
 			return "success";
 			

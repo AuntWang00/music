@@ -101,56 +101,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    <div class="con5">
    		<div class="container5">
 	   		<div class="show-title">
-	   				<h3>最新单曲</h3>   				
+	   				<h3><a href="new.jsp">最新单曲</a></h3>   				
 	   		</div>
 	   		<!-- 单曲列表 -->
-   			<ul class="show-list">		
-   				<li class="show-item">
-	   				<div class="show-pic">
-	   					<a href="#" ><img src="images/pic.jpg" alt="#"></a>
-	   				</div>
-   					<div class="show-info">
-   						<a href="#" class="show-name">歌曲名称</a>
-   						<p class="show-name-p">歌曲其他信息</p>
-   					</div>
-   				</li>
-   				<li class="show-item">
-	   				<div class="show-pic">
-	   					<a href="#" ><img src="images/pic.jpg" alt="#"></a>
-	   				</div>
-   					<div class="show-info">
-   						<a href="#" class="show-name">歌曲名称</a>
-   						<p class="show-name-p">歌曲其他信息</p>
-   					</div>
-   				</li>
-   				<li class="show-item">
-	   				<div class="show-pic">
-	   					<a href="#" ><img src="images/pic.jpg" alt="#"></a>
-	   				</div>
-   					<div class="show-info">
-   						<a href="#" class="show-name">歌曲名称</a>
-   						<p class="show-name-p">歌曲其他信息</p>
-   					</div>
-   				</li>
-   				<li class="show-item">
-	   				<div class="show-pic">
-	   					<a href="#" ><img src="images/pic.jpg" alt="#"></a>
-	   				</div>
-   					<div class="show-info">
-   						<a href="#" class="show-name">歌曲名称</a>
-   						<p class="show-name-p">歌曲其他信息</p>
-   					</div>
-   				</li>
-   				<li class="show-item">
-	   				<div class="show-pic">
-	   					<a href="#" ><img src="images/pic.jpg" alt="#"></a>
-	   				</div>
-   					<div class="show-info">
-   						<a href="#" class="show-name">歌曲名称</a>
-   						<p class="show-name-p">歌曲其他信息</p>
-   					</div>
-   				</li>
-   			</ul>
+	   		<s:form action="song/song_showSong" method="post">
+	   		
+	   		<s:iterator value = "songslist" status="status" begin="0" end ="4">
+		   		<ul class = "show-list">
+		   			<li class="show-item">
+		   				<div class="show-pic">
+		   					<span style="white-space:pre;"> </span>
+		   					<img src="${pageContext.request.contextPath}/images/${fileName}" />
+		   				</div>
+		   				<div class="show-info">
+		   					<s:property value ="songname"/>
+		   				</div>
+		   			</li>
+		   		</ul>
+	   		</s:iterator>
+	   		
+	   		</s:form>
+	   		
    		</div>
    	</div>
    	<!-- 最新单曲结束 -->
@@ -164,193 +135,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	   		
 	   	<!-- jQuery轮播开始 -->
    			<div class="demo-wrapper">
-  				<ul class="portfolio-items">
-				    <li class="item">
-				      <figure>
-				        <div class="view"> <img src="images/a1.png" /> </div>
-				        <figcaption>
-				          <p><span> <a href="#">The 
-				            Two and The Bubbles</a></span></p>
-				          <p><span>By Vlad Gerasimov</span></p>
-				        </figcaption>
-				      </figure>
-				      <div class="date"> 2005</div>
-				    </li>
-				    <li class="item">
-				      <figure>
-				        <div class="view"> <img src="images/a2.png" /> </div>
-				        <figcaption>
-				          <p><span> <a href="#"> Christmas Ice Skating</a></span></p>
-				          <p><span>By Vlad Gerasimov</span></p>
-				        </figcaption>
-				      </figure>
-				      <div class="date"> 2008</div>
-				    </li>
-				    <li class="item">
-				      <figure>
-				        <div class="view"> <img src="images/a3.png" /> </div>
-				        <figcaption>
-				          <p><span> <a href="#"> Love Knows No Boundaries</a></span></p>
-				          <p><span>By Vlad Gerasimov</span></p>
-				        </figcaption>
-				      </figure>
-				      <div class="date"> 2008</div>
-				    </li>
-				    <li class="item">
-				      <figure>
-				        <div class="view"> <img src="images/a4.png" /> </div>
-				        <figcaption>
-				          <p><span><a href="#">Sandal</a></span></p>
-				          <p><span>By Vlad Gerasimov </span></p>
-				        </figcaption>
-				      </figure>
-				      <div class="date"> 2009</div>
-				    </li>
-				    <li class="item">
-				      <figure>
-				        <div class="view"> <img src="images/a5.png" /> </div>
-				        <figcaption>
-				          <p><span><a href="#">Skiing</a></span></p>
-				          <p><span>By Vlad Gerasimov</span></p>
-				        </figcaption>
-				      </figure>
-				      <div class="date"> 2004</div>
-				    </li>
-				    <li class="item">
-				      <figure>
-				        <div class="view"> <img src="images/a6.png" /> </div>
-				        <figcaption>
-				          <p><span><a href="#">The 
-				            Knight and The Lady</a></span></p>
-				          <p><span>By Vlad Gerasimov</span></p>
-				        </figcaption>
-				      </figure>
-				      <div class="date"> 2009</div>
-				    </li>
-				    <li class="item">
-				      <figure>
-				        <div class="view"> <img src="images/a7.png" /> </div>
-				        <figcaption>
-				          <p><span><a href="#">Friends</a></span></p>
-				          <p><span>By Vlad Gerasimov</span></p>
-				        </figcaption>
-				      </figure>
-				      <div class="date"> 2008</div>
-				    </li>
-				    <li class="item">
-				      <figure>
-				        <div class="view"> <img src="images/a8.png" /> </div>
-				        <figcaption>
-				          <p><span><a href="#">Coiffure</a></span></p>
-				          <p><span>By Vlad Gerasimov</span></p>
-				        </figcaption>
-				      </figure>
-				      <div class="date"> 2004</div>
-				    </li>
-				    <li class="item">
-				      <figure>
-				        <div class="view"> <img src="images/a1.png" /> </div>
-				        <figcaption>
-				          <p><span><a href="#">Get a Mac</a></span></p>
-				          <p><span>By Vlad Gerasimov</span></p>
-				        </figcaption>
-				      </figure>
-				      <div class="date"> 2007</div>
-				    </li>
-				    <li class="item">
-				      <figure>
-				        <div class="view"> <img src="images/a2.png" /> </div>
-				        <figcaption>
-				          <p><span><a href="#">Connection</a></span></p>
-				          <p><span>By Vlad Gerasimov </span></p>
-				        </figcaption>
-				      </figure>
-				      <div class="date"> 2006</div>
-				    </li>
-				    <li class="item">
-				      <figure>
-				        <div class="view"> <img src="images/a3.png" /> </div>
-				        <figcaption>
-				          <p><span> <a href="#">Alice, 
-				            Her Dragon, and The Christmas Tree</a></span></p>
-				          <p><span>By Vlad Gerasimov </span></p>
-				        </figcaption>
-				      </figure>
-				      <div class="date"> 2011</div>
-				    </li>
-				    <li class="item">
-				      <figure>
-				        <div class="view"> <img src="images/a4.png" /> </div>
-				        <figcaption>
-				          <p><span><a href="#">Inseparable</a></span></p>
-				          <p><span>By Vlad Gerasimov </span></p>
-				        </figcaption>
-				      </figure>
-				      <div class="date"> 2009</div>
-				    </li>
-				    <li class="item">
-				      <figure>
-				        <div class="view"> <img src="images/a5.png" /> </div>
-				        <figcaption>
-				          <p><span><a href="#">Pregnant</a></span></p>
-				          <p><span>By Vlad Gerasimov </span></p>
-				        </figcaption>
-				      </figure>
-				      <div class="date"> 2006</div>
-				    </li>
-				    <li class="item">
-				      <figure>
-				        <div class="view"> <img src="images/a6.png" /> </div>
-				        <figcaption>
-				          <p><span><a href="#">Christmas 
-				            Tree</a></span></p>
-				          <p><span>By Vlad Gerasimov </span></p>
-				        </figcaption>
-				      </figure>
-				      <div class="date"> 2009</div>
-				    </li>
-				    <li class="item">
-				      <figure>
-				        <div class="view"> <img src="images/a7.png" /> </div>
-				        <figcaption>
-				          <p><span> <a href="#">The 
-				            Two and The Mouse</a></span></p>
-				          <p><span>By Vlad Gerasimov </span></p>
-				        </figcaption>
-				      </figure>
-				      <div class="date"> 2005</div>
-				    </li>
-				    <li class="item">
-				      <figure>
-				        <div class="view"> <img src="images/a8.png" /> </div>
-				        <figcaption>
-				          <p><span><a href="#">Punctuation</a></span></p>
-				          <p><span>By Vlad Gerasimov </span></p>
-				        </figcaption>
-				      </figure>
-				      <div class="date"> 2006</div>
-				    </li>
-				    <li class="item">
-				      <figure>
-				        <div class="view"> <img src="images/a1.png" /> </div>
-				        <figcaption>
-				          <p><span><a href="#"> Internet Cafe</a></span></p>
-				          <p><span>By Vlad Gerasimov </span></p>
-				        </figcaption>
-				      </figure>
-				      <div class="date"> 2012</div>
-				    </li>
-				    <li class="item">
-				      <figure>
-				        <div class="view"> <img src="images/a2.png" /> </div>
-				        <figcaption>
-				          <p><span> <a href="#"> Raring Ringtail</a></span></p>
-				          <p><span>By Vlad Gerasimov </span></p>
-				        </figcaption>
-				      </figure>
-				      <div class="date"> 2013</div>
-				    </li>
-  				</ul>
+   			
+   				<s:form action="song/song_showSong" method="post">
+   				<ul class="portfolio-items">
+   					<s:iterator value = "songslist" status="status" begin="0" end="18">					
+   							<li class="item">
+   								<figure>
+   									<div class="view">
+   										<img src = "<%=basePath %><s:property value='filepath'/>">
+   									</div>
+   									 <figcaption>
+   										<p><span><s:property value ="songname"/></span></p>
+   									    <p><span>By Vlad Gerasimov</span></p>
+   									 </figcaption> 
+   								</figure>
+   							</li>  						
+   					</s:iterator>
+   					</ul>
+   				</s:form>  
+   								
 		  </div>
 
 			<script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>

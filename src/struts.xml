@@ -13,7 +13,7 @@
       <package name = "default" extends="struts-default">
       	<interceptors>
       		<interceptor name = "LoginInterceptors" class = "com.music.util.LoginInterceptors">
-      			<param name="excludeName">customer_login,customer_reg,song_show_view,song_showSong</param>
+      			<param name="excludeName">customer_login,customer_reg,song_show_view,song_showSong,song_querySongs</param>
       			<param name="sessionName">customer</param>
       		</interceptor>
       		

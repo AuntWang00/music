@@ -24,39 +24,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-     <table class="table table-hover">
-        <tr>  
-          <th>序号</th>  
-          <th>歌曲名称</th>
-          <th>歌手名称</th>
-          <th>价格</th> 
-          <th>专辑</th>
-          <th>语种</th>  
-           <th></th>  
-          <th></th>
-          <th></th> 
-        </tr> 
-        
-<c:forEach var="song" items="${songslist}" varStatus="status">
-	       <c:when test="${customer.realname == song.singer&& customer.name!= null}">
-
-          <tr>
-            <td><c:out value="${status.index+1}"></c:out></td>
-            <td><a href="song/song_showDetail?song.songid=${song.songid}">
-            <c:out value="${song.songname}"></c:out></a></td>
-            <td><c:out value="${song.singer}"></c:out></td>
-            <td><c:out value="${song.price}"></c:out></td>
-            <td><c:out value="${song.album}"></c:out></td>
-            <td><c:out value="${song.language}"></c:out></td>
-           
-	         <td><a href="song/song_showEdit?song.songid=${song.songid}">编辑</a></td>
-            <td><a href="song/song_deleteSong?song.songid=${song.songid}">删除</a></td>
-	       
-	         
-          </tr>
-          </c:when>
-        </c:forEach>
-      </table>
+    <form action="FileUpload2" enctype="multipart/form-data" method="post" >   
      
   </body>
 </html>

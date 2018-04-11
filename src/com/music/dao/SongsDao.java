@@ -11,6 +11,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+
 import com.music.model.Songs;
 
 @Service @Transactional
@@ -55,11 +56,13 @@ public class SongsDao {
     	String hql = "From Songs song where 1=1";
     	if(!songname.equals("")) 
     		hql = hql + " and song.songname like '%" + songname + "%'"; //模糊查询 ,不要乱加空格哦
-    	//System.out.println(hql);
+    	System.out.println(hql);
     	Query q = s.createQuery(hql);
-    	List songslist = q.list();
+    	List<Songs> songslist = q.list();
     	return (ArrayList<Songs>) songslist;
     }
+    
+    
 
 }
 
