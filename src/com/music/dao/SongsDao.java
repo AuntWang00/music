@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 
+import com.music.model.Music_customer;
+import com.music.model.Order;
 import com.music.model.Songs;
 
 @Service @Transactional
@@ -45,6 +47,9 @@ public class SongsDao {
         return (ArrayList<Songs>) songslist;
     }
     
+    
+    
+    
     public Songs GetSongById(Integer songid) {
         Session s = factory.getCurrentSession();
         Songs song = (Songs)s.get(Songs.class, songid);
@@ -63,6 +68,20 @@ public class SongsDao {
     }
     
     
+    
+/*
+    public ArrayList<Songs> QueryMySongsInfo(Music_customer customer,Songs song) { 
+    	Session s = factory.getCurrentSession();
+    	String hql = "From Songs song where 1=1";
+    	if(null != customer && customer.getCustomerid()!=0) 
+    		hql = hql + " and order.customer.customerid like '%" + customer.getCustomerid() + "%'";
+    	if(null != song && null!=song.getSongname()) 
+    		hql = hql + " and song.songname like '%" + song.getSongname() + "%'";
+    	Query q = s.createQuery(hql);
+    	List<Songs> songslist = q.list();
+    	return (ArrayList<Songs>) songslist;
+    }
+   */
 
 }
 

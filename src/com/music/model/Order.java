@@ -20,7 +20,7 @@ public class Order implements java.io.Serializable {
 	// Fields
 
 	private Integer orderid;
-	private Customer customer;
+	private Music_customer customer;
 	private Songs songs;
 	private Integer songnum;
 	private Double total;
@@ -37,7 +37,7 @@ public class Order implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Order(Customer customer, Songs songs, Integer songnum, Double total) {
+	public Order(Music_customer customer, Songs songs, Integer songnum, Double total) {
 		this.customer = customer;
 		this.songs = songs;
 		this.songnum = songnum;
@@ -59,11 +59,11 @@ public class Order implements java.io.Serializable {
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "customer")
-	public Customer getCustomer() {
+	public Music_customer getCustomer() {
 		return this.customer;
 	}
 
-	public void setCustomer(Customer customer) {
+	public void setCustomer(Music_customer customer) {
 		this.customer = customer;
 	}
 

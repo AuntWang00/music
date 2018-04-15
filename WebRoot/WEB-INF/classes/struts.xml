@@ -36,12 +36,12 @@
 	 
 	        <action name="song_*" class="songsAction" method="{1}">
 	        	<result name="show_view">/main.jsp</result>
-	        	<result name="message">/message.jsp</result>
+	        	<result name="message">/add.jsp</result>
 	        	<result name="detail_view">/detail.jsp</result>
 	        	<result name="edit_view">/edit.jsp</result>
 	        	<result name="delete_message">/delete_message.jsp</result>
 	        	<result name="edit_message">/edit_message.jsp</result>
-	        	
+	        	<result name="song_view1">/mymusic.jsp</result>
 	        	
 	        	
 	        	

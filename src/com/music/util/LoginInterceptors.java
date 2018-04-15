@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts2.ServletActionContext;
 
-import com.music.model.Customer;
+import com.music.model.Music_customer;
 import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.interceptor.AbstractInterceptor;
 
@@ -75,7 +75,7 @@ public class LoginInterceptors extends AbstractInterceptor{
 
 	        
 	       
-	        Customer customer = (Customer) session.get(sessionName);   
+	        Music_customer customer = (Music_customer) session.get(sessionName);   
 	        
 	           if(customer==null){  
 	        	     

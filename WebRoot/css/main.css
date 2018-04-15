@@ -942,3 +942,15 @@ figcaption a {
 	
 	height:30px;
 }
+
+.add-contain{
+	width:60%;
+	margin-left:auto;
+	margin-right:auto;
+}
+
+.reg-contain{
+	width:60%;
+	margin-left:auto;
+	margin-right:auto;
+}

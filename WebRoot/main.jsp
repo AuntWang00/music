@@ -48,7 +48,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   		<div class="top-container">
   			<div class="header-logo">
   				<h1 class="maige-title">
-  					<a href="main.jsp"><img srcset="images/title.png" alt="title logo" class="maige-logo"></a>					
+  					<a href="song/song_showSong"><img srcset="images/title.png" alt="title logo" class="maige-logo"></a>					
   				</h1>				
   			</div>
   			
@@ -58,7 +58,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			   		<ul>  					
 			  			<li class="active"><a class="fff" href="main.jsp">原创音乐馆</a></li>
 			  			<li><a class="f1" href="query.jsp">MV</a></li>
-			  			<li><a class="f1" href="#">我的音乐</a></li>
+			  			<li><a class="f1" href="song/song_queryMyAllSongs?customer.customerid=<s:property 
+	                  value='customerid'/>&customer.id=<s:property value='#session.customer.customerid'/>" class="add-order">我的音乐</a></li>
 			  			<li><a class="f1" href="#">关于买歌</a></li>			
 			  		</ul>
 	  			</div>	
@@ -90,6 +91,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		 	<c:choose>
 		       <c:when test="${customer.name ==null}"> 您还未登录，登录可开启更多功能！</c:when>
 		       <c:otherwise>
+		       <img src = "<%=basePath %><s:property value='filepath'/>" style="width:20px; height:20px;">
 		  	   <c:out value="${customer.name}"></c:out>, 欢迎您!
 		       </c:otherwise>
 		     </c:choose>

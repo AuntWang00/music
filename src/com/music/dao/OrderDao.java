@@ -11,7 +11,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.music.model.Customer;
+import com.music.model.Music_customer;
 import com.music.model.Songs;
 import com.music.model.Order;
 
@@ -56,7 +56,7 @@ public class OrderDao {
     }
     
     
-    public ArrayList<Order> QueryOrderInfo(Customer customer, Songs song) {
+    public ArrayList<Order> QueryOrderInfo(Music_customer customer, Songs song) {
     	Session s = factory.getCurrentSession();
     	String hql = "From Order order where 1=1";
     	if(null != customer && customer.getCustomerid()!=0) 

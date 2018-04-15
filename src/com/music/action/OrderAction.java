@@ -24,7 +24,7 @@ import com.opensymphony.xwork2.ActionSupport;
 	    
 	    private Order order;
 	    private List<Order> orderList;
-	    private Customer customer;
+	    private Music_customer customer;
 	    private Songs song;
 	    
 		public Order getOrder() {
@@ -43,11 +43,11 @@ import com.opensymphony.xwork2.ActionSupport;
 			this.orderList = orderList;
 		}
 
-		public Customer getCustomer() {
+		public Music_customer getCustomer() {
 			return customer;
 		}
 
-		public void setCustomer(Customer customer) {
+		public void setCustomer(Music_customer customer) {
 			this.customer = customer;
 		}
 
@@ -63,7 +63,7 @@ import com.opensymphony.xwork2.ActionSupport;
 		public String addOrder() throws Exception{
 			//Customer customer = new Customer();
 			//customer = customerDao.QueryCustomerInfo(customer.getName()).get(0);
-			ArrayList<Customer> customer_list = customerDao.QueryCustomerInfo(customer.getName());
+			ArrayList<Music_customer> customer_list = customerDao.QueryCustomerInfo(customer.getName());
 			System.out.println(customer.getName());
 			if (customer_list != null) {
 				customer = customer_list.get(0);
@@ -82,9 +82,9 @@ import com.opensymphony.xwork2.ActionSupport;
 		
 	    public String showOrder() {
 	    //	System.out.println(customer.getName());
-	    	ArrayList<Customer> customer_list = customerDao.QueryCustomerInfo(customer.getName());
+	    	ArrayList<Music_customer> customer_list = customerDao.QueryCustomerInfo(customer.getName());
 	    	if (customer_list != null) {
-		        Customer cus= customer_list.get(0);
+	    		Music_customer cus= customer_list.get(0);
 		        
 		        orderList = orderDao.QueryOrderInfo(cus,null);
 

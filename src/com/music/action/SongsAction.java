@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.UUID;
 
 import com.music.dao.SongsDao;
-import com.music.model.Customer;
+import com.music.model.Music_customer;
 import com.music.model.Songs;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -90,6 +90,12 @@ public class SongsAction extends ActionSupport{
 		return "show_view";
 	}
 	
+/*
+    public String QueryMyAllSongs() throws Exception{
+        songslist = songsDao.QueryMySongsInfo(customer,song);
+        return "show_view1";
+    }
+*/	
 	public String showDetail(){
 		song =songsDao.GetSongById(song.getSongid());
 		return "detail_view";
@@ -117,6 +123,13 @@ public class SongsAction extends ActionSupport{
 		return "show_view";
 	}
 	
+	/*
+	public String queryMySongs() throws Exception{
+		System.out.println("辣鸡，我在你的查歌啦");
+		songslist = songsDao.QueryMySongsInfo(customer,song);
+		return "show_view1";
+	}
+	*/
 	private String keywords;
 	
 	public String getKeywords() {
@@ -127,11 +140,11 @@ public class SongsAction extends ActionSupport{
 		this.keywords = keywords;
 	}
 	
-	private Customer customer;
-	public Customer getCustomer() {
+	private Music_customer customer;
+	public Music_customer getCustomer() {
 		return customer;
 	}
-	public void setCustomer(Customer customer) {
+	public void setCustomer(Music_customer customer) {
 		this.customer = customer;
 	}
 

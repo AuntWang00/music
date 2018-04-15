@@ -31,9 +31,12 @@
   <filter-mapping>
     <filter-name>struts2</filter-name>
     <url-pattern>/*</url-pattern>
-    <url-pattern>*.css</url-pattern>
+  <!--    <url-pattern>*.css</url-pattern> -->
   </filter-mapping>
+  
+  
+  
   <welcome-file-list>
-    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>initial.jsp</welcome-file>
   </welcome-file-list>
 </web-app>
