@@ -1,4 +1,4 @@
-﻿<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib uri="/struts-tags" prefix="s"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%
@@ -48,38 +48,30 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   		<div class="top-container">
   			<div class="header-logo">
   				<h1 class="maige-title">
-  					<a href="main.jsp"><img srcset="images/title.png" alt="title logo" class="maige-logo"></a>					
+  					<a href="song/song_showSong"><img srcset="images/title.png" alt="title logo" class="maige-logo"></a>					
   				</h1>				
   			</div>
-  			
-  	<!--导航开始 -->
-  			<div class="container2">	
-	  			<div class="menu">  
-			   		<ul>  					
-			  			<li class="active"><a class="fff" href="main.jsp">原创音乐馆</a></li>
-			  			<li><a class="f1" href="query.jsp">MV</a></li>
-			  			<li><a class="f1" href="mymusic.jsp">我的音乐</a></li>
-			  			<li><a class="f1" href="">关于买歌</a></li>			
-			  		</ul>
-	  			</div>	
- 
-  <main class="bg">
- <s:form action="customer/customer_login" method="post" cssclass="login">
-  <h3>登陆页面</h3>
- <div class="form-group">
- <div class="input-group">
- <span class="input-group-addon"><i class="fa fa-ul fa-lock"></i></span>
- <input type="text" name="customer.name" class="form-control" placeholder="用户名" required>
- </div>
- <div class="input-group">
- <span class="input-group-addon"><i class="fa fa-ul fa-lock"></i></span>
- <input type="password" name="customer.password" class="form-control" placeholder="密码" required>
-      </div>
-      </div>
-      <button type="submit" class="btn btn-success">登陆</button>
-    </s:form>
-     <a href="reg.jsp">还没有账户，去创建一个</a>
-    </main>
- 
+  		</div>
+    </div>	
+  	
+	 <div class="login-contain">
+		  <main class="bg">
+				 <s:form action="customer/customer_login" method="post" cssclass="login">
+					 <h3>登陆页面</h3>
+					 <div class="form-group">
+						 <div class="input-group">
+						 <span class="input-group-addon"><i class="fa fa-ul fa-lock"></i></span>
+						 <input type="text" name="customer.name" class="form-control" placeholder="用户名" required>
+						 </div>
+					 	<div class="input-group">
+					 		<span class="input-group-addon"><i class="fa fa-ul fa-lock"></i></span>
+					 		<input type="password" name="customer.password" class="form-control" placeholder="密码" required>
+					     </div>
+					</div>
+					      <button type="submit" class="btn btn-success">登陆</button> <div class="bg-a"><a href="reg.jsp">还没有账户，去创建一个</a></div>
+				 </s:form>
+				    
+		  </main>
+	 </div>
   </body>
 </html>

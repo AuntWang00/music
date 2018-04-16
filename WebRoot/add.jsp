@@ -11,7 +11,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>注册页面</title>
+    <title>上传歌曲主页</title>
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
@@ -49,41 +49,101 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   					<a href="song/song_showSong"><img srcset="images/title.png" alt="title logo" class="maige-logo"></a>					
   				</h1>				
   			</div>
+  			
+  	<!--导航开始 -->
+  			<div class="container2">	
+	  			<div class="menu">  
+			   		<ul>  					
+			  			<li><a class="fff" href="main.jsp">原创音乐馆</a></li>
+			  			<li><a class="f1" href="query.jsp">MV</a></li>
+			  			<li  class="active"><a class="f1" href="#">我的音乐</a></li>
+			  			<li><a class="f1" href="#">关于买歌</a></li>			
+			  		</ul>
+	  			</div>	
+	  <!-- 登录和注册按钮 -->
+		  		<div class="header-login">
+	  		   		<table class="top-table">  		   		
+				   		<tr>
+		  		   			<td>
+		  		   				<a class="top-table-font1" href="reg.jsp">注册</a>
+			  		   			<a class="top-table-font2" href="login.jsp">登录</a>
+			  		   		</td>
+			  		   	</tr>
+	  		  		</table> 
+	  		    </div> 
+  		    </div> 			              
   		</div>	
   	</div>
   	<!-- 页面顶部结束 -->
   	
- <div class="reg-contain">
+  	<!-- 搜索框与登录状态判断语句开始 -->
+  	<div class="container1-1">
+	  	<div class="input-group col-md-3" style="margin-top:0px positon:relative">  
+	       <input type="text" class="form-control search clearable" placeholder="请输入歌曲名或歌手名" / >  
+	       <span class="input-group-btn">  
+	           <button class="btn btn-info btn-search"><i class="fa fa-search"></i></button>             
+	        </span>  
+	 	</div>  
+	 	<div class="login-check">
+		 	<c:choose>
+		       <c:when test="${customer.name ==null}"> 您还未登录，登录可开启更多功能！</c:when>
+		       <c:otherwise>
+		  	   <c:out value="${customer.name}"></c:out>, 欢迎您!
+		       </c:otherwise>
+		     </c:choose>
+	 	</div>
+  	</div>
+	<!-- 搜索框与登录状态判断语句结束 -->
+	
+	<div class="add-contain">
   		<main class="container-fluid">
 	    <div class="row">
 		   <div class="col-md-12">
-		       <s:form action="customer/customer_reg" id="defaultForm" method="post" cssClass="form-horizontal"  enctype="multipart/form-data">
+		      <s:form action="song/song_addSong?song.singer=customerid" cssClass="form-horizontal" enctype="multipart/form-data">
+		      <s:hidden name="song.singer" />
 		      <div class="panel panel-success">
 			       <div class="panel-heading">
-		               <h4 class="panel-title">注 册 账 户</h4>
+		               <h4 class="panel-title">添 加 歌 曲</h4>
 		           </div>
-		         <div class="panel-body">
+		           <div class="panel-body">
 				       <div class="form-group">
-			                <label class="control-label col-md-3">用户名</label>
-			                <div class="col-md-4">
-                              <input type="text" name="customer.name" class="form-control input-sm" required>
+			                <label class="control-label col-md-3">歌曲名</label>
+			                <div class="col-md-8">
+                              <input type="text" name="song.songname" class="form-control input-sm" 
+                               value="尚未填写歌曲名称" required>
                            </div>
 			           </div>  
 			           <div class="form-group">
-			                <label class="control-label col-md-3">输入密码</label>
-			                <div class="col-md-4">
-                              <input type="password" name="customer.password" class="form-control input-sm"  required>
+			                <label class="control-label col-md-3">单价</label>
+			                <div class="col-md-8">
+                              <input type="text" name="song.price" class="form-control input-sm"
+                               value="0"  required>
+                           </div>
+			           </div>  
+			           <div class="form-group">
+			                <label class="control-label col-md-3">所属专辑</label>
+			                <div class="col-md-8">
+                              <input type="text" name="song.album" class="form-control input-sm" 
+                               value="暂无所属专辑"  required>
                             </div>
 			           </div>
-			            <div class="form-group">
-			                <label class="control-label col-md-3">确认密码</label>
-			                <div class="col-md-4">
-                              <input type="password" name="customer.number" class="form-control input-sm"  required>
+			           <div class="form-group">
+			                <label class="control-label col-md-3">语言</label>
+			                <div class="col-md-8">
+                              <input type="text" name="song.language" class="form-control input-sm" 
+                               value="未知"  required>
+                            </div>
+			           </div>
+			           <div class="form-group">
+			                <label class="control-label col-md-3">歌词</label>
+			                <div class="col-md-8">
+                              <input type="text" name="song.lyrics" class="form-control input-sm"
+                               value="暂无歌词"  required>
                             </div>
 			           </div>
 			           
 				       <div class="form-group">
-				                <label class="control-label col-md-3">用户头像</label>
+				                <label class="control-label col-md-3">封面图片</label>
 				                <div class="col-md-4">
 	                              <div class="fileupload fileupload-new" data-provides="fileupload">
 	                                <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
@@ -94,7 +154,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                                </div>
 	                                <div>
 	                                   <span class="btn btn-file btn-primary"><span class="fileupload-new">浏览</span>
-	                                   <span class="fileupload-exists">浏览</span><input type="file" name="custPhoto"/></span>
+	                                   <span class="fileupload-exists">浏览</span><input type="file" name="songPhoto"/></span>
 	                                   <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload">取消</a>
 	                                </div>
 	                              </div>
@@ -114,7 +174,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script src="<%=basePath%>js/jquery.min.js"></script>
     <script src="<%=basePath%>js/bootstrap.min.js"></script>
 	<script src="<%=basePath%>js/bootstrap-fileupload.js"></script>
-	
+  	
   	
   </body>
 </html>

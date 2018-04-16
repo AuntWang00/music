@@ -2,35 +2,19 @@
 <!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd" >
 
 <hibernate-reverse-engineering>
-	<table name="customer" catalog="music"
-		class="com.music.model.Customer">
-		<primary-key>
-			<generator class="increment"></generator>
-		</primary-key>
-	</table>
-	<table name="order" catalog="music" class="com.music.model.Order">
-		<primary-key>
-			<generator class="increment"></generator>
-		</primary-key>
-	</table>
-	<table name="songs" catalog="music" class="com.music.model.Songs">
-		<primary-key>
-			<generator class="increment"></generator>
-		</primary-key>
-	</table>
 	<table name="music_customer" catalog="music"
-		class="com.music.model.Customer">
+		class="com.music.model.Music_customer">
 		<primary-key>
 			<generator class="increment"></generator>
 		</primary-key>
 	</table>
 	<table name="music_order" catalog="music"
-		class="com.music.model.Order">
+		class="com.music.model.Music_order">
 		<primary-key>
 			<generator class="increment"></generator>
 		</primary-key>
 	</table>
-<table name="singer" catalog="music" class="com.music.model.Singer">
+<table name="songs" catalog="music" class="com.music.model.Songs">
 	<primary-key>
 		<generator class="increment"></generator>
 	</primary-key>

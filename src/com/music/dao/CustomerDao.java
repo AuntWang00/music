@@ -11,54 +11,55 @@ import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.music.model.Customer;
+import com.music.model.Music_customer;
+import com.music.model.Songs;
 
 
 @Service @Transactional
 public class CustomerDao {
 	@Resource SessionFactory factory;
 	
-	 /*ï¿½ï¿½ï¿½Customerï¿½ï¿½Ï¢*/
-    public void AddCustomer(Customer customer) throws Exception {
+	 /*Ìí¼ÓCustomerÐÅÏ¢*/
+    public void AddCustomer(Music_customer customer) throws Exception {
     	Session s = factory.getCurrentSession();
-    	System.out.println(customer);
+    	System.out.println("customer:"+customer);
     	s.save(customer);
     }
     
-    /*É¾ï¿½ï¿½Customerï¿½ï¿½Ï¢*/
+    /*É¾³ýCustomerÐÅÏ¢*/
     public void DeleteCustomer (Integer customerid) throws Exception {
         Session s = factory.getCurrentSession(); 
-        Object customer = s.load(Customer.class, customerid);
+        Object customer = s.load(Music_customer.class, customerid);
         s.delete(customer);
     }
     
-    /*ï¿½ï¿½ï¿½ï¿½Customerï¿½ï¿½Ï¢*/
-    public void UpdateCustomer(Customer customer) throws Exception {
+    /*¸üÐÂCustomerÐÅÏ¢*/
+    public void UpdateCustomer(Music_customer customer) throws Exception {
         Session s = factory.getCurrentSession();
         s.update(customer);
     }
     
-    /*ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½Customerï¿½ï¿½Ï¢*/
-    public ArrayList<Customer> QueryAllCustomer() {
+    /*²éÑ¯ËùÓÐCustomerÐÅÏ¢*/
+    public ArrayList<Music_customer> QueryAllCustomer() {
         Session s = factory.getCurrentSession();
-        String hql = "From Customer";
+        String hql = "From Music_customer";
         Query q = s.createQuery(hql);
         List customerList = q.list();
-        return (ArrayList<Customer>) customerList;
+        return (ArrayList<Music_customer>) customerList;
     }
 
-    /*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½*/
-    public Customer GetCustomerById(Integer customerid) {
+    /*¸ù¾ÝÖ÷¼ü»ñÈ¡¶ÔÏó*/
+    public Music_customer GetCustomerById(Integer customerid) {
         Session s = factory.getCurrentSession();
-        Customer customer = (Customer)s.get(Customer.class, customerid);
+        Music_customer customer = (Music_customer)s.get(Music_customer.class, customerid);
         return customer;
     }
     
-    /*ï¿½ï¿½Ý²ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¯*/
-    public ArrayList<Customer> QueryCustomerInfo(String name) { 	
+    /*¸ù¾Ý²éÑ¯Ìõ¼þ²éÑ¯*/
+    public ArrayList<Music_customer> QueryCustomerInfo(String name) { 	
     	Session s = factory.getCurrentSession();
     	List customerList;
-    	String hql = "From Customer customer where 1=1";
+    	String hql = "From Music_customer customer where 1=1";
     	if(!name.equals("")){ 
     		hql = hql + " and customer.name like '%" + name + "%'";
 	    	Query q = s.createQuery(hql);
@@ -70,8 +71,7 @@ public class CustomerDao {
     	
     	}
     	
-    	return (ArrayList<Customer>) customerList;
+    	return (ArrayList<Music_customer>) customerList;
     }
 
 }
-

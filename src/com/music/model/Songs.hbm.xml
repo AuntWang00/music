@@ -10,38 +10,50 @@
             <column name="songid" />
             <generator class="increment"></generator>
         </id>
+        <many-to-one name="music_customer" class="com.music.model.Music_customer" fetch="select">
+            <column name="singer" />
+        </many-to-one>
         <property name="songname" type="java.lang.String">
-            <column name="songname" length="40" />
+            <column name="songname" length="100" />
         </property>
-        <property name="price" type="java.lang.Double">
-            <column name="price" precision="22" scale="0" />
+        <property name="price" type="java.lang.Long">
+            <column name="price" precision="10" scale="0" />
         </property>
         <property name="filepath" type="java.lang.String">
-        	<column name="filepath" precision="100"/>
+            <column name="filepath" length="100" />
         </property>
         <property name="album" type="java.lang.String">
-        	<column name="album" precision="50"/>
+            <column name="album" length="50" />
         </property>
         <property name="language" type="java.lang.String">
-        	<column name="language" precision="10"/>
+            <column name="language" length="10" />
         </property>
         <property name="lyrics" type="java.lang.String">
-        	<column name="lyrics" precision="8000"/>
+            <column name="lyrics" length="8000" />
         </property>
-        <property name="singer" type="java.lang.Integer">
-        	<column name="singer"/>
-        </property>
-        <set name="orders" inverse="true">
+        <set name="music_orders" inverse="true">
             <key>
                 <column name="songs" not-null="true" />
             </key>
-            <one-to-many class="com.music.model.Order" />
+            <one-to-many class="com.music.model.Music_order" />
         </set>
-        <set name="orders_1" inverse="true">
+        <set name="music_orders_1" inverse="true">
             <key>
                 <column name="songs" not-null="true" />
             </key>
-            <one-to-many class="com.music.model.Order" />
+            <one-to-many class="com.music.model.Music_order" />
+        </set>
+        <set name="music_orders_2" inverse="true">
+            <key>
+                <column name="songs" not-null="true" />
+            </key>
+            <one-to-many class="com.music.model.Music_order" />
+        </set>
+        <set name="music_orders_3" inverse="true">
+            <key>
+                <column name="songs" not-null="true" />
+            </key>
+            <one-to-many class="com.music.model.Music_order" />
         </set>
     </class>
 </hibernate-mapping>

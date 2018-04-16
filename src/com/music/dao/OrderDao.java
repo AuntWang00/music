@@ -11,9 +11,9 @@ import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.music.model.Customer;
+import com.music.model.Music_customer;
 import com.music.model.Songs;
-import com.music.model.Order;
+import com.music.model.Music_order;
 
 
 @Service @Transactional
@@ -21,7 +21,7 @@ public class OrderDao {
 	@Resource SessionFactory factory;
 	
 	 
-    public void AddOrder(Order order) throws Exception {
+    public void AddOrder(Music_order order) throws Exception {
     	Session s = factory.getCurrentSession();
     	s.save(order);
     }
@@ -29,43 +29,43 @@ public class OrderDao {
     
     public void DeleteOrder (Integer orderId) throws Exception {
         Session s = factory.getCurrentSession(); 
-        Object order = s.load(Order.class, orderId);
+        Object order = s.load(Music_order.class, orderId);
         s.delete(order);
     }
     
     
-    public void UpdateOrder(Order order) throws Exception {
+    public void UpdateOrder(Music_order order) throws Exception {
         Session s = factory.getCurrentSession();
         s.update(order);
     }
     
     
-    public ArrayList<Order> QueryAllOrder() {
+    public ArrayList<Music_order> QueryAllOrder() {
         Session s = factory.getCurrentSession();
-        String hql = "From Order";
+        String hql = "From Music_order";
         Query q = s.createQuery(hql);
         List orderList = q.list();
-        return (ArrayList<Order>) orderList;
+        return (ArrayList<Music_order>) orderList;
     }
 
     
-    public Order GetOrderById(Integer orderid) {
+    public Music_order GetOrderById(Integer orderid) {
         Session s = factory.getCurrentSession();
-        Order order = (Order)s.get(Order.class, orderid);
+        Music_order order = (Music_order)s.get(Music_order.class, orderid);
         return order;
     }
     
     
-    public ArrayList<Order> QueryOrderInfo(Customer customer, Songs song) {
+    public ArrayList<Music_order> QueryOrderInfo(Music_customer customer, Songs song) {
     	Session s = factory.getCurrentSession();
-    	String hql = "From Order order where 1=1";
+    	String hql = "From Music_order order where 1=1";
     	if(null != customer && customer.getCustomerid()!=0) 
     		hql = hql + " and order.customer.customerid like '%" + customer.getCustomerid() + "%'";
     	if(null != song && null!=song.getSongname()) 
     		hql = hql + " and order.song.songname like '%" + song.getSongname() + "%'";
     	Query q = s.createQuery(hql);
     	List orderList = q.list();
-    	return (ArrayList<Order>) orderList;
+    	return (ArrayList<Music_order>) orderList;
     }
 
 }

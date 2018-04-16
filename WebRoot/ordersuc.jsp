@@ -1,4 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib uri="/struts-tags" prefix="s"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -9,18 +11,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>登录出错啦</title>
+    <title>下单成功</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-	<meta http-equiv="Refresh" content="2;url=login.jsp">
 	<meta http-equiv="description" content="This is my page">
+	<meta http-equiv="Refresh" content="1;url=order/order_showOrder?customer.name=${customer.name}">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
-	<link rel="stylesheet" href="<%=basePath%>css/bootstrap.css">
 	<link rel="shortcut icon" href="<%=basePath%>images/logo.png">
-	
 	
 
   </head>
@@ -28,15 +28,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body>
   <header>
   		<div class="logo"></div>
-  		
+  		<div class="account">
+		    <c:choose>
+		       <c:when test="${customer.name ==null}">
+		         <a href="login.jsp">登录</a>
+		         <a href="reg.jsp">注册</a>
+		       </c:when>
+		       <c:otherwise>
+		         <c:out value="${customer.name}"></c:out>欢迎您!
+		       </c:otherwise>
+		    </c:choose>
+		    </div>
 		    
     </header>
     <main>
-    	<div>
-       <p>账号不存在/密码错误，请重新输入！ </p>
-       </div>
-   
+    <div>
+    下单成功! <br>
+    </div>
     </main>
-    
   </body>
 </html>

@@ -6,14 +6,12 @@ String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 
-<!DOCTYPE HTML>
-
+<!DOCTYPE html>
 <html>
   <head>
     <base href="<%=basePath%>">
     
-    <title>我的音乐</title>
-    
+    <title>所有订单</title>
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
@@ -21,6 +19,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="description" content="This is my page">
 	<link rel="stylesheet" href="<%=basePath%>css/bootstrap.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
+	
 	<link rel="shortcut icon" href="<%=basePath%>images/logo.png">
 	
 	
@@ -39,11 +38,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	
 	
-
   </head>
   
   <body>
-  	<!-- 页面顶部开始 （包括logo、导航、登录按钮、注册按钮）-->
+     <!-- 页面顶部开始 （包括logo、导航、登录按钮、注册按钮）-->
   	<div class="top">
   		<div class="top-container">
   			<div class="header-logo">
@@ -56,9 +54,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   			<div class="container2">	
 	  			<div class="menu">  
 			   		<ul>  					
-			  			<li class="active"><a class="fff" href="song/song_showSong">原创音乐馆</a></li>
+			  			<li class="active"><a class="fff" href="main.jsp">原创音乐馆</a></li>
 			  			<li><a class="f1" href="query.jsp">MV</a></li>
-			  			<li><a class="f1" href="song/song_queryMySongs">我的音乐</a></li>
+			  			<li><a class="f1" href="order_main.jsp">我的音乐</a></li>
 			  			<li><a class="f1" href="#">关于买歌</a></li>			
 			  		</ul>
 	  			</div>	
@@ -67,8 +65,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  		   		<table class="top-table">  		   		
 				   		<tr>
 		  		   			<td>
-		  		   				<a class="top-table-font1" href="reg.jsp">注册</a>
-			  		   			<a class="top-table-font2" href="login.jsp">登录</a>
+		  		   				<a class="top-table-font1" href="login.jsp">注册</a>
+			  		   			<a class="top-table-font2" href="reg.jsp">登录</a>
 			  		   		</td>
 			  		   	</tr>
 	  		  		</table> 
@@ -90,7 +88,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		 	<c:choose>
 		       <c:when test="${customer.name ==null}"> 您还未登录，登录可开启更多功能！</c:when>
 		       <c:otherwise>
-		       <img src = "<%=basePath %><s:property value='filepath'/>" style="width:20px; height:20px;">
 		  	   <c:out value="${customer.name}"></c:out>, 欢迎您!
 		       </c:otherwise>
 		     </c:choose>
@@ -98,58 +95,46 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   	</div>
 	<!-- 搜索框与登录状态判断语句结束 -->
 	
-	<div class="mymusic-contain">
-		<div class="mymusic-list">
-		     <a href="song/song_queryMySongs">我上传的音乐</a> 
-		     <a href="order_main.jsp">我购买的音乐</a> 
-		     <a href="song/song_addSong?customer.customerid=<s:property value='customer.customerid'/>" class="delete"> 上传音乐</a>
+    
+  <main class="container-fluid">
+      <div class="row">
+         <div class="col-md-12">
+		   <s:form action="song/song_querySongs" method="post">
+		      <div class="panel panel-info">
+	                 <div class="panel-heading">
+	                    <h3 class="panel-title">我的订单</h3>
+	                 </div>
+	                 <div class="panel-body panel-body-table" >
+	                      <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+	                         <thead>
+	                           <tr>
+	                              	  <th>序号</th>  
+							          <th>订单号</th>
+							          <th>名称</th>
+							          <th>单价</th> 
+							          
+	                              </tr>
+	                          </thead>
+	                          <tbody>
+	                              <s:iterator value="songslist" var="song" status="status">
+	                                  <tr>
+	                                      <td><s:property value="#status.index+1"></s:property></td>
+	                                      <td><s:property value="#song.songid"></s:property></td>
+	                                      <td><s:property value="#song.songname"></s:property></td>
+	                                      <td><s:property value="#song.price"></s:property></td>
+	                                      
+	                                  </tr>
+	                              </s:iterator>
+	                          </tbody>
+	                        </table>
+	                   </div>
+	            </div>
+	               
+		       </s:form>
 	       </div>
-	       
-	       <main class="container-fluid">
-	      <div class="row">
-	         <div class="col-md-12">
-			   
-			      <div class="panel panel-info">
-		                 <div class="panel-heading">
-		                    <h3 class="panel-title">我上传的歌曲</h3>
-		                 </div>
-		                  <s:form action="song/song_queryMySongs" method="post">
-		                 <div class="panel-body panel-body-table">
-		                   <div class="table-responsive" style="overflow-x:hidden">
-		                      <table class="table table-striped table-bordered table-hover" id="dataTables-example">
-		                         <thead>
-		                           <tr>
-		                              <th>序号</th>  
-								          <th>歌曲名称</th>
-								          <th>单价</th>
-								          <th>专辑</th> 
-								          <th>语言</th>  
-								          <th>歌手</th>
-		                              </tr>
-		                          </thead>
-		                          <tbody>
-		                              <s:iterator value="songslist" status="status">
-		                                  <tr>
-		                                      <td><s:property value="#status.index+1"></s:property></td>
-		                                      <td><s:a href="song/song_showDetail?song.songid=%{songid}">
-			               						  <s:property value="song.songname"></s:property></s:a></td>
-		                                      <td class="center"><s:property value="song.price"></s:property></td>
-		                                      <td class="center"><s:property value="song.album"></s:property></td>
-		                                      <td class="center"><s:property value="song.language"></s:property></td>
-		                                      <td class="center"><s:property value="song.singer.name"></s:property></td>
-		                                  </tr>
-		                              </s:iterator>
-		                          </tbody>
-		                        </table>
-		                      </div>
-		                    </div>
-		                     </s:form>
-		                </div>
-			      
-		       </div>
-		   </div>
-		</main>
-	</div>
+	   </div>
+	</main>
+	
 	<script src="<%=basePath%>js/jquery.min.js"></script>
     <script src="<%=basePath%>js/bootstrap.min.js"></script>
     <script src="<%=basePath%>js/jquery.dataTables.js"></script>

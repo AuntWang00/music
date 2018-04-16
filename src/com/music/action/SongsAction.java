@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.UUID;
 
 import com.music.dao.SongsDao;
-import com.music.model.Customer;
+import com.music.model.Music_customer;
 import com.music.model.Songs;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -24,11 +24,13 @@ import com.opensymphony.xwork2.ActionSupport;
 @Controller @Scope("prototype")
 public class SongsAction extends ActionSupport{
 	
-	/*“µÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩ ÔøΩÔøΩsongsDao◊¢ÔøΩÔøΩ*/
+	/*“µŒÒ≤„∂‘œÛ Ω´songsDao◊¢»Î*/
 	@Resource SongsDao songsDao;
 	
 	private Songs song;
-	
+	 private File songPhoto;
+	 private String songPhotoFileName;
+	 private String songPhotoContentType;
 	
 	public Songs getSong() {
 		return song;
@@ -48,35 +50,10 @@ public class SongsAction extends ActionSupport{
 		this.songslist = songslist;
 	}
 	
-	public SongsDao getSongsDao() {
-		return songsDao;
-	}
-
-	public void setSongsDao(SongsDao songsDao) {
-		this.songsDao = songsDao;
-	}
-
-	private File songPhoto;
-	
-	public File getSongPhoto() {
-		return songPhoto;
-	}
-
-	public void setSongPhoto(File songPhoto) {
-		this.songPhoto = songPhoto;
-	}
-
-	public String getSongPhotoContentType() {
-		return songPhotoContentType;
-	}
-
-	private String songPhotoFileName;
-	private String songPhotoContentType;
-	//Êñá‰ª∂‰∏ä‰º†ÊÄùË∑Ø
 	public String addSong() throws Exception{
 		String path = ServletActionContext.getServletContext().getRealPath("/upload"); 
-        /*ÔøΩÔøΩÔøΩÔøΩÕº∆¨ÔøΩœ¥ÔøΩ*/
-        String songPhotoFileName = ""; 
+        /*¥¶¿ÌÕº∆¨…œ¥´*/
+        String SongPhotoFileName = ""; 
    	 	if(songPhoto!= null) {
    	 		InputStream is = new FileInputStream(songPhoto);
    			String fileContentType = this.getSongPhotoContentType();
@@ -103,17 +80,21 @@ public class SongsAction extends ActionSupport{
         else
         	song.setFilepath("upload/NoImage.jpg");
         
+		
 		songsDao.addSong(song);
 		return "message";
-		
 	}
-	
 	
 	public String showSong(){
 		songslist = songsDao.QueryAllSongs();
 		return "show_view";
 	}
 	
+	public String queryMySongs() throws Exception{
+		songslist = songsDao.QueryMySongsInfo(customer);
+		return "show_view1";
+	}
+
 	public String showDetail(){
 		song =songsDao.GetSongById(song.getSongid());
 		return "detail_view";
@@ -135,11 +116,22 @@ public class SongsAction extends ActionSupport{
 		return "delete_message";
 		
 	}
+	
+	
 	public String querySongs() throws Exception{
+		System.out.println("¿±º¶£¨Œ“‘⁄≤È∏Ë¿≤");
 		songslist = songsDao.QuerySongsInfo(keywords);
 		return "show_view";
 	}
 	
+	/*
+	public String queryMySongs() throws Exception{
+		System.out.println("¿±º¶£¨Œ“‘⁄ƒ„µƒ≤È∏Ë¿≤");
+		songslist = songsDao.QueryMySongsInfo(customer);
+		return "show_view1";
+	}
+	*/
+	 
 	private String keywords;
 	
 	public String getKeywords() {
@@ -150,12 +142,20 @@ public class SongsAction extends ActionSupport{
 		this.keywords = keywords;
 	}
 	
-	private Customer customer;
-	public Customer getCustomer() {
+	private Music_customer customer;
+	public Music_customer getCustomer() {
 		return customer;
 	}
-	public void setCustomer(Customer customer) {
+	public void setCustomer(Music_customer customer) {
 		this.customer = customer;
+	}
+
+	public File getSongPhoto() {
+		return songPhoto;
+	}
+
+	public void setSongPhoto(File songPhoto) {
+		this.songPhoto = songPhoto;
 	}
 
 	public String getSongPhotoFileName() {
@@ -166,12 +166,13 @@ public class SongsAction extends ActionSupport{
 		this.songPhotoFileName = songPhotoFileName;
 	}
 
+	public String getSongPhotoContentType() {
+		return songPhotoContentType;
+	}
+
 	public void setSongPhotoContentType(String songPhotoContentType) {
 		this.songPhotoContentType = songPhotoContentType;
 	}
-	
+		
+
 }
-
-	
-
-

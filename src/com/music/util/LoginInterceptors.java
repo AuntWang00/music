@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts2.ServletActionContext;
 
-import com.music.model.Customer;
+import com.music.model.Music_customer;
 import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.interceptor.AbstractInterceptor;
 
@@ -15,11 +15,8 @@ public class LoginInterceptors extends AbstractInterceptor{
 
 	 
 	   private static final long serialVersionUID = 1L;
-
 	   private String sessionName;
-
-	   private String excludeName;
-	   
+	   private String excludeName;	   
 	   private List <String> list;
 	   /*
 	    * 因为在配置文件的参数excludeName中，例外的action可能是若干个，中间用逗号间隔，
@@ -29,75 +26,57 @@ public class LoginInterceptors extends AbstractInterceptor{
 	   public List<String>  strlsit(String str){
 
 	     String[] s = str.split(",");
-
 	     List <String> list = new ArrayList <String>();
-
 	     for(String ss : s){
-
 	        list.add(ss.trim());
-
 	     }
-
 	     return list;
-
 	   }
 
 	   @Override
 	   //拦截器初始化时把例外的action放入list中
 	   public void init() {
-
 	      list = strlsit(excludeName);
-
 	   }
 	   
 	   //重载init()
 	   //继承destroy()
+	   public void destroy(){}
 	   //intercept重载,自己编写
 
 	   @Override
 
 	   public String intercept(ActionInvocation invocation) throws Exception {
-
-	     
-		 System.out.println("--------进入拦截器-------");  
+		   
+		 System.out.println("--------进入拦截器-------"); 
+		 
 		 String actionName = invocation.getProxy().getActionName();   
-		 Map <String,Object>  session = invocation.getInvocationContext().getSession(); 
+		 Map <String,Object>  session = invocation.getInvocationContext().getSession(); //获取session
 		 System.out.println(list);
-	     if(list.contains(actionName)){   
-	        
+	     if(list.contains(actionName)){          
 	    	System.out.println(actionName + "没有被拦截");
-	        return invocation.invoke();     
-
-	     }else {   
-
-	        
-	    	System.out.println(actionName + "呀被拦截了");
-
-	        
-	       
-	        Customer customer = (Customer) session.get(sessionName);   
-	        
-	           if(customer==null){  
-	        	     
+	     //   return invocation.invoke();     
+	     }else {   	        
+	    	System.out.println(actionName + "呀被拦截了");	       
+	        Music_customer customer = (Music_customer) session.get(sessionName);   // 用户还未登陆 	        
+	           if(customer==null){   // 获取HttpServletRequest对象 	        	     
 	                 HttpServletRequest req = ServletActionContext.getRequest();  
-
-	                
-	                 String path = req.getRequestURI().replaceAll("/music", "");
+	              // 获取此请求的地址，请求地址包含application name，进行subString操作，去除application name
+	                 String path = req.getRequestURI().substring(7); // 获得请求中的参数 
 	                 System.out.println("path:" + path);
-	        
-	                 //存入session，这个参数在struts.xml中会作为参数出现
-	                 session.put("prePage", path);  
-	        	     return "login";
-	           }
-	           else {                
-	        	
-	                 return invocation.invoke();   
-
-	          }
-
-	     }
-
+	     			String queryString = req.getQueryString(); // 预防空指针 
+	     			if (queryString == null) { 
+	     				queryString = ""; 
+	     			} // 拼凑得到登陆之前的地址 
+	     			String realPath = path + "?" + queryString; // 存入session，方便调用 
+	     			session.put("prePage", realPath); 
+	     			return "login";
+	     		} // 用户已经登陆，放行      			
+	     	return invocation.invoke(); 
+	     } 
+	     return invocation.invoke();    
 	   }
+	             
 
 	   public String getSessionName() {
 

@@ -8,7 +8,8 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.music.dao.CustomerDao;
-import com.music.model.Customer;
+import com.music.model.Music_customer;
+
 import com.mysql.jdbc.PreparedStatement;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -26,90 +27,23 @@ import javax.servlet.http.HttpServletRequest;
 
 
 @Controller @Scope("prototype")
+
 public class CustomerAction extends ActionSupport implements SessionAware{
 	
 @Resource CustomerDao customerDao;
     
-    private Customer customer;
-    
+    private Music_customer customer;
+    private File custPhoto;
+	 private String custPhotoFileName;
+	 private String custPhotoContentType;
     private Map<String,Object> session;
 	private String prePage;
-	private File customerPhoto;
-	private String customerPhotoFileName;
-	private String customerPhotoContentType;
 
-	public CustomerDao getCustomerDao() {
-		return customerDao;
-	}
-
-	public void setCustomerDao(CustomerDao customerDao) {
-		this.customerDao = customerDao;
-	}
-
-	public File getCustomerPhoto() {
-		return customerPhoto;
-	}
-
-	public void setCustomerPhoto(File customerPhoto) {
-		this.customerPhoto = customerPhoto;
-	}
-
-	public String getCustomerPhotoFileName() {
-		return customerPhotoFileName;
-	}
-
-	public void setCustomerPhotoFileName(String customerPhotoFileName) {
-		this.customerPhotoFileName = customerPhotoFileName;
-	}
-
-	public String getCustomerPhotoContentType() {
-		return customerPhotoContentType;
-	}
-
-	public void setCustomerPhotoContentType(String customerPhotoContentType) {
-		this.customerPhotoContentType = customerPhotoContentType;
-	}
-
-	public String addCustomer() throws Exception{
-		String path = ServletActionContext.getServletContext().getRealPath("/upload"); 
-        /*ï¿½ï¿½ï¿½ï¿½Í¼Æ¬ï¿½Ï´ï¿½*/
-        String customerPhotoFileName = ""; 
-   	 	if(customerPhoto!= null) {
-   	 		InputStream is = new FileInputStream(customerPhoto);
-   			String fileContentType = this.getCustomerPhotoContentType();
-   			System.out.println(fileContentType);
-   			if(fileContentType.equals("image/jpeg")  || fileContentType.equals("image/pjpeg"))
-   				customerPhotoFileName = UUID.randomUUID().toString() +  ".jpg";
-   			else if(fileContentType.equals("image/gif"))
-   				customerPhotoFileName = UUID.randomUUID().toString() +  ".gif";
-   			else if(fileContentType.equals("image/png"))
-   				customerPhotoFileName = UUID.randomUUID().toString() +  ".png";
-
-   			File file = new File(path, customerPhotoFileName);
-   			OutputStream os = new FileOutputStream(file);
-   			byte[] b = new byte[1024];
-   			int bs = 0;
-   			while ((bs = is.read(b)) > 0) {
-   				os.write(b, 0, bs);
-   			}
-   			is.close();
-   			os.close();
-   	 	}
-        if(customerPhoto != null)
-        	customer.setFilepath("upload/" + customerPhotoFileName);
-        else
-        	customer.setFilepath("upload/NoImage.jpg");
-        
-        customerDao.AddCustomer(customer);
-		return "success";
-		
-	}
-	
-	public Customer getCustomer() {
+	public Music_customer getCustomer() {
 		return customer;
 	}
 
-	public void setCustomer(Customer customer) {
+	public void setCustomer(Music_customer customer) {
 		this.customer = customer;
 	}
 	
@@ -133,23 +67,23 @@ public class CustomerAction extends ActionSupport implements SessionAware{
 	
 	
 	public String reg() throws Exception{
-		customerDao.AddCustomer(customer);
-		session.put("customer", customer);
+		
 		String path = ServletActionContext.getServletContext().getRealPath("/upload"); 
-        /*ï¿½ï¿½ï¿½ï¿½Í¼Æ¬ï¿½Ï´ï¿½*/
-        String customerPhotoFileName = ""; 
-   	 	if(customerPhoto!= null) {
-   	 		InputStream is = new FileInputStream(customerPhoto);
-   			String fileContentType = this.getCustomerPhotoContentType();
-   			System.out.println(fileContentType);
+        /*´¦ÀíÍ¼Æ¬ÉÏ´«*/
+		
+        String CustPhotoFileName = ""; 
+   	 	if(custPhoto!= null) {
+   	 		InputStream is = new FileInputStream(custPhoto);
+   			String fileContentType = this.getCustPhotoContentType();
+   			System.out.println("fileContentType:"+fileContentType);
    			if(fileContentType.equals("image/jpeg")  || fileContentType.equals("image/pjpeg"))
-   				customerPhotoFileName = UUID.randomUUID().toString() +  ".jpg";
+   				custPhotoFileName = UUID.randomUUID().toString() +  ".jpg";
    			else if(fileContentType.equals("image/gif"))
-   				customerPhotoFileName = UUID.randomUUID().toString() +  ".gif";
+   				custPhotoFileName = UUID.randomUUID().toString() +  ".gif";
    			else if(fileContentType.equals("image/png"))
-   				customerPhotoFileName = UUID.randomUUID().toString() +  ".png";
+   				custPhotoFileName = UUID.randomUUID().toString() +  ".png";
 
-   			File file = new File(path, customerPhotoFileName);
+   			File file = new File(path, custPhotoFileName);
    			OutputStream os = new FileOutputStream(file);
    			byte[] b = new byte[1024];
    			int bs = 0;
@@ -159,12 +93,15 @@ public class CustomerAction extends ActionSupport implements SessionAware{
    			is.close();
    			os.close();
    	 	}
-        if(customerPhoto != null)
-        	customer.setFilepath("upload/" + customerPhotoFileName);
+   	 	
+   	 	System.out.println("custPhoto:"+custPhoto);
+        if(custPhoto != null)
+        	customer.setFilepath("upload/" + custPhotoFileName);
         else
         	customer.setFilepath("upload/NoImage.jpg");
         
-        customerDao.AddCustomer(customer);
+		customerDao.AddCustomer(customer);
+		session.put("customer", customer); //Map<String,Object> session;
 		return "show_view";
 	}
 	
@@ -172,28 +109,28 @@ public class CustomerAction extends ActionSupport implements SessionAware{
 	
 	public String login() {
 		
-		ArrayList<Customer> listCustomer = customerDao.QueryCustomerInfo(customer.getName());
+		ArrayList<Music_customer> listCustomer = customerDao.QueryCustomerInfo(customer.getName());
 		if(listCustomer.size()==0) { 
 			
-			this.errMessage = "è´¦å·ä¸å­˜åœ¨";
+			this.errMessage = "ÕËºÅ²»´æÔÚ";
 			System.out.print(this.errMessage);
 			return "input";
 			
 		} 
 		else{			
-		    Customer db_customer = listCustomer.get(0); //å½“ç”¨æˆ·åä¸å…è®¸é‡åæ—¶æ‰è¿™æ ·å†™
+			Music_customer db_customer = listCustomer.get(0); //µ±ÓÃ»§Ãû²»ÔÊĞíÖØÃûÊ±²ÅÕâÑùĞ´
 			if(!db_customer.getPassword().equals(customer.getPassword())) {
 			
-			this.errMessage = " å¯†ç ä¸æ­£ç¡® ";
+			this.errMessage = " ÃÜÂë²»ÕıÈ· ";
 			System.out.print(this.errMessage);
 			return "input";
 			
 		    }else{
 			
-			session.put("customer", db_customer); //ç”¨æˆ·åæ”¾åˆ°sessionä¸­
-			//è·³è½¬å‰çš„é¡µé¢ä»sessionä¸­å–å‡ºæ¥ï¼Œå–å‡ºæ¥åå°†å…¶ç½®ç©º
+			session.put("customer", db_customer); //ÓÃ»§Ãû·Åµ½sessionÖĞ
+			//Ìø×ªÇ°µÄÒ³Ãæ´ÓsessionÖĞÈ¡³öÀ´£¬È¡³öÀ´ºó½«ÆäÖÃ¿Õ
 			prePage = (String) session.get("prePage");
-			System.out.println("ï¼Ÿï¼Ÿï¼Ÿ"+ prePage);
+			System.out.println("È¡³öÌø×ªÇ°µÄÒ³Ãæ"+ prePage);
 			session.remove("prePage");  
 			return "success";
 			
@@ -207,6 +144,38 @@ public class CustomerAction extends ActionSupport implements SessionAware{
 
 	public void setPrePage(String prePage) {
 		this.prePage = prePage;
+	}
+
+	public CustomerDao getCustomerDao() {
+		return customerDao;
+	}
+
+	public void setCustomerDao(CustomerDao customerDao) {
+		this.customerDao = customerDao;
+	}
+
+	public File getCustPhoto() {
+		return custPhoto;
+	}
+
+	public void setCustPhoto(File custPhoto) {
+		this.custPhoto = custPhoto;
+	}
+
+	public String getCustPhotoFileName() {
+		return custPhotoFileName;
+	}
+
+	public void setCustPhotoFileName(String custPhotoFileName) {
+		this.custPhotoFileName = custPhotoFileName;
+	}
+
+	public String getCustPhotoContentType() {
+		return custPhotoContentType;
+	}
+
+	public void setCustPhotoContentType(String custPhotoContentType) {
+		this.custPhotoContentType = custPhotoContentType;
 	}
 
 
