@@ -56,9 +56,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   			<div class="container2">	
 	  			<div class="menu">  
 			   		<ul>  					
-			  			<li class="active"><a class="fff" href="main.jsp">原创音乐馆</a></li>
+			  			<li class="active"><a class="fff" href="song/song_showSong">原创音乐馆</a></li>
 			  			<li><a class="f1" href="query.jsp">MV</a></li>
-			  			<li><a class="f1" href="song/song_queryMySongs" class="add-order">我的音乐</a></li>
+			  			<li><a class="f1" href="song/song_showSong1" class="add-order">我的音乐</a></li>
 			  			<li><a class="f1" href="#">关于买歌</a></li>			
 			  		</ul>
 	  			</div>	
@@ -112,7 +112,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		   			<li class="show-item">
 		   				<div class="show-pic">
 		   					<span style="white-space:pre;"> </span>
-		   					<img src="${pageContext.request.contextPath}/images/${fileName}" />
+		   					<img src = "<%=basePath %><s:property value='filepath'/>">
 		   				</div>
 		   				<div class="show-info">
 		   					<s:property value ="songname"/>

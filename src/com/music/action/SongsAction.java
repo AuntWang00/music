@@ -12,25 +12,32 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
+import com.music.dao.CustomerDao;
 import com.music.dao.SongsDao;
+
 import com.music.model.Music_customer;
 import com.music.model.Songs;
 import com.opensymphony.xwork2.ActionSupport;
 
 
 
+@SuppressWarnings("serial")
 @Controller @Scope("prototype")
 public class SongsAction extends ActionSupport{
 	
 	/*业务层对象 将songsDao注入*/
 	@Resource SongsDao songsDao;
-	
+	@Resource CustomerDao customerDao;
+	private Music_customer customer1;
 	private Songs song;
 	 private File songPhoto;
+	 private Map<String,Object> session;
 	 private String songPhotoFileName;
 	 private String songPhotoContentType;
+	 private List<Songs> songslist;
 	
 	public Songs getSong() {
 		return song;
@@ -40,7 +47,7 @@ public class SongsAction extends ActionSupport{
 		this.song = song;
 	}
 	
-	private List<Songs> songslist;
+	
 	
 	public List<Songs> getSongslist() {
 		return songslist;
@@ -90,10 +97,28 @@ public class SongsAction extends ActionSupport{
 		return "show_view";
 	}
 	
-	public String queryMySongs() throws Exception{
-		songslist = songsDao.QueryMySongsInfo(customer);
+
+		
+	/*
+    public String showOrder() {
+    	
+        //将系统设定为用户名不重复，因此在系统中查询到第一个该名称用户即可
+    	System.out.println(customer.getName());
+        Customer cus= customerDao.QueryCustomerInfo(customer.getName()).get(0);
+        //注意不需要food的查询条件时，下面语句的写法，直接将food的条件置为null
+        orderList = orderDao.QueryOrderInfo(cus,null);
+
+        return "show_view";
+    }
+*/
+	public String showSong1(){
+		System.out.println("into showSong1");
+	//	System.out.println(customer1.getName());
+		Music_customer cus= customerDao.QueryCustomerInfo(customer1.getName()).get(0);
+		songslist = songsDao.QuerySongsInfo1(cus,null);
+	//	System.out.println("into showSong1:"+songslist);
 		return "show_view1";
-	}
+	}	
 
 	public String showDetail(){
 		song =songsDao.GetSongById(song.getSongid());
@@ -144,10 +169,10 @@ public class SongsAction extends ActionSupport{
 	
 	private Music_customer customer;
 	public Music_customer getCustomer() {
-		return customer;
+		return customer1;
 	}
 	public void setCustomer(Music_customer customer) {
-		this.customer = customer;
+		this.customer1 = customer;
 	}
 
 	public File getSongPhoto() {
@@ -172,6 +197,38 @@ public class SongsAction extends ActionSupport{
 
 	public void setSongPhotoContentType(String songPhotoContentType) {
 		this.songPhotoContentType = songPhotoContentType;
+	}
+
+	public SongsDao getSongsDao() {
+		return songsDao;
+	}
+
+	public void setSongsDao(SongsDao songsDao) {
+		this.songsDao = songsDao;
+	}
+
+	public CustomerDao getCustomerDao() {
+		return customerDao;
+	}
+
+	public void setCustomerDao(CustomerDao customerDao) {
+		this.customerDao = customerDao;
+	}
+
+	public Music_customer getCustomer1() {
+		return customer1;
+	}
+
+	public void setCustomer1(Music_customer customer1) {
+		this.customer1 = customer1;
+	}
+
+	public Map<String, Object> getSession() {
+		return session;
+	}
+
+	public void setSession(Map<String, Object> session) {
+		this.session = session;
 	}
 		
 

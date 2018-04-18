@@ -56,9 +56,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   			<div class="container2">	
 	  			<div class="menu">  
 			   		<ul>  					
-			  			<li class="active"><a class="fff" href="song/song_showSong">原创音乐馆</a></li>
+			  			<li ><a class="f1" href="song/song_showSong">原创音乐馆</a></li>
 			  			<li><a class="f1" href="query.jsp">MV</a></li>
-			  			<li><a class="f1" href="song/song_queryMySongs">我的音乐</a></li>
+			  			<li class="active"><a class="fff" href="song/song_showSong1">我的音乐</a></li>
 			  			<li><a class="f1" href="#">关于买歌</a></li>			
 			  		</ul>
 	  			</div>	
@@ -90,7 +90,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		 	<c:choose>
 		       <c:when test="${customer.name ==null}"> 您还未登录，登录可开启更多功能！</c:when>
 		       <c:otherwise>
-		       <img src = "<%=basePath %><s:property value='filepath'/>" style="width:20px; height:20px;">
+		       <img src = "<%=basePath %>${customer.filepath}" style="width:30px; height:30px;">
 		  	   <c:out value="${customer.name}"></c:out>, 欢迎您!
 		       </c:otherwise>
 		     </c:choose>
@@ -102,59 +102,59 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<div class="mymusic-list">
 		     <a href="song/song_queryMySongs">我上传的音乐</a> 
 		     <a href="order_main.jsp">我购买的音乐</a> 
-		     <a href="song/song_addSong?customer.customerid=<s:property value='customer.customerid'/>" class="delete"> 上传音乐</a>
+		     <a href="song/song_addSong?customer.customerid=${customer.customerid}" class="add"> 上传音乐</a>
 	       </div>
 	       
 	       <main class="container-fluid">
-	      <div class="row">
-	         <div class="col-md-12">
-			   
-			      <div class="panel panel-info">
-		                 <div class="panel-heading">
-		                    <h3 class="panel-title">我上传的歌曲</h3>
-		                 </div>
-		                  <s:form action="song/song_queryMySongs" method="post">
-		                 <div class="panel-body panel-body-table">
-		                   <div class="table-responsive" style="overflow-x:hidden">
-		                      <table class="table table-striped table-bordered table-hover" id="dataTables-example">
-		                         <thead>
-		                           <tr>
-		                              <th>序号</th>  
-								          <th>歌曲名称</th>
-								          <th>单价</th>
-								          <th>专辑</th> 
-								          <th>语言</th>  
-								          <th>歌手</th>
-		                              </tr>
-		                          </thead>
-		                          <tbody>
-		                              <s:iterator value="songslist" status="status">
-		                                  <tr>
-		                                      <td><s:property value="#status.index+1"></s:property></td>
-		                                      <td><s:a href="song/song_showDetail?song.songid=%{songid}">
-			               						  <s:property value="song.songname"></s:property></s:a></td>
-		                                      <td class="center"><s:property value="song.price"></s:property></td>
-		                                      <td class="center"><s:property value="song.album"></s:property></td>
-		                                      <td class="center"><s:property value="song.language"></s:property></td>
-		                                      <td class="center"><s:property value="song.singer.name"></s:property></td>
-		                                  </tr>
-		                              </s:iterator>
-		                          </tbody>
-		                        </table>
-		                      </div>
-		                    </div>
-		                     </s:form>
-		                </div>
-			      
-		       </div>
-		   </div>
-		</main>
-	</div>
+      <div class="row">
+         <div class="col-md-12">
+		   
+		      <div class="panel panel-info">
+		      		<div class="panel-heading">
+	                    <h3 class="panel-title">我上传的歌曲</h3>
+	                 </div>
+	                 <s:form action="song/song_showSong1" method="post">
+	                 <div class="panel-body panel-body-table" >
+	                      <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+	                         <thead>
+	                        
+	                           <tr>
+	                              	  <th>序号</th> 
+							          <th>歌曲名称</th>
+							          <th>单价</th>
+							          <th>专辑</th>	
+							           <th>歌手</th> 
+	                              </tr>
+	                          </thead>
+	                          <tbody>
+	                              <s:iterator value="songslist" var="song" status="status">
+	                              		
+	                              		  <s:if test="#session.customer.customerid==11">
+	                                  <tr>
+	                                      <td><s:property value="#status.index+1"></s:property></td>
+	                                      <td><s:property value="#song.songname"></s:property></td>
+	                                      <td><s:property value="#song.price"></s:property></td>
+	                                      <td><s:property value="#song.album"></s:property></td>
+	                                      <td><s:property value="#song.singer.name"></s:property></td>    
+	                                  </tr>
+	                                  </s:if>
+	                              </s:iterator>
+	                          </tbody>
+	                        </table>
+	                   </div>
+	                   </s:form>
+	            </div>
+	               
+		       
+	       </div>
+	   </div>
+	</main>
+	
 	<script src="<%=basePath%>js/jquery.min.js"></script>
     <script src="<%=basePath%>js/bootstrap.min.js"></script>
     <script src="<%=basePath%>js/jquery.dataTables.js"></script>
     <script src="<%=basePath%>js/dataTables.bootstrap.js"></script>
-    <script>
+    <script >
        $(document).ready(function () {
            $('#dataTables-example').dataTable({
 			   "language": {

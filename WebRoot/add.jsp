@@ -99,7 +99,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   		<main class="container-fluid">
 	    <div class="row">
 		   <div class="col-md-12">
-		      <s:form action="song/song_addSong?song.singer=customerid" cssClass="form-horizontal" enctype="multipart/form-data">
+		      <s:form action="song/song_addSong" cssClass="form-horizontal" enctype="multipart/form-data">
 		      <s:hidden name="song.singer" />
 		      <div class="panel panel-success">
 			       <div class="panel-heading">

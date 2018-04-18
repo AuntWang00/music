@@ -84,10 +84,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			           
 				       <div class="form-group">
 				                <label class="control-label col-md-3">用户头像</label>
+				                
 				                <div class="col-md-4">
 	                              <div class="fileupload fileupload-new" data-provides="fileupload">
 	                                <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
 	                                   <img src="<%=basePath%>upload/demoUpload.jpg" alt="" />
+	                                  
 	                                </div>
 	                                <div class="fileupload-preview fileupload-exists thumbnail" 
 	                                   style="max-width: 200px; max-height:150px; line-height: 20px;">
@@ -96,6 +98,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                                   <span class="btn btn-file btn-primary"><span class="fileupload-new">浏览</span>
 	                                   <span class="fileupload-exists">浏览</span><input type="file" name="custPhoto"/></span>
 	                                   <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload">取消</a>
+	                                   <p>（图片大小请勿超过2M！）</p> 
+	                                    
 	                                </div>
 	                              </div>
 	                            </div>

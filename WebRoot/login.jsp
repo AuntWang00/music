@@ -58,17 +58,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		  <main class="bg">
 				 <s:form action="customer/customer_login" method="post" cssclass="login">
 					 <h3>登陆页面</h3>
-					 <div class="form-group">
-						 <div class="input-group">
-						 <span class="input-group-addon"><i class="fa fa-ul fa-lock"></i></span>
-						 <input type="text" name="customer.name" class="form-control" placeholder="用户名" required>
-						 </div>
-					 	<div class="input-group">
-					 		<span class="input-group-addon"><i class="fa fa-ul fa-lock"></i></span>
-					 		<input type="password" name="customer.password" class="form-control" placeholder="密码" required>
-					     </div>
-					</div>
-					      <button type="submit" class="btn btn-success">登陆</button> <div class="bg-a"><a href="reg.jsp">还没有账户，去创建一个</a></div>
+					<div class="form-group">
+		              <div class="input-group">
+		                <span class="input-group-addon"><i class="fa fa-user"></i></span>
+		                <input type="text" name="customer.name" class="form-control" placeholder="请输入用户名">
+		              </div>
+		              <s:fielderror fieldName="customer.name" cssClass="fielderror"/>
+		               <div class="input-group">
+		                <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+		                <input type="password" name="customer.password" class="form-control" placeholder="请输入密码">
+		              </div>
+		              <s:fielderror fieldName="customer.password" cssClass="fielderror"/>
+		          </div>
+			      <button type="submit" class="btn btn-success btn-login">登 录 </button> <div class="bg-a"><a href="reg.jsp">还没有账户，去创建一个</a></div>
 				 </s:form>
 				    
 		  </main>

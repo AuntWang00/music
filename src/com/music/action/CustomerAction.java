@@ -31,13 +31,15 @@ import javax.servlet.http.HttpServletRequest;
 public class CustomerAction extends ActionSupport implements SessionAware{
 	
 @Resource CustomerDao customerDao;
-    
+	private static final long serialVersionUID = 1L;
+
     private Music_customer customer;
     private File custPhoto;
 	 private String custPhotoFileName;
 	 private String custPhotoContentType;
     private Map<String,Object> session;
 	private String prePage;
+	
 
 	public Music_customer getCustomer() {
 		return customer;
@@ -108,35 +110,33 @@ public class CustomerAction extends ActionSupport implements SessionAware{
 	
 	
 	public String login() {
-		
+		System.out.println("into customerAction.login()");
+		System.out.println("customer.getName():"+customer.getName());
 		ArrayList<Music_customer> listCustomer = customerDao.QueryCustomerInfo(customer.getName());
 		if(listCustomer.size()==0) { 
 			
-			this.errMessage = "账号不存在";
+			this.errMessage = " 账号不存在 ";
 			System.out.print(this.errMessage);
 			return "input";
 			
 		} 
 		else{			
-			Music_customer db_customer = listCustomer.get(0); //当用户名不允许重名时才这样写
+		    Music_customer db_customer = listCustomer.get(0);
 			if(!db_customer.getPassword().equals(customer.getPassword())) {
 			
-			this.errMessage = " 密码不正确 ";
-			System.out.print(this.errMessage);
-			return "input";
+				this.errMessage = " 密码不正确! ";
+				System.out.print(this.errMessage);
+				return "input";
 			
-		    }else{
-			
-			session.put("customer", db_customer); //用户名放到session中
-			//跳转前的页面从session中取出来，取出来后将其置空
-			prePage = (String) session.get("prePage");
-			System.out.println("取出跳转前的页面"+ prePage);
-			session.remove("prePage");  
-			return "success";
-			
+		    }else{			
+				session.put("customer", db_customer);
+				System.out.println("登录验证完成！");
+				return "success";
 		    }
 		}
 	}
+
+	
 
 	public String getPrePage() {
 		return prePage;
@@ -176,6 +176,10 @@ public class CustomerAction extends ActionSupport implements SessionAware{
 
 	public void setCustPhotoContentType(String custPhotoContentType) {
 		this.custPhotoContentType = custPhotoContentType;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 

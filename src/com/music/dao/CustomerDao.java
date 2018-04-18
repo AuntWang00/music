@@ -56,21 +56,19 @@ public class CustomerDao {
     }
     
     /*根据查询条件查询*/
-    public ArrayList<Music_customer> QueryCustomerInfo(String name) { 	
+    @SuppressWarnings("unchecked")
+	public ArrayList<Music_customer> QueryCustomerInfo(String name) { 	
     	Session s = factory.getCurrentSession();
-    	List customerList;
+    	List<Music_customer> customerList;
     	String hql = "From Music_customer customer where 1=1";
     	if(!name.equals("")){ 
     		hql = hql + " and customer.name like '%" + name + "%'";
 	    	Query q = s.createQuery(hql);
 	    	customerList = q.list();
 	    	
-    	}else{
-    		
-    	    customerList =null;	
-    	
-    	}
-    	
+    	}else{   		
+    	    customerList =null;	   	
+    	}   	
     	return (ArrayList<Music_customer>) customerList;
     }
 
