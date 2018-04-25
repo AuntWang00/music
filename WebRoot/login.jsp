@@ -12,7 +12,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>歌曲展示页面</title>
+    <title>登录页面</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -54,7 +54,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   		</div>
     </div>	
   	
-	 <div class="login-contain">
+	 <!-- <div class="login-contain">
 		  <main class="bg">
 				 <s:form action="customer/customer_login" method="post" cssclass="login">
 					 <h3>登陆页面</h3>
@@ -74,6 +74,45 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				 </s:form>
 				    
 		  </main>
-	 </div>
+	 </div>  -->
+	  <div class="reg-contain">
+  		<main class="container-fluid">
+	    <div class="row">
+		   <div class="col-md-10">
+		       <s:form action="customer/customer_login" id="defaultForm" method="post" cssClass="form-horizontal"  enctype="multipart/form-data">
+		      <div class="panel panel-success">
+			       <div class="panel-heading">
+		               <h4 class="panel-title">登 陆 账 户</h4>
+		           </div>
+		         <div class="panel-body">
+		         <div class="part1">
+				       <div class="form-group">
+			                <label class="control-label col-md-4">用户名</label>
+			                <div class="col-md-6">
+                              <input type="text" name="customer.name" class="form-control input-sm" required>
+                           </div>
+			           </div>  
+			           <div class="form-group">
+			                <label class="control-label col-md-4">密码</label>
+			                <div class="col-md-6">
+                              <input type="password" name="customer.password" class="form-control input-sm"  required>
+                            </div>
+			           </div>
+			           </div>
+			           <div class="part2">
+			           <div class="form-group col-md-1">
+				          <button type="submit" class="btn btn-success btn-login">提  交 </button>
+				          </div>
+				       </div>
+				   </div>
+				</div>
+		    </s:form>
+		  </div>
+	   </div>
+	</main>
+	</div>
+    <script src="<%=basePath%>js/jquery.min.js"></script>
+    <script src="<%=basePath%>js/bootstrap.min.js"></script>
+	<script src="<%=basePath%>js/bootstrap-fileupload.js"></script>
   </body>
 </html>

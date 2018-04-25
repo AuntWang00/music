@@ -54,9 +54,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   			<div class="container2">	
 	  			<div class="menu">  
 			   		<ul>  					
-			  			<li><a class="fff" href="main.jsp">原创音乐馆</a></li>
+			  			<li><a class="f1" href="song/song_showSong">原创音乐馆</a></li>
 			  			<li><a class="f1" href="query.jsp">MV</a></li>
-			  			<li  class="active"><a class="f1" href="#">我的音乐</a></li>
+			  			<li class="active"><a class="fff" href="song/song_showSong1">我的音乐</a></li>
 			  			<li><a class="f1" href="#">关于买歌</a></li>			
 			  		</ul>
 	  			</div>	
@@ -96,80 +96,98 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!-- 搜索框与登录状态判断语句结束 -->
 	
 	<div class="add-contain">
+	<div class="mymusic-list">
+			<div class="menu1">  
+				   	<ul>  					
+				  			<li ><a class="f11" href="song/song_showSong1">我上传的歌曲</a> </li>
+				  			<li><a  class="f11" href="order_main.jsp">我购买的歌曲</a></li>
+				  			<li class="active" ><a  class="fff1" href="song/song_showAdd?song.singer=<s:property value='#session.customer.name'/>"> 添加歌曲 </a></li>		
+				  		</ul>
+		  	</div>	
+	    </div>
   		<main class="container-fluid">
-	    <div class="row">
-		   <div class="col-md-12">
-		      <s:form action="song/song_addSong" cssClass="form-horizontal" enctype="multipart/form-data">
-		      <s:hidden name="song.singer" />
-		      <div class="panel panel-success">
-			       <div class="panel-heading">
-		               <h4 class="panel-title">添 加 歌 曲</h4>
-		           </div>
-		           <div class="panel-body">
-				       <div class="form-group">
-			                <label class="control-label col-md-3">歌曲名</label>
-			                <div class="col-md-8">
-                              <input type="text" name="song.songname" class="form-control input-sm" 
-                               value="尚未填写歌曲名称" required>
-                           </div>
-			           </div>  
-			           <div class="form-group">
-			                <label class="control-label col-md-3">单价</label>
-			                <div class="col-md-8">
-                              <input type="text" name="song.price" class="form-control input-sm"
-                               value="0"  required>
-                           </div>
-			           </div>  
-			           <div class="form-group">
-			                <label class="control-label col-md-3">所属专辑</label>
-			                <div class="col-md-8">
-                              <input type="text" name="song.album" class="form-control input-sm" 
-                               value="暂无所属专辑"  required>
-                            </div>
-			           </div>
-			           <div class="form-group">
-			                <label class="control-label col-md-3">语言</label>
-			                <div class="col-md-8">
-                              <input type="text" name="song.language" class="form-control input-sm" 
-                               value="未知"  required>
-                            </div>
-			           </div>
-			           <div class="form-group">
+	   		 <div class="row">
+		  		 <div class="col-md-12">
+		     		<s:form action="song/song_addSong?song.singer=#session.customer.name" cssClass="form-horizontal" enctype="multipart/form-data">
+		     		<!--  
+		      		 <s:hidden name="song.singer" value="<s:property value='#session.customer.customerid'></s:property>"  />
+		      		 
+		      		  <s:hidden name="song.language" value="<s:property value='#session.customer.customerid'></s:property>"  />
+		    -->
+		      <s:hidden name="song.singer"/>
+		      			<div class="panel panel-success">
+					       <div class="panel-heading">
+				               <h4 class="panel-title">添 加 歌 曲</h4>
+				           </div>
+				          
+				       
+					            
+				           <div class="panel-body">
+						       <div class="form-group">
+					                <label class="control-label col-md-3">歌曲名</label>
+					                <div class="col-md-8">
+		                              <input type="text" name="song.songname" class="form-control input-sm" 
+		                               value="尚未填写歌曲名称" required>
+		                           </div>
+					           </div>  
+					           <div class="form-group">
+					                <label class="control-label col-md-3">单价</label>
+					                <div class="col-md-8">
+		                              <input type="text" name="song.price" class="form-control input-sm"
+		                               value="0"  required>
+		                           </div>
+					           </div>  
+					           <div class="form-group">
+					                <label class="control-label col-md-3">所属专辑</label>
+					                <div class="col-md-8">
+		                              <input type="text" name="song.album" class="form-control input-sm" 
+		                               value="暂无所属专辑"  required>
+		                            </div>
+					           </div>
+					           
+					               
+					           <div class="form-group">
+					                <label class="control-label col-md-3">语言</label>
+					                <div class="col-md-8">
+		                              <input type="text" name="song.language" class="form-control input-sm" 
+		                               value="未知"  required>
+		                            </div>
+					           </div>
+					        <div class="form-group">
 			                <label class="control-label col-md-3">歌词</label>
 			                <div class="col-md-8">
-                              <input type="text" name="song.lyrics" class="form-control input-sm"
-                               value="暂无歌词"  required>
+                              <textarea  name="song.lyrics" rows="10" class="form-control input-sm"><s:property value='song.lyrics'></s:property></textarea>
                             </div>
 			           </div>
-			           
-				       <div class="form-group">
-				                <label class="control-label col-md-3">封面图片</label>
-				                <div class="col-md-4">
-	                              <div class="fileupload fileupload-new" data-provides="fileupload">
-	                                <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
-	                                   <img src="<%=basePath%>upload/demoUpload.jpg" alt="" />
-	                                </div>
-	                                <div class="fileupload-preview fileupload-exists thumbnail" 
-	                                   style="max-width: 200px; max-height:150px; line-height: 20px;">
-	                                </div>
-	                                <div>
-	                                   <span class="btn btn-file btn-primary"><span class="fileupload-new">浏览</span>
-	                                   <span class="fileupload-exists">浏览</span><input type="file" name="songPhoto"/></span>
-	                                   <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload">取消</a>
-	                                </div>
-	                              </div>
-	                            </div>
-				           </div>
-
-			           <div class="form-group col-md-3">
-				          <button type="submit" class="btn btn-success pull-right">提  交 </button>
-				       </div>
-				   </div>
-				</div>
-		    </s:form>
-		  </div>
-	   </div>
-	</main>
+					           
+						       <div class="form-group">
+						                <label class="control-label col-md-3">封面图片</label>
+						                <div class="col-md-4">
+			                              <div class="fileupload fileupload-new" data-provides="fileupload">
+			                                <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
+			                                   <img src="<%=basePath%>upload/demoUpload.jpg" alt="" />
+			                                </div>
+			                                <div class="fileupload-preview fileupload-exists thumbnail" 
+			                                   style="max-width: 200px; max-height:150px; line-height: 20px;">
+			                                </div>
+			                                <div>
+			                                   <span class="btn btn-file btn-primary"><span class="fileupload-new">浏览</span>
+			                                   <span class="fileupload-exists">浏览</span><input type="file" name="songPhoto"/></span>
+			                                   <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload">取消</a>
+			                                </div>
+			                              </div>
+			                            </div>
+						           </div>
+		
+					           <div class="form-group col-md-3">
+						          <button type="submit" class="btn btn-success pull-right">提  交 </button>
+						       </div>
+						   </div>
+						 </div>
+				    </s:form>
+				</div>				   
+		   </div>
+	  </main>
 	</div>
     <script src="<%=basePath%>js/jquery.min.js"></script>
     <script src="<%=basePath%>js/bootstrap.min.js"></script>

@@ -44,7 +44,8 @@
 	        	<result name="edit_view">/edit.jsp</result>
 	        	<result name="delete_message">/deletesuc.jsp</result>
 	        	<result name="edit_message">/editsuc.jsp</result>
-	        	<result name="song_view1">/mymusic.jsp</result>	          
+	        	<result name="song_view1">/mymusic.jsp</result>	  
+	        	<result name="add_view">/add.jsp</result>	          
 	        </action>  
 	 </package>
 	

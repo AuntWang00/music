@@ -56,9 +56,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   			<div class="container2">	
 	  			<div class="menu">  
 			   		<ul>  					
-			  			<li ><a class="f1" href="song/song_showSong">原创音乐馆</a></li>
-			  			<li><a class="f1" href="query.jsp">MV</a></li>
-			  			<li class="active"><a class="fff" href="song/song_showSong1">我的音乐</a></li>
+			  			<li class="active"><a class="fff" href="song/song_showSong">原创音乐馆</a></li>
+			  			<li><a class="f1" href="query.jsp">MV</a></li>	  			
+			  			 <li><a class="f1" href="song/song_showSong1" class="add-order">我的音乐</a></li>
 			  			<li><a class="f1" href="#">关于买歌</a></li>			
 			  		</ul>
 	  			</div>	
@@ -98,14 +98,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   	</div>
 	<!-- 搜索框与登录状态判断语句结束 -->
 	
+	
 	<div class="mymusic-contain">
+	
 		<div class="mymusic-list">
-		     <a href="song/song_queryMySongs">我上传的音乐</a> 
-		     <a href="order_main.jsp">我购买的音乐</a> 
-		     <a href="song/song_addSong?customer.customerid=${customer.customerid}" class="add"> 上传音乐</a>
-	       </div>
+			<div class="menu1">  
+				   		<ul>  					
+				  			<li class="active"><a class="fff1" href="song/song_showSong1">我上传的歌曲</a> </li>
+				  			<li><a  class="f11" href="order/order_showOrder?customer.name=<s:property value='#session.customer.name'/>">我购买的歌曲</a></li>
+				  			<li ><a  class="f11" href="song/song_showAdd?song.singer=<s:property value='#session.customer.name'/>"> 添加歌曲 </a></li>		
+				  		</ul>
+		  	</div>	
+	    </div>
 	       
-	       <main class="container-fluid">
+	  <main class="container-fluid">
       <div class="row">
          <div class="col-md-12">
 		   
@@ -117,25 +123,31 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                 <div class="panel-body panel-body-table" >
 	                      <table class="table table-striped table-bordered table-hover" id="dataTables-example">
 	                         <thead>
-	                        
+	                       
 	                           <tr>
 	                              	  <th>序号</th> 
+	                              	  <th></th>
 							          <th>歌曲名称</th>
 							          <th>单价</th>
 							          <th>专辑</th>	
 							           <th>歌手</th> 
+							           <th>相关操作 </th>
 	                              </tr>
 	                          </thead>
 	                          <tbody>
 	                              <s:iterator value="songslist" var="song" status="status">
 	                              		
-	                              		  <s:if test="#session.customer.customerid==11">
+	                              		<s:if test="#session.customer.name==#song.singer">
 	                                  <tr>
 	                                      <td><s:property value="#status.index+1"></s:property></td>
-	                                      <td><s:property value="#song.songname"></s:property></td>
+	                                      <td><img src = "<%=basePath %><s:property value='filepath'/>" style="width:100px;height:100px"></td>
+	                                      <td><s:a href="song/song_showDetail?song.songid=%{songid}"><s:property value="#song.songname"></s:property></s:a></td>
 	                                      <td><s:property value="#song.price"></s:property></td>
 	                                      <td><s:property value="#song.album"></s:property></td>
-	                                      <td><s:property value="#song.singer.name"></s:property></td>    
+	                                      <td><s:property value="#song.singer"></s:property></td>  
+	                                       <td><a href="song/song_showEdit?song.songid=<s:property value='songid'/>&song.singer=<s:property value='singer'/>" class="edit">编辑   </a>
+	                                      	  <a href="song/song_deleteSong?song.songid=<s:property value='songid'/>" class="delete">  删除</a>
+	                                      </td>  
 	                                  </tr>
 	                                  </s:if>
 	                              </s:iterator>
@@ -149,7 +161,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	       </div>
 	   </div>
 	</main>
-	
+	</div>
 	<script src="<%=basePath%>js/jquery.min.js"></script>
     <script src="<%=basePath%>js/bootstrap.min.js"></script>
     <script src="<%=basePath%>js/jquery.dataTables.js"></script>
@@ -184,5 +196,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		   });
        });
     </script>
+   	<!--  友情链接和footer -->
+     <footer class="footer" role="footer">
+   		<div class="footer-inner">
+   			<div class="footer-info">
+   			<p>不知道放什么就先空着吧</p>
+   			</div>
+   			<div class="footer-copyright">
+   			<p>2018买歌原创音乐版权所有</p>
+   			</div>
+   		</div>
+   	</footer>
   </body>
 </html>

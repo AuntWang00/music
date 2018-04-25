@@ -12,7 +12,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <title>歌曲添加成功</title>
     
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-	<meta http-equiv="Refresh" content="2;url=song/song_showSong">
+	<meta http-equiv="Refresh" content="1;url=song/song_showSong1">
 	<meta http-equiv="description" content="This is my page">
 	<link rel="stylesheet" type="text/css" href="css/index.css">
 	<link rel="shortcut icon" href="<%=basePath%>images/logo.png">

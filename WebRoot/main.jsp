@@ -57,8 +57,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  			<div class="menu">  
 			   		<ul>  					
 			  			<li class="active"><a class="fff" href="song/song_showSong">原创音乐馆</a></li>
-			  			<li><a class="f1" href="query.jsp">MV</a></li>
-			  			<li><a class="f1" href="song/song_showSong1" class="add-order">我的音乐</a></li>
+			  			<li><a class="f1" href="query.jsp">MV</a></li>	  			
+			  			 <li><a class="f1" href="song/song_showSong1" class="add-order">我的音乐</a></li>
 			  			<li><a class="f1" href="#">关于买歌</a></li>			
 			  		</ul>
 	  			</div>	
@@ -107,15 +107,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	   		<!-- 单曲列表 -->
 	   		<s:form action="song/song_showSong" method="post">
 	   		
-	   		<s:iterator value = "songslist" status="status"  begin="0" end ="4"> 
+	   		<s:iterator value = "songslist" status="status"  begin="6" end ="10"> 
 		   		<ul class = "show-list">
 		   			<li class="show-item">
 		   				<div class="show-pic">
-		   					<span style="white-space:pre;"> </span>
-		   					<img src = "<%=basePath %><s:property value='filepath'/>">
+		   					
+		   					<img src = "<%=basePath %><s:property value='filepath'/>" style="width:236.5px; height:237px;">
 		   				</div>
 		   				<div class="show-info">
-		   					<s:property value ="songname"/>
+		   					<s:a href="song/song_showDetail?song.songid=%{songid}"><s:property value ="songname"/></s:a>
 		   				</div>
 		   			</li>
 		   		</ul>

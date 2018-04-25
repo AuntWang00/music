@@ -112,11 +112,7 @@ public class SongsAction extends ActionSupport{
     }
 */
 	public String showSong1(){
-		System.out.println("into showSong1");
-	//	System.out.println(customer1.getName());
-		Music_customer cus= customerDao.QueryCustomerInfo(customer1.getName()).get(0);
-		songslist = songsDao.QuerySongsInfo1(cus,null);
-	//	System.out.println("into showSong1:"+songslist);
+		songslist = songsDao.QueryAllSongs();
 		return "show_view1";
 	}	
 
@@ -127,17 +123,52 @@ public class SongsAction extends ActionSupport{
 	
 	public String showEdit() throws Exception{
 		song = songsDao.GetSongById(song.getSongid());
-		return "edit_view";
-		
-		
+		return "edit_view";		
 	}
+	
+	public String showAdd() throws Exception{
+		
+		return "add_view";		
+	}
+	
 	public String editSong() throws Exception{
+		String path = ServletActionContext.getServletContext().getRealPath("/upload"); 
+        /*处理图片上传*/
+        String SongPhotoFileName = ""; 
+   	 	if(songPhoto!= null) {
+   	 		InputStream is = new FileInputStream(songPhoto);
+   			String fileContentType = this.getSongPhotoContentType();
+   			System.out.println(fileContentType);
+   			if(fileContentType.equals("image/jpeg")  || fileContentType.equals("image/pjpeg"))
+   				songPhotoFileName = UUID.randomUUID().toString() +  ".jpg";
+   			else if(fileContentType.equals("image/gif"))
+   				songPhotoFileName = UUID.randomUUID().toString() +  ".gif";
+   			else if(fileContentType.equals("image/png"))
+   				songPhotoFileName = UUID.randomUUID().toString() +  ".png";
+
+   			File file = new File(path, songPhotoFileName);
+   			OutputStream os = new FileOutputStream(file);
+   			byte[] b = new byte[1024];
+   			int bs = 0;
+   			while ((bs = is.read(b)) > 0) {
+   				os.write(b, 0, bs);
+   			}
+   			is.close();
+   			os.close();
+   	 	}
+        if(songPhoto != null)
+        	song.setFilepath("upload/" + songPhotoFileName);
+        else
+        	song.setFilepath("upload/NoImage.jpg");
+        
+		
 		songsDao.updateSong(song);
 		return "edit_message";
 		
 	}
 	public String deleteSong() throws Exception{
 		songsDao.deleteSong(song.getSongid());
+		
 		return "delete_message";
 		
 	}
