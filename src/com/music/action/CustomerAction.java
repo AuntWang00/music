@@ -117,7 +117,7 @@ public class CustomerAction extends ActionSupport implements SessionAware{
 			
 			this.errMessage = " ÕËºÅ²»´æÔÚ ";
 			System.out.print(this.errMessage);
-			return "input";
+			return "logininput";
 			
 		} 
 		else{			

@@ -22,9 +22,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" href="<%=basePath%>css/bootstrap.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 	<link rel="shortcut icon" href="<%=basePath%>images/logo.png">
-	
-	
-	
+
  	 <link rel="stylesheet" href="css/buttons.css">
  	 <link href="http://cdn.bootcss.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 		<link type="text/css" rel="stylesheet" href="less/reset.css">
@@ -54,27 +52,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   		</div>
     </div>	
   	
-	 <!-- <div class="login-contain">
-		  <main class="bg">
-				 <s:form action="customer/customer_login" method="post" cssclass="login">
-					 <h3>登陆页面</h3>
-					<div class="form-group">
-		              <div class="input-group">
-		                <span class="input-group-addon"><i class="fa fa-user"></i></span>
-		                <input type="text" name="customer.name" class="form-control" placeholder="请输入用户名">
-		              </div>
-		              <s:fielderror fieldName="customer.name" cssClass="fielderror"/>
-		               <div class="input-group">
-		                <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-		                <input type="password" name="customer.password" class="form-control" placeholder="请输入密码">
-		              </div>
-		              <s:fielderror fieldName="customer.password" cssClass="fielderror"/>
-		          </div>
-			      <button type="submit" class="btn btn-success btn-login">登 录 </button> <div class="bg-a"><a href="reg.jsp">还没有账户，去创建一个</a></div>
-				 </s:form>
-				    
-		  </main>
-	 </div>  -->
 	  <div class="reg-contain">
   		<main class="container-fluid">
 	    <div class="row">

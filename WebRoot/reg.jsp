@@ -66,20 +66,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				       <div class="form-group">
 			                <label class="control-label col-md-3">用户名</label>
 			                <div class="col-md-4">
-                              <input type="text" name="customer.name" class="form-control input-sm" required>
+                              <input type="text" name="customer.name" class="form-control input-sm" >
                            </div>
+                           <s:fielderror fieldName="customer.name" cssClass="fielderror"/>
 			           </div>  
 			           <div class="form-group">
 			                <label class="control-label col-md-3">输入密码</label>
 			                <div class="col-md-4">
-                              <input type="password" name="customer.password" class="form-control input-sm"  required>
+                              <input type="password" name="customer.password" class="form-control input-sm"  >
                             </div>
+                             <s:fielderror fieldName="customer.password" cssClass="fielderror"/>
 			           </div>
 			            <div class="form-group">
 			                <label class="control-label col-md-3">确认密码</label>
 			                <div class="col-md-4">
-                              <input type="password" name="customer.number" class="form-control input-sm"  required>
+                              <input type="password" name="customer.repassword" class="form-control input-sm" >
                             </div>
+                            <s:fielderror fieldName="customer.repassword" cssClass="fielderror"/>
 			           </div>
 			           
 				       <div class="form-group">

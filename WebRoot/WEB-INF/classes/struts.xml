@@ -57,8 +57,8 @@
                   <param name="namespace">/song</param>
                   <param name="param1">${customer.name}</param>       
                 </result>
-      		
-                <result name="input">/loginfail.jsp</result>
+      			<result name="input">/reg.jsp</result>
+                <result name="logininput">/loginfail.jsp</result>
                  <result name="success">/loginsuc.jsp</result>
                              
 	        </action>  
