@@ -60,13 +60,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		      <div class="panel panel-success">
 			       <div class="panel-heading">
 		               <h4 class="panel-title">登 陆 账 户</h4>
-		           </div>
 		         <div class="panel-body">
 		         <div class="part1">
 				       <div class="form-group">
 			                <label class="control-label col-md-4">用户名</label>
 			                <div class="col-md-6">
-                              <input type="text" name="customer.name" class="form-control input-sm" required>
+                              <input type="text" name="customer.name" id="customername" onblur="checkName()" class="form-control input-sm" required="required">
+                               <span id="span1"></span>  
                            </div>
 			           </div>  
 			           <div class="form-group">
@@ -91,5 +91,47 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script src="<%=basePath%>js/jquery.min.js"></script>
     <script src="<%=basePath%>js/bootstrap.min.js"></script>
 	<script src="<%=basePath%>js/bootstrap-fileupload.js"></script>
+	<script>
+	function checkName(){  
+    //alert("name");  
+    var customername = document.getElementById("customername").value;  
+    //传统的ajax校验  
+    //1.创建异步交互对象，  
+    var xhr = createXmlHttp();  
+    //alert(xhr);  
+    //2设置监听  
+    xhr.onreadystatechange = function(){  
+        if(xhr.readyState == 4){  
+            if(xhr.status == 200){  
+                document.getElementById("span1").innerHTML = xhr.responseText;  
+            }  
+        }  
+    }  
+    //alert("sb");
+    //3打开连接//${pageContext.request.contextPath}
+    xhr.open("GET","/music/customer/customer_findByName.action?&customername="+customername,true);  
+    //4发送 
+    //alert("sb!"); 
+    xhr.send(null);       
+    }     
+          
+    //创建XmlHttp对象  
+    function createXmlHttp(){  
+        var xmlHttp;  
+        try{  
+            xmlHttp= new XMLHttpRequest();  
+        }catch(e){  
+            try{  
+                xmlHttp=new ActiveXObject("Msxm12.XMLHTTP");  
+            }catch(e){  
+                try{  
+                    xmlHttp= new ActiveXObject("Microsoft.XMLHTTP");  
+                }catch(e){}  
+            }             
+        }  
+          
+         return xmlHttp;      
+    }  
+</script>
   </body>
 </html>

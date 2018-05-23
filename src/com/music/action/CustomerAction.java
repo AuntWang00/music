@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 
 import com.music.dao.CustomerDao;
 import com.music.model.Music_customer;
+import com.music.model.Songs;
 
 import com.mysql.jdbc.PreparedStatement;
 import com.opensymphony.xwork2.ActionSupport;
@@ -16,14 +17,17 @@ import com.opensymphony.xwork2.ActionSupport;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 
 @Controller @Scope("prototype")
@@ -32,15 +36,16 @@ public class CustomerAction extends ActionSupport implements SessionAware{
 	
 @Resource CustomerDao customerDao;
 	private static final long serialVersionUID = 1L;
-
+	private String customername;//
     private Music_customer customer;
     private File custPhoto;
 	 private String custPhotoFileName;
 	 private String custPhotoContentType;
     private Map<String,Object> session;
 	private String prePage;
-	
-
+	 private List<Music_customer> customerList;
+	 private String keyWords;
+private String result;
 	public Music_customer getCustomer() {
 		return customer;
 	}
@@ -68,10 +73,18 @@ public class CustomerAction extends ActionSupport implements SessionAware{
 	}
 	
 	
+	public String getResult() {
+		return result;
+	}
+
+	public void setResult(String result) {
+		this.result = result;
+	}
+
 	public String reg() throws Exception{
 		
 		String path = ServletActionContext.getServletContext().getRealPath("/upload"); 
-        /*����ͼƬ�ϴ�*/
+        /*����ͼƬ�ϴ�*/
 		
         String CustPhotoFileName = ""; 
    	 	if(custPhoto!= null) {
@@ -107,7 +120,22 @@ public class CustomerAction extends ActionSupport implements SessionAware{
 		return "show_view";
 	}
 	
+
+	public String queryCustomers() throws Exception{
+		System.out.println("123");
+		customerList = customerDao.QueryCustomerInfo(keyWords);
+		System.out.println(keyWords);
+		return "show_view1";
+	}
+	public String showCustomer(){
+		customerList = customerDao.QueryAllCustomer();
+		return "show_view2";
+	}
 	
+	public String showDetail(){
+		customer =customerDao.GetCustomerById(customer.getCustomerid());
+		return "show_detail";
+	}
 	
 	public String login() {
 		System.out.println("into customerAction.login()");
@@ -115,7 +143,7 @@ public class CustomerAction extends ActionSupport implements SessionAware{
 		ArrayList<Music_customer> listCustomer = customerDao.QueryCustomerInfo(customer.getName());
 		if(listCustomer.size()==0) { 
 			
-			this.errMessage = " �˺Ų����� ";
+			this.errMessage = " �˺Ų����� ";
 			System.out.print(this.errMessage);
 			return "logininput";
 			
@@ -124,19 +152,68 @@ public class CustomerAction extends ActionSupport implements SessionAware{
 		    Music_customer db_customer = listCustomer.get(0);
 			if(!db_customer.getPassword().equals(customer.getPassword())) {
 			
-				this.errMessage = " ���벻��ȷ! ";
+				this.errMessage = " ���벻��ȷ! ";
 				System.out.print(this.errMessage);
 				return "input";
 			
 		    }else{			
 				session.put("customer", db_customer);
-				System.out.println("��¼��֤��ɣ�");
+				System.out.println("��¼��֤��ɣ�");
 				return "success";
 		    }
 		}
 	}
 
-	
+	public String findByName() throws IOException{  
+		System.out.println("0");
+		ArrayList<Music_customer> listCustomer = customerDao.QueryCustomerInfo(customername);
+		System.out.println("1");
+	    HttpServletResponse response=  ServletActionContext.getResponse();  
+		System.out.println("2");
+	    response.setContentType("text/html;charset=UTF-8");  
+		System.out.println("3");
+	    if(listCustomer.size()!=0) { 
+	        //存在 
+	    	System.out.println("4");  
+	    	 response.getWriter().println("<font color='green'>用户存在，可以登录</font>");  
+	    }else{  
+	        response.getWriter().println("<font color='red'>用户名不存在，请重新输入</font>");  
+	    }  
+	    return NONE;  
+	}  
+	public String findByName1() throws IOException{  
+		System.out.println("0");
+		ArrayList<Music_customer> listCustomer = customerDao.QueryCustomerInfo(customername);
+		System.out.println("1");
+	    HttpServletResponse response=  ServletActionContext.getResponse();  
+		System.out.println("2");
+	    response.setContentType("text/html;charset=UTF-8");  
+		System.out.println("3");
+	    if(listCustomer.size()==0) { 
+	        //存在 
+	    	System.out.println("4");  
+	    	 response.getWriter().println("<font color='green'>用户不存在，可以注册</font>");  
+	    }else{  
+	        response.getWriter().println("<font color='red'>用户名已存在，请重新输入</font>");  
+	    }  
+	    return NONE;  
+	}  
+
+	public List<Music_customer> getCustomerList() {
+		return customerList;
+	}
+
+	public void setCustomerList(List<Music_customer> customerList) {
+		this.customerList = customerList;
+	}
+
+	public String getKeyWords() {
+		return keyWords;
+	}
+
+	public void setKeyWords(String keyWords) {
+		this.keyWords = keyWords;
+	}
 
 	public String getPrePage() {
 		return prePage;
@@ -182,6 +259,12 @@ public class CustomerAction extends ActionSupport implements SessionAware{
 		return serialVersionUID;
 	}
 
+	public String getCustomername() {
+		return customername;
+	}
 
+	public void setCustomername(String customername) {
+		this.customername = customername;
+	}
 
 }

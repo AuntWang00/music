@@ -24,7 +24,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="shortcut icon" href="<%=basePath%>images/logo.png">
 	
 	
-	
  	 <link rel="stylesheet" href="css/buttons.css">
  	 <link href="http://cdn.bootcss.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 		<link type="text/css" rel="stylesheet" href="less/reset.css">
@@ -109,9 +108,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	   				<h3><a href="new.jsp">最新单曲</a></h3>   				
 	   		</div>
 	   		<!-- 单曲列表 -->
-	   		<s:form action="song/song_showSong" method="post">
+	   		<s:form action="customer/customer_queryCustomers" method="post">
 	   		
-	   		<s:iterator value = "songslist" status="status"  begin="15" end ="19"> 
+	   		<s:iterator value = "customerList" status="status" > 
 		   		<ul class = "show-list">
 		   			<li class="show-item">
 		   				<div class="show-pic">
@@ -119,7 +118,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		   					<img src = "<%=basePath %><s:property value='filepath'/>" style="width:236.5px; height:237px;">
 		   				</div>
 		   				<div class="show-info">
-		   					<s:a href="song/song_showDetail?song.songid=%{songid}"><s:property value ="songname"/></s:a>
+		   					<s:a href="customer/customer_showDetail?customer.customerid=%{customerid}"><s:property value ="name"/></s:a>
 		   				</div>
 		   			</li>
 		   		</ul>
@@ -129,122 +128,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	   		
    		</div>
    	</div>
-   	<!-- 最新单曲结束 -->
-   	
-   	<!-- 最热单曲开始 -->
-   	<div class="container3">
-   		<div class="con3">
-	   		<div class="show-title">
-	   				<h3>最热单曲</h3>   				
-	   		</div>
-	   		
-	   	<!-- jQuery轮播开始 -->
-   			<div class="demo-wrapper">
-   			
-   				<s:form action="song/song_showSong" method="post">
-   				<ul class="portfolio-items">
-   					<s:iterator value = "songslist" status="status" begin="9" end="20">		
-   							<li class="item">
-   								<figure>
-   									<div class="view">
-   										<img src = "<%=basePath %><s:property value='filepath'/>">
-   									</div>
-   									 <figcaption>
-   										<p><span><s:property value ="songname"/></span></p>
-   									    <p><span>By Vlad Gerasimov</span></p>
-   									 </figcaption> 
-   								</figure>
-   							</li>  						
-   					</s:iterator>
-   					</ul>
-   				</s:form>  
-   								
-		  </div>
-
-			<script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
-			<script src="js/modernizr-1.5.min.js"></script> 
-			<script src="js/jquery.mousewheel.js"></script> 
-			<script src="js/scripts.js"></script>
-			   			
-   		</div>
-   </div>
-   
-   <!--专辑首发开始  -->
-   <div class="container4">
-   		<div class="con4">
-   			<div class="show-title">
-	   				<h3>专辑首发</h3>   				
-	   		</div>
-   			<!-- 辣鸡轮播 -->
-	   		<div id="content">
-	<div id="main" class="clearfix">
-		<div id="index_b_hero">
-			<div class="hero-wrap">
-				<ul class="heros clearfix">
-					<li class="hero">
-					<a id="jdtpic1" href="#" target="_blank">
-					<img src="images/yiyangqianxi1.jpg"></a></li>
-					<li class="hero">
-					<a href="#" target="_blank">
-					<img src="images/wuyuetian.jpg"></a></li>
-					<li class="hero">
-					<a href="#" target="_blank">
-					<img src="images/zhangxueyou.jpg"></a></li>
-					<li class="hero">
-					<a href="#" target="_blank">
-					<img src="images/Taylor1.jpg"></a></li>
-					<li class="hero">
-					<a href="#" target="_blank">
-					<img src="images/Taylor2.jpg"></a></li>
-					<li class="hero">
-					<a href="#" target="_blank">
-					<img src="images/taiyan.jpg"></a></li>
-					<li class="hero">
-					<a href="#" target="_blank">
-					<img src="images/yiyangqianxi2.jpg"></a></li>
-					<li class="hero">
-					<a href="#" target="_blank">
-					<img src="images/xujun.jpg"></a></li>
-					<li class="hero">
-					<a href="#" target="_blank">
-					<img src="images/yanglaosan.jpg"></a></li>
-				</ul>
-			</div>
-			<div class="helper">
-				<a href="javascript:;" class="prev">
-					<div class="mask-left"></div>
-				</a>
-				<a href="javascript:;" class="next">
-					<div class="mask-right"></div>
-				</a>
-			</div>
-		</div>
-	</div>
-</div>
-
-		<script type="text/javascript" src="js/if.Common.Banner.js"></script>
-		<script type="text/javascript" src="js/index.js"></script>
-		<script type="text/javascript">
-		jQuery(function(){
-			var len = jQuery(".heros li").length;
-			jQuery(".heros li").each(function(index, element) {
-			    len--;
-			    jQuery(this).css("z-index", len);
-			});
-			jQuery(".hero").mousemove(function(){
-				jQuery(".mask-left, .mask-right").show();
-			});
-			jQuery("#main").mouseleave(function(){
-				jQuery(".mask-left, .mask-right").hide();
-			});
-		})
-		</script>
-		</div>
-	</div>
-   
-   	
-   	<!--  友情链接和footer -->
-     <footer class="footer" role="footer">
+   	  <footer class="footer" role="footer">
    		<div class="footer-inner">
    			<div class="footer-info">
    			<p>不知道放什么就先空着吧</p>

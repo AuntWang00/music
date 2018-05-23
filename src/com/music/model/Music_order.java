@@ -32,11 +32,6 @@ public class Music_order implements java.io.Serializable {
 	public Music_order() {
 	}
 
-	/** minimal constructor */
-	public Music_order(Songs songs) {
-		this.songs = songs;
-	}
-
 	/** full constructor */
 	public Music_order(Music_customer music_customer, Songs songs,
 			Integer songnum, Double total, Integer song) {
@@ -60,7 +55,7 @@ public class Music_order implements java.io.Serializable {
 		this.orderid = orderid;
 	}
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "customer")
 	public Music_customer getMusic_customer() {
 		return this.music_customer;
@@ -70,8 +65,8 @@ public class Music_order implements java.io.Serializable {
 		this.music_customer = music_customer;
 	}
 
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "songs", nullable = false)
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "songs")
 	public Songs getSongs() {
 		return this.songs;
 	}
