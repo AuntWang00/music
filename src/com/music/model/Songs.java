@@ -8,8 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
@@ -24,13 +22,15 @@ public class Songs implements java.io.Serializable {
 	// Fields
 
 	private Integer songid;
-	private Music_customer music_customer;
 	private String songname;
-	private Long price;
+	private Double price;
 	private String filepath;
 	private String album;
 	private String language;
 	private String lyrics;
+	private String singer;
+	private String audiopath;
+	private Integer bofangliang;
 	private Set<Music_order> music_orders = new HashSet<Music_order>(0);
 	private Set<Music_order> music_orders_1 = new HashSet<Music_order>(0);
 	private Set<Music_order> music_orders_2 = new HashSet<Music_order>(0);
@@ -42,18 +42,26 @@ public class Songs implements java.io.Serializable {
 	public Songs() {
 	}
 
+	/** minimal constructor */
+	public Songs(String filepath) {
+		this.filepath = filepath;
+	}
+
 	/** full constructor */
-	public Songs(Music_customer music_customer, String songname, Long price,
-			String filepath, String album, String language, String lyrics,
-			Set<Music_order> music_orders, Set<Music_order> music_orders_1,
-			Set<Music_order> music_orders_2, Set<Music_order> music_orders_3) {
-		this.music_customer = music_customer;
+	public Songs(String songname, Double price, String filepath, String album,
+			String language, String lyrics, String singer, String audiopath,
+			Integer bofangliang, Set<Music_order> music_orders,
+			Set<Music_order> music_orders_1, Set<Music_order> music_orders_2,
+			Set<Music_order> music_orders_3) {
 		this.songname = songname;
 		this.price = price;
 		this.filepath = filepath;
 		this.album = album;
 		this.language = language;
 		this.lyrics = lyrics;
+		this.singer = singer;
+		this.audiopath = audiopath;
+		this.bofangliang = bofangliang;
 		this.music_orders = music_orders;
 		this.music_orders_1 = music_orders_1;
 		this.music_orders_2 = music_orders_2;
@@ -73,16 +81,6 @@ public class Songs implements java.io.Serializable {
 		this.songid = songid;
 	}
 
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "singer")
-	public Music_customer getMusic_customer() {
-		return this.music_customer;
-	}
-
-	public void setMusic_customer(Music_customer music_customer) {
-		this.music_customer = music_customer;
-	}
-
 	@Column(name = "songname", length = 100)
 	public String getSongname() {
 		return this.songname;
@@ -92,16 +90,16 @@ public class Songs implements java.io.Serializable {
 		this.songname = songname;
 	}
 
-	@Column(name = "price", precision = 10, scale = 0)
-	public Long getPrice() {
+	@Column(name = "price", precision = 22, scale = 0)
+	public Double getPrice() {
 		return this.price;
 	}
 
-	public void setPrice(Long price) {
+	public void setPrice(Double price) {
 		this.price = price;
 	}
 
-	@Column(name = "filepath", length = 100)
+	@Column(name = "filepath", nullable = false, length = 100)
 	public String getFilepath() {
 		return this.filepath;
 	}
@@ -135,6 +133,33 @@ public class Songs implements java.io.Serializable {
 
 	public void setLyrics(String lyrics) {
 		this.lyrics = lyrics;
+	}
+
+	@Column(name = "singer", length = 50)
+	public String getSinger() {
+		return this.singer;
+	}
+
+	public void setSinger(String singer) {
+		this.singer = singer;
+	}
+
+	@Column(name = "audiopath", length = 100)
+	public String getAudiopath() {
+		return this.audiopath;
+	}
+
+	public void setAudiopath(String audiopath) {
+		this.audiopath = audiopath;
+	}
+
+	@Column(name = "bofangliang")
+	public Integer getBofangliang() {
+		return this.bofangliang;
+	}
+
+	public void setBofangliang(Integer bofangliang) {
+		this.bofangliang = bofangliang;
 	}
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "songs")

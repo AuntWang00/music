@@ -72,7 +72,7 @@ import com.opensymphony.xwork2.ActionSupport;
 				ord.setSongs(song);
 				
 				ord.setSongnum(1);
-				ord.setTotal(songsDao.GetSongById(song.getSongid()).getPrice()*1);
+				ord.setTotal((double) (songsDao.GetSongById(song.getSongid()).getPrice()*1));
 					orderDao.AddOrder(ord);
 			}
 			  

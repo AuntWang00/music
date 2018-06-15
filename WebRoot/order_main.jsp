@@ -6,12 +6,14 @@ String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 
-<!DOCTYPE html>
+<!DOCTYPE HTML>
+
 <html>
   <head>
     <base href="<%=basePath%>">
     
     <title>所有订单</title>
+    
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
@@ -20,135 +22,98 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" href="<%=basePath%>css/bootstrap.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 	<link rel="shortcut icon" href="<%=basePath%>images/logo.png">
-	
-	
-	
- 	 <link rel="stylesheet" href="css/buttons.css">
- 	 <link href="http://cdn.bootcss.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-		<link type="text/css" rel="stylesheet" href="less/reset.css">
-		<link type="text/css" rel="stylesheet" href="less/slide.css">
-		<link type="text/css" rel="stylesheet" href="less/index.css">
-		
-		
-		<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>	
-			
+ 	 <link href="http://cdn.bootcss.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">		
+		<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>				
 		<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
 		<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	
-	
-	
   </head>
   
+  
   <body>
-     <!-- 页面顶部开始 （包括logo、导航、登录按钮、注册按钮）-->
+    <!-- 页面顶部开始 （包括logo、导航、登录按钮、注册按钮）-->
   	<div class="top">
   		<div class="top-container">
   			<div class="header-logo">
   				<h1 class="maige-title">
-  					<a href="main.jsp"><img srcset="images/title.png" alt="title logo" class="maige-logo"></a>					
+  					<a href="song/song_showNewSong"><img srcset="images/title.png" alt="title logo" class="maige-logo"></a>					
   				</h1>				
   			</div>
   			
   	<!--导航开始 -->
-  			<div class="container2">	
+  	<div class="container2"> 
 	  			<div class="menu">  
-			   		<ul>  					
-			  			<li class="active"><a class="fff" href="main.jsp">原创音乐馆</a></li>
-			  			<li><a class="f1" href="query.jsp">MV</a></li>
-			  			<li><a class="f1" href="order_main.jsp">我的音乐</a></li>
-			  			<li><a class="f1" href="#">关于买歌</a></li>			
-			  		</ul>
-	  			</div>	
+			   		<div class="nav">
+
+  <ul>
+ 	<li><a class="f1" href="song/song_showNewSong">原创音乐馆</a>
+    </li>
+	<li><a class="f1" href="customer/customer_showCustomer">歌手</a>
+    </li>
+    <li class="active"><a class="fff" class="add-order">我的音乐</a>
+      <ul>
+        <li><a href="song/song_showSong1">我上传的歌曲</a></li>
+        <li><a href="order/order_showOrder?customer.name=<s:property value='#session.customer.name'/>">我购买的歌曲</a></li>
+        <li><a href="song/song_showAdd?song.singer=<s:property value='#session.customer.name'/>">添加歌曲</a></li>
+       </ul>
+    </li>
+    <li><a class="f1" href="#">关于买歌</a></li>
+
+  </ul>
+
+</div>
+	  			</div>
+
 	  <!-- 登录和注册按钮 -->
 		  		<div class="header-login">
-	  		   		<table class="top-table">  		   		
+		  		<c:choose>
+		       <c:when test="${customer.name ==null}"> 
+		       <table class="top-table">  		   		
 				   		<tr>
 		  		   			<td>
-		  		   				<a class="top-table-font1" href="login.jsp">注册</a>
-			  		   			<a class="top-table-font2" href="reg.jsp">登录</a>
+		  		   				<a class="top-table-font1" href="reg.jsp">注册</a>
+			  		   			<a class="top-table-font2" href="login.jsp">登录</a>
 			  		   		</td>
 			  		   	</tr>
 	  		  		</table> 
+				</c:when>
+		       <c:otherwise>
+		       <div class="top-login"> 		       	
+		       	<img src = "<%=basePath %>${customer.filepath}" style="width:30px; height:30px;">	   
+		  	    <c:out value="${customer.name}"></c:out>, 欢迎您!
+			    <a href="logout.jsp">退出</a>	
+			    </div>		   
+		       </c:otherwise>
+		       </c:choose>
+	  		   		
 	  		    </div> 
   		    </div> 			              
   		</div>	
   	</div>
   	<!-- 页面顶部结束 -->
   	
-  	<!-- 搜索框与登录状态判断语句开始 -->
-  	<div class="container1-1">
-	  	<div class="input-group col-md-3" style="margin-top:0px positon:relative">  
-	       <input type="text" class="form-control search clearable" placeholder="请输入歌曲名或歌手名" / >  
-	       <span class="input-group-btn">  
-	           <button class="btn btn-info btn-search"><i class="fa fa-search"></i></button>             
-	        </span>  
-	 	</div>  
-	 	<div class="login-check">
-		 	<c:choose>
-		       <c:when test="${customer.name ==null}"> 您还未登录，登录可开启更多功能！</c:when>
-		       <c:otherwise>
-		  	   <c:out value="${customer.name}"></c:out>, 欢迎您!
-		       </c:otherwise>
-		     </c:choose>
-	 	</div>
-  	</div>
-	<!-- 搜索框与登录状态判断语句结束 -->
 	
     
-   <!--  <main>
-	    <s:form action="order/order_queryOrders" method="post">
-	      
-	      <div>
-	         <s:submit value="查 询" cssClass="search-go"></s:submit>
-	         <input class="search" type="text" name="song.songname" placeholder="请输入歌曲名称">
-	      </div>
-	
-	      <h3>我的订单</h3>
-	      <table>
-	        <tr>  
-	          <th>序号</th>  
-	          <th>订单号</th>
-	          <th>歌曲</th>
-	          <th>单价</th> 
-	          <th>购买数</th>  
-	          <th>总价</th>
-	        </tr> 
-	         <s:iterator value="orderList" status="status">
-	          <tr>
-	            <td><s:property value="#status.index+1"></s:property></td>
-	            <td><s:a href="order/order_showDetail?order.orderid=%{orderid}">
-	               <s:property value="orderid"></s:property></s:a>
-	            </td>
-	            <td><s:property value="songs.songname"></s:property></td>
-	            <td><s:property value="songs.price"></s:property></td>
-	            <td><s:property value="songnum"></s:property></td>
-	            <td><s:property value="total"></s:property></td>
-	          </tr>
-	         </s:iterator>
-	      </table>
-	    </s:form>
-	</main>
-  </body> -->
+  <div class="order-contain">
+ 
      <main class="container-fluid">
       <div class="row">
          <div class="col-md-12">
-		    <s:form action="order/order_queryOrders" method="post">
 		      <div class="panel panel-info">
-	                 <div class="panel-heading">
-	                    <h3 class="panel-title">我的订单</h3>
+		      		<div class="panel-heading">
+	                    <h3 class="panel-title">我购买的歌曲</h3>
 	                 </div>
-	                 <div class="panel-body panel-body-table">
-	                   <div class="table-responsive" style="overflow-x:hidden">
+	                 <s:form action="order/order_queryOrders" method="post">
+	                 <div class="panel-body panel-body-table" >
 	                      <table class="table table-striped table-bordered table-hover" id="dataTables-example">
 	                         <thead>
+	                        
 	                           <tr>
 	                              <th>序号</th>  
-							       
-	          <th>订单号</th>
-	          <th>歌曲</th>
-	          <th>单价</th> 
-	          <th>购买数</th>  
-	          <th>总价</th>
+							          <th>订单号</th>
+							          <th>歌名</th>
+							          <th>数量</th> 
+							          <th>总价</th>  
+							          
 	                              </tr>
 	                          </thead>
 	                          <tbody>
@@ -157,27 +122,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                                      <td><s:property value="#status.index+1"></s:property></td>
 	                                      <td><s:a href="order/order_showDetail?order.orderid=%{orderid}">
 		               <s:property value="orderid"></s:property></s:a></td>
-	                                      <td><s:property value="song.songname"></s:property></td>
-	                                      <td class="center"><s:property value="song.price"></s:property></td>
+	                                      <td><s:property value="songs.songname"></s:property></td>
 	                                      <td class="center"><s:property value="songnum"></s:property></td>
 	                                      <td class="center"><s:property value="total"></s:property></td>
-	                                  </tr>
+	                                     </tr>
 	                              </s:iterator>
 	                          </tbody>
 	                        </table>
-	                      </div>
-	                    </div>
-	                </div>
-		       </s:form>
+	                   </div>
+	                   </s:form>
+	            </div>
+	               
+		       
 	       </div>
 	   </div>
 	</main>
-	
+	</div>
 	<script src="<%=basePath%>js/jquery.min.js"></script>
     <script src="<%=basePath%>js/bootstrap.min.js"></script>
     <script src="<%=basePath%>js/jquery.dataTables.js"></script>
     <script src="<%=basePath%>js/dataTables.bootstrap.js"></script>
-    <script>
+    <script >
        $(document).ready(function () {
            $('#dataTables-example').dataTable({
 			   "language": {
@@ -208,5 +173,4 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
        });
     </script>
   </body>
-   
 </html>

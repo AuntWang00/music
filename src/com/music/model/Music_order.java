@@ -60,7 +60,7 @@ public class Music_order implements java.io.Serializable {
 		this.orderid = orderid;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "customer")
 	public Music_customer getMusic_customer() {
 		return this.music_customer;
@@ -70,7 +70,7 @@ public class Music_order implements java.io.Serializable {
 		this.music_customer = music_customer;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "songs", nullable = false)
 	public Songs getSongs() {
 		return this.songs;
@@ -94,8 +94,8 @@ public class Music_order implements java.io.Serializable {
 		return this.total;
 	}
 
-	public void setTotal(long l) {
-		this.total = (double) l;
+	public void setTotal(Double total) {
+		this.total = total;
 	}
 
 	@Column(name = "song")

@@ -11,9 +11,7 @@ import com.music.model.Music_customer;
 import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.interceptor.AbstractInterceptor;
 
-public class LoginInterceptors extends AbstractInterceptor{
-
-	 
+public class LoginInterceptors extends AbstractInterceptor{ 
 	   private static final long serialVersionUID = 1L;
 	   private String sessionName;
 	   private String excludeName;	   
@@ -48,34 +46,39 @@ public class LoginInterceptors extends AbstractInterceptor{
 
 	   public String intercept(ActionInvocation invocation) throws Exception {
 		   
-		 System.out.println("--------进入拦截器-------"); 
-		 
-		 String actionName = invocation.getProxy().getActionName();   
-		 Map <String,Object>  session = invocation.getInvocationContext().getSession(); //获取session
-		 System.out.println(list);
-	     if(list.contains(actionName)){          
-	    	System.out.println(actionName + "没有被拦截");
-	     //   return invocation.invoke();     
-	     }else {   	        
-	    	System.out.println(actionName + "呀被拦截了");	       
-	        Music_customer customer = (Music_customer) session.get(sessionName);   // 用户还未登陆 	        
-	           if(customer==null){   // 获取HttpServletRequest对象 	        	     
-	                 HttpServletRequest req = ServletActionContext.getRequest();  
-	              // 获取此请求的地址，请求地址包含application name，进行subString操作，去除application name
-	                 String path = req.getRequestURI().substring(7); // 获得请求中的参数 
-	                 System.out.println("path:" + path);
-	     			String queryString = req.getQueryString(); // 预防空指针 
-	     			if (queryString == null) { 
-	     				queryString = ""; 
-	     			} // 拼凑得到登陆之前的地址 
-	     			String realPath = path + "?" + queryString; // 存入session，方便调用 
-	     			session.put("prePage", realPath); 
-	     			return "login";
-	     		} // 用户已经登陆，放行      			
-	     	return invocation.invoke(); 
-	     } 
-	     return invocation.invoke();    
-	   }
+			 System.out.println("--------进入拦截器-------"); 
+			 
+			 String actionName = invocation.getProxy().getActionName();   
+			 Map <String,Object>  session = invocation.getInvocationContext().getSession(); //获取session
+			 System.out.println("session:"+session);
+			 System.out.println(list);
+		     if(list.contains(actionName)){          
+		    	System.out.println(actionName + "没有被拦截");
+		        return invocation.invoke();     
+		     }else {   	        
+		    	System.out.println(actionName + "呀被拦截了");
+		    	//判断当前用户是否已经登录
+		        Music_customer customer = (Music_customer) session.get(sessionName);         
+		           if(customer==null){        	    // 用户还未登陆 	   
+		                 HttpServletRequest req = ServletActionContext.getRequest();   // 获取HttpServletRequest对象 	  
+		              // 获取此请求的地址，请求地址包含application name，进行subString操作，去除application name
+		                 String path = req.getRequestURI().substring(7); // 获得请求中的参数 
+		                 System.out.println("path:" + path);
+		     			String queryString = req.getQueryString(); // 预防空指针 
+		     			if (queryString == null) { 
+		     				queryString = ""; 
+		     			} // 拼凑得到登陆之前的地址 
+		     			String realPath = path + "?" + queryString; // 存入session，方便调用 
+		     			session.put("prePage", realPath);
+		     			 System.out.println("prePage" + realPath);
+		     			return "login";
+		     		}else{ 
+		     			// 用户已经登陆，放行      			
+		     			return invocation.invoke();  
+		     		}
+		     } 	
+	   	}
+	   
 	             
 
 	   public String getSessionName() {

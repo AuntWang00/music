@@ -48,23 +48,39 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   		<div class="top-container">
   			<div class="header-logo">
   				<h1 class="maige-title">
-  					<a href="song/song_showSong"><img srcset="images/title.png" alt="title logo" class="maige-logo"></a>					
+  					<a href="song/song_showNewSong"><img srcset="images/title.png" alt="title logo" class="maige-logo"></a>					
   				</h1>				
   			</div>
   			
   	<!--导航开始 -->
-  			<div class="container2">	
+  	<div class="container2"> 
 	  			<div class="menu">  
-			   		<ul>  					
-			  			<li class="active"><a class="fff" href="song/song_showSong">原创音乐馆</a></li>
-			  			<li><a class="f1" href="query.jsp">MV</a></li>
-			  			<li><a class="f1" href="song/song_queryMySongs">我的音乐</a></li>
-			  			<li><a class="f1" href="#">关于买歌</a></li>			
-			  		</ul>
-	  			</div>	
+			   		<div class="nav">
+
+  <ul>
+ 	<li><a class="f1" href="song/song_showNewSong">原创音乐馆</a>
+    </li>
+	<li><a class="f1" href="customer/customer_showCustomer">歌手</a>
+    </li>
+    <li class="active"><a class="fff" href="song/song_showSong1" class="add-order">我的音乐</a>
+      <ul>
+        <li><a href="song/song_showSong1">我上传的歌曲</a></li>
+        <li><a href="order/order_showOrder?customer.name=<s:property value='#session.customer.name'/>">我购买的歌曲</a></li>
+        <li><a href="song/song_showAdd?song.singer=<s:property value='#session.customer.name'/>">添加歌曲</a></li>
+       </ul>
+    </li>
+    <li><a class="f1" href="#">关于买歌</a></li>
+
+  </ul>
+
+</div>
+	  			</div>
+
 	  <!-- 登录和注册按钮 -->
 		  		<div class="header-login">
-	  		   		<table class="top-table">  		   		
+		  		<c:choose>
+		       <c:when test="${customer.name ==null}"> 
+		       <table class="top-table">  		   		
 				   		<tr>
 		  		   			<td>
 		  		   				<a class="top-table-font1" href="reg.jsp">注册</a>
@@ -72,89 +88,80 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			  		   		</td>
 			  		   	</tr>
 	  		  		</table> 
+				</c:when>
+		       <c:otherwise>
+		       <div class="top-login"> 		       	
+		       	<img src = "<%=basePath %>${customer.filepath}" style="width:30px; height:30px;">	   
+		  	    <c:out value="${customer.name}"></c:out>, 欢迎您!
+			    <a href="logout.jsp">退出</a>	
+			    </div>		   
+		       </c:otherwise>
+		       </c:choose>
+	  		   		
 	  		    </div> 
   		    </div> 			              
   		</div>	
   	</div>
   	<!-- 页面顶部结束 -->
-  	
-  	<!-- 搜索框与登录状态判断语句开始 -->
-  	<div class="container1-1">
-	  	<div class="input-group col-md-3" style="margin-top:0px positon:relative">  
-	       <input type="text" class="form-control search clearable" placeholder="请输入歌曲名或歌手名" / >  
-	       <span class="input-group-btn">  
-	           <button class="btn btn-info btn-search"><i class="fa fa-search"></i></button>             
-	        </span>  
-	 	</div>  
-	 	<div class="login-check">
-		 	<c:choose>
-		       <c:when test="${customer.name ==null}"> 您还未登录，登录可开启更多功能！</c:when>
-		       <c:otherwise>
-		       <img src = "<%=basePath %><s:property value='filepath'/>" style="width:20px; height:20px;">
-		  	   <c:out value="${customer.name}"></c:out>, 欢迎您!
-		       </c:otherwise>
-		     </c:choose>
-	 	</div>
-  	</div>
-	<!-- 搜索框与登录状态判断语句结束 -->
 	
 	<div class="mymusic-contain">
-		<div class="mymusic-list">
-		     <a href="song/song_queryMySongs">我上传的音乐</a> 
-		     <a href="order_main.jsp">我购买的音乐</a> 
-		     <a href="song/song_addSong?customer.customerid=<s:property value='customer.customerid'/>" class="delete"> 上传音乐</a>
-	       </div>
 	       
-	       <main class="container-fluid">
-	      <div class="row">
-	         <div class="col-md-12">
-			   
-			      <div class="panel panel-info">
-		                 <div class="panel-heading">
-		                    <h3 class="panel-title">我上传的歌曲</h3>
-		                 </div>
-		                  <s:form action="song/song_queryMySongs" method="post">
-		                 <div class="panel-body panel-body-table">
-		                   <div class="table-responsive" style="overflow-x:hidden">
-		                      <table class="table table-striped table-bordered table-hover" id="dataTables-example">
-		                         <thead>
-		                           <tr>
-		                              <th>序号</th>  
-								          <th>歌曲名称</th>
-								          <th>单价</th>
-								          <th>专辑</th> 
-								          <th>语言</th>  
-								          <th>歌手</th>
-		                              </tr>
-		                          </thead>
-		                          <tbody>
-		                              <s:iterator value="songslist" status="status">
-		                                  <tr>
-		                                      <td><s:property value="#status.index+1"></s:property></td>
-		                                      <td><s:a href="song/song_showDetail?song.songid=%{songid}">
-			               						  <s:property value="song.songname"></s:property></s:a></td>
-		                                      <td class="center"><s:property value="song.price"></s:property></td>
-		                                      <td class="center"><s:property value="song.album"></s:property></td>
-		                                      <td class="center"><s:property value="song.language"></s:property></td>
-		                                      <td class="center"><s:property value="song.singer.name"></s:property></td>
-		                                  </tr>
-		                              </s:iterator>
-		                          </tbody>
-		                        </table>
-		                      </div>
-		                    </div>
-		                     </s:form>
-		                </div>
-			      
-		       </div>
-		   </div>
-		</main>
+	  <main class="container-fluid">
+      <div class="row">
+         <div class="col-md-12">
+		   
+		      <div class="panel panel-info">
+		      		<div class="panel-heading">
+	                    <h3 class="panel-title">我上传的歌曲</h3>
+	                 </div>
+	                 <s:form action="song/song_showSong1" method="post">
+	                 <div class="panel-body panel-body-table" >
+	                      <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+	                         <thead>
+	                       
+	                           <tr>
+	                              	  <th>序号</th> 
+	                              	  <th></th>
+							          <th>歌曲名称</th>
+							          <th>单价</th>
+							          <th>专辑</th>	
+							           <th>歌手</th> 
+							           <th>相关操作 </th>
+	                              </tr>
+	                          </thead>
+	                          <tbody>
+	                              <s:iterator value="songslist" var="song" status="status">
+	                              		
+	                              		<s:if test="#session.customer.name==#song.singer">
+	                                  <tr>
+	                                      <td><s:property value="#status.index+1"></s:property></td>
+	                                      <td><img src = "<%=basePath %><s:property value='filepath'/>" style="width:100px;height:100px"></td>
+	                                      <td><s:a href="song/song_showDetail?song.songid=%{songid}"><s:property value="#song.songname"></s:property></s:a></td>
+	                                      <td><s:property value="#song.price"></s:property></td>
+	                                      <td><s:property value="#song.album"></s:property></td>
+	                                      <td><s:property value="#song.singer"></s:property></td>  
+	                                       <td><a href="song/song_showEdit?song.songid=<s:property value='songid'/>&song.singer=<s:property value='singer'/>&song.bofangliang=<s:property value='bofangliang' />" class="edit">编辑   </a>
+	                                      	  <a href="song/song_deleteSong?song.songid=<s:property value='songid'/>" class="delete">  删除</a>
+	                                      </td>  
+	                                  </tr>
+	                                  </s:if>
+	                              </s:iterator>
+	                          </tbody>
+	                        </table>
+	                   </div>
+	                   </s:form>
+	            </div>
+	               
+		       
+	       </div>
+	   </div>
+	</main>
 	</div>
 	<script src="<%=basePath%>js/jquery.min.js"></script>
     <script src="<%=basePath%>js/bootstrap.min.js"></script>
     <script src="<%=basePath%>js/jquery.dataTables.js"></script>
     <script src="<%=basePath%>js/dataTables.bootstrap.js"></script>
-    <script>
+    <script >
        $(document).ready(function () {
            $('#dataTables-example').dataTable({
 			   "language": {
@@ -184,5 +191,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		   });
        });
     </script>
+   	<!--  友情链接和footer -->
+     <footer class="footer" role="footer">
+   		<div class="footer-inner">
+   			<div class="footer-info">
+   			<p>不知道放什么就先空着吧</p>
+   			</div>
+   			<div class="footer-copyright">
+   			<p>2018买歌原创音乐版权所有</p>
+   			</div>
+   		</div>
+   	</footer>
   </body>
 </html>

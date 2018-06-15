@@ -60,7 +60,7 @@ public class OrderDao {
     	Session s = factory.getCurrentSession();
     	String hql = "From Music_order order where 1=1";
     	if(null != customer && customer.getCustomerid()!=0) 
-    		hql = hql + " and order.customer.customerid like '%" + customer.getCustomerid() + "%'";
+    		hql = hql + " and order.music_customer.customerid like '%" + customer.getCustomerid() + "%'";
     	if(null != song && null!=song.getSongname()) 
     		hql = hql + " and order.song.songname like '%" + song.getSongname() + "%'";
     	Query q = s.createQuery(hql);
