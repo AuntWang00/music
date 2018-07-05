@@ -27,10 +27,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
  	 <link rel="stylesheet" href="css/buttons.css">
  	 <link href="http://cdn.bootcss.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-		<link type="text/css" rel="stylesheet" href="less/reset.css">
-		<link type="text/css" rel="stylesheet" href="less/slide.css">
-		<link type="text/css" rel="stylesheet" href="less/index.css">
-		
 		
 		<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>	
 			
@@ -69,7 +65,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <li><a href="song/song_showAdd?song.singer=<s:property value='#session.customer.name'/>">添加歌曲</a></li>
        </ul>
     </li>
-    <li><a class="f1" href="#">关于买歌</a></li>
+    <li><a class="f1" href="about.jsp">关于买歌</a></li>
 
   </ul>
 
@@ -91,7 +87,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</c:when>
 		       <c:otherwise>
 		       <div class="top-login"> 		       	
-		       	<img src = "<%=basePath %>${customer.filepath}" style="width:30px; height:30px;">	   
+		       	<a href="customer/customer_showEdit?customer.customerid=${customer.customerid}&customer.sex=${customer.sex}&customer.country=${customer.country}">
+		       	<img src = "<%=basePath %>${customer.filepath}" style="width:30px; height:30px;"></a>	   
 		  	    <c:out value="${customer.name}"></c:out>, 欢迎您!
 			    <a href="logout.jsp">退出</a>	
 			    </div>		   

@@ -1,3 +1,4 @@
+<%@ page import="com.music.action.*" %>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib uri="/struts-tags" prefix="s"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -29,6 +30,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>				
 		<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
 		<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		 <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
   </head>
   
   <body>
@@ -58,7 +60,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <li><a href="song/song_showAdd?song.singer=<s:property value='#session.customer.name'/>">添加歌曲</a></li>
        </ul>
     </li>
-    <li><a class="f1" href="#">关于买歌</a></li>
+    <li><a class="f1" href="about.jsp">关于买歌</a></li>
 
   </ul>
 
@@ -80,7 +82,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</c:when>
 		       <c:otherwise>
 		       <div class="top-login"> 		       	
-		       	<img src = "<%=basePath %>${customer.filepath}" style="width:30px; height:30px;">	   
+		       	<a href="customer/customer_showEdit?customer.customerid=${customer.customerid}&customer.sex=${customer.sex}&customer.country=${customer.country}">
+		       	<img src = "<%=basePath %>${customer.filepath}" style="width:30px; height:30px;"></a>   
 		  	    <c:out value="${customer.name}"></c:out>, 欢迎您!
 			    <a href="logout.jsp">退出</a>	
 			    </div>		   
@@ -93,7 +96,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   	</div>
   	
   		<!-- 搜索框语句开始 -->
-  	<s:form action="customer/customer_queryCustomers" method="post">
+  	<s:form action="customer/customer_SortCustomerByAll()" method="post">
   	<div class="container1-1">
 	  	<div class="input-group col-md-3" style="margin-top:0px positon:relative">  
 	       <input type="text" class="form-control search clearable" placeholder="请输入歌曲名或歌手名" title="关键词" name="keyWords" />  
@@ -114,10 +117,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    	<div class="singer-contain1">
    	 <div class="shutter">
 		<div class="shutter-img">
-		  <a href="#" data-shutter-title="Iron Man"><img src="images/Taylor1.jpg" alt="#"></a>
-		  <a href="#" data-shutter-title="Super Man"><img src="images/Taylor2.jpg" alt="#"></a>
-		  <a href="#" data-shutter-title="Iron Man"><img src="images/wuyuetian.jpg" alt="#"></a>
-		  <a href="#" data-shutter-title="Super Man"><img src="images/zhangxueyou.jpg" alt="#"></a>
+		  <a href="#" data-shutter-title="孟美岐"><img src="images/mq1.jpg" alt="#"></a>
+		  <a href="#" data-shutter-title="孟美岐"><img src="images/mq2.jpg" alt="#"></a>
+		  <a href="#" data-shutter-title="孟美岐"><img src="images/mq3.jpg" alt="#"></a>
+		  <a href="#" data-shutter-title="孟美岐"><img src="images/mq4.jpg" alt="#"></a>
+		  <a href="#" data-shutter-title="孟美岐"><img src="images/mq5.jpg" alt="#"></a>
 		  
 		</div>
 		<ul class="shutter-btn">
@@ -148,70 +152,71 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<div class="singer-filter">
 			<div class="filter1">				
 				<div class="filter2">
-					<div class="singer-tag-kind"><a href="#">热门</a></div>
-					<div class="singer-tag"><a href="#">A</a></div>
-					<div class="singer-tag"><a href="#">B</a></div>
-					<div class="singer-tag"><a href="#">C</a></div>
-					<div class="singer-tag"><a href="#">D</a></div>
-					<div class="singer-tag"><a href="#">E</a></div>
-					<div class="singer-tag"><a href="#">F</a></div>
-					<div class="singer-tag"><a href="#">G</a></div>
+					<div class="singer-tag-kind"><a href="customer/customer_showCustomer">热门</a></div>
+					<div class="singer-tag"><s:a href="customer/customer_SortCustomerByShouzimu?customer.shouzimu=A">A</s:a></div>
+					<div class="singer-tag"><s:a href="customer/customer_SortCustomerByShouzimu?customer.shouzimu=B">B</s:a></div>
+					<div class="singer-tag"><s:a href="customer/customer_SortCustomerByShouzimu?customer.shouzimu=C">C</s:a></div>
+					<div class="singer-tag"><s:a href="customer/customer_SortCustomerByShouzimu?customer.shouzimu=D">D</s:a></div>
+					<div class="singer-tag"><s:a href="customer/customer_SortCustomerByShouzimu?customer.shouzimu=E">E</s:a></div>
+					<div class="singer-tag"><s:a href="customer/customer_SortCustomerByShouzimu?customer.shouzimu=F">F</s:a></div>
+					<div class="singer-tag"><s:a href="customer/customer_SortCustomerByShouzimu?customer.shouzimu=G">G</s:a></div>
 				</div>
 				<div class="filter2">
 					<div class="singer-tag-blank"></div>
-					<div class="singer-tag"><a href="#">H</a></div>
-					<div class="singer-tag"><a href="#">I</a></div>
-					<div class="singer-tag"><a href="#">J</a></div>
-					<div class="singer-tag"><a href="#">K</a></div>
-					<div class="singer-tag"><a href="#">L</a></div>
-					<div class="singer-tag"><a href="#">M</a></div>
-					<div class="singer-tag"><a href="#">N</a></div>
+					<div class="singer-tag"><s:a href="customer/customer_SortCustomerByShouzimu?customer.shouzimu=H">H</s:a></div>
+					<div class="singer-tag"><s:a href="customer/customer_SortCustomerByShouzimu?customer.shouzimu=I">I</s:a></div>
+					<div class="singer-tag"><s:a href="customer/customer_SortCustomerByShouzimu?customer.shouzimu=J">J</s:a></div>
+					<div class="singer-tag"><s:a href="customer/customer_SortCustomerByShouzimu?customer.shouzimu=K">K</s:a></div>
+					<div class="singer-tag"><s:a href="customer/customer_SortCustomerByShouzimu?customer.shouzimu=L">L</s:a></div>
+					<div class="singer-tag"><s:a href="customer/customer_SortCustomerByShouzimu?customer.shouzimu=M">M</s:a></div>
+					<div class="singer-tag"><s:a href="customer/customer_SortCustomerByShouzimu?customer.shouzimu=N">N</s:a></div>
 				</div>
 				<div class="filter2">
 					<div class="singer-tag-blank"></div>
-					<div class="singer-tag"><a href="#">O</a></div>
-					<div class="singer-tag"><a href="#">P</a></div>
-					<div class="singer-tag"><a href="#">Q</a></div>
-					<div class="singer-tag"><a href="#">R</a></div>
-					<div class="singer-tag"><a href="#">S</a></div>
-					<div class="singer-tag"><a href="#">T</a></div>
-					<div class="singer-tag"><a href="#">U</a></div>
+					<div class="singer-tag"><s:a href="customer/customer_SortCustomerByShouzimu?customer.shouzimu=O">O</s:a></div>
+					<div class="singer-tag"><s:a href="customer/customer_SortCustomerByShouzimu?customer.shouzimu=P">P</s:a></div>
+					<div class="singer-tag"><s:a href="customer/customer_SortCustomerByShouzimu?customer.shouzimu=Q">Q</s:a></div>
+					<div class="singer-tag"><s:a href="customer/customer_SortCustomerByShouzimu?customer.shouzimu=R">R</s:a></div>
+					<div class="singer-tag"><s:a href="customer/customer_SortCustomerByShouzimu?customer.shouzimu=S">S</s:a></div>
+					<div class="singer-tag"><s:a href="customer/customer_SortCustomerByShouzimu?customer.shouzimu=T">T</s:a></div>
+					<div class="singer-tag"><s:a href="customer/customer_SortCustomerByShouzimu?customer.shouzimu=U">U</s:a></div>
 				</div>
 				<div class="filter2">
 					<div class="singer-tag-blank"></div>
-					<div class="singer-tag"><a href="#">V</a></div>
-					<div class="singer-tag"><a href="#">W</a></div>
-					<div class="singer-tag"><a href="#">X</a></div>
-					<div class="singer-tag"><a href="#">Y</a></div>
-					<div class="singer-tag"><a href="#">Z</a></div>
+					<div class="singer-tag"><s:a href="customer/customer_SortCustomerByShouzimu?customer.shouzimu=V">V</s:a></div>
+					<div class="singer-tag"><s:a href="customer/customer_SortCustomerByShouzimu?customer.shouzimu=W">W</s:a></div>
+					<div class="singer-tag"><s:a href="customer/customer_SortCustomerByShouzimu?customer.shouzimu=X">X</s:a></div>
+					<div class="singer-tag"><s:a href="customer/customer_SortCustomerByShouzimu?customer.shouzimu=Y">Y</s:a></div>
+					<div class="singer-tag"><s:a href="customer/customer_SortCustomerByShouzimu?customer.shouzimu=Z">Z</s:a></div>
+					<div class="singer-tag">  </div>
+					<div class="singer-tag"><s:a href="customer/customer_SortCustomerByShouzimu?customer.shouzimu=ZZ">其他</s:a></div>
 				</div>
 				<br><div class="filter2">
-					<div class="singer-tag-kind"><a href="#">全部</a></div>
-					<div class="singer-tag"><a href="#">男</a></div>
-					<div class="singer-tag"><a href="#">女</a></div>
-					<div class="singer-tag1"><a href="#">组合</a></div>
+					<div class="singer-tag-kind"><a href="customer/customer_showCustomer">全部</a></div>
+					<div class="singer-tag"><s:a href="customer/customer_SortCustomerBySex?customer.sex=1">男</s:a></div>
+					<div class="singer-tag"><s:a href="customer/customer_SortCustomerBySex?customer.sex=2">女</s:a></div>
+					<div class="singer-tag1"><s:a href="customer/customer_SortCustomerBySex?customer.sex=3">组合</s:a></div>
 				</div>
 				<br><div class="filter2">
-					<div class="singer-tag-kind"><a href="#">全部</a></div>
-					<div class="singer-tag1"><a href="#">内地</a></div>
-					<div class="singer-tag1"><a href="#">港台</a></div>
-					<div class="singer-tag1"><a href="#">欧美</a></div>
-					<div class="singer-tag1"><a href="#">日韩</a></div>
-					<div class="singer-tag1"><a href="#">其他</a></div>
+					<div class="singer-tag-kind"><a href="customer/customer_showCustomer">全部</a></div>
+					<div class="singer-tag1"><s:a href="customer/customer_SortCustomerByCountry?customer.country=1">内地</s:a></div>
+					<div class="singer-tag1"><s:a href="customer/customer_SortCustomerByCountry?customer.country=2">港台</s:a></div>
+					<div class="singer-tag1"><s:a href="customer/customer_SortCustomerByCountry?customer.country=3">欧美</s:a></div>
+					<div class="singer-tag1"><s:a href="customer/customer_SortCustomerByCountry?customer.country=4">日韩</s:a></div>
+					<div class="singer-tag1"><s:a href="customer/customer_SortCustomerByCountry?customer.country=5">其他</s:a></div>
 				</div>
 				
 			</div>
 		</div>
 		
-		
+
 		</div>
 		
-		
+		<div class="singer" id ="singer">
 	   		<!-- 歌手列表 -->
-	   		<s:form action="customer/customer_queryCustomers" method="post" >
-	   		
-	   		<s:iterator value = "customerList" status="status" begin="0" end="9"> 
-		   		<ul class = "singer-list">
+	   		<s:form action="customer/customer_queryCustomers" method="post" > 	   		 		
+	   		<s:iterator value = "customerList" status="status" > 
+		   		<ul class = "singer-list" >
 		   			<li class="singer-item">
 		   				<div class="singer-box">
    					
@@ -225,29 +230,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		   		</ul>
 		   		
 	   		</s:iterator>
-	   		
+	   		 
 	   		</s:form>
-	   		
+	   		</div>
 	   		<!-- 歌手列表 -->
-	   		<s:form action="customer/customer_queryCustomers" method="post" >
 	   		
-	   		<s:iterator value = "customerList" status="status" begin="10" > 
-		   		<ul class = "singer-list2">
-		   			<li class="singer-item2">
-		   			
-		   				<div class="singer-box2">  							   						   			
-		   				<div class="singer-info2">		   				
-		   				<s:a href="customer/customer_showDetail?customer.customerid=%{customerid}"><s:property value ="name"/></s:a>		   				
-		   				</div>
-		   				</div>
-		   		
-		   			</li>
-		   		</ul>
-	   		</s:iterator>
 	   		
-	   		</s:form>
-	   		
-   		
    	</div>
    	<!-- 最新单曲结束 -->
    	

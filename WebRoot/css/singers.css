@@ -7,9 +7,13 @@
 	margin-left:auto;	
 	width:1300px;
 	padding:0 10px;
-	overflow-y:auto;
+	
 }
-
+.singer{
+	height:700px;
+	    overflow-y: auto;
+	  
+}
 .singer-list{	
 	margin-top:30px;
 	list-style:none;	
@@ -165,6 +169,7 @@
 .singer-contain1{
 	width:100%;
 	height:358px;
+	margin-bottom: 30px;
 }
 
 .filter1{

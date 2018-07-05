@@ -38,7 +38,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-     <!-- 页面顶部开始 （包括logo、导航、登录按钮、注册按钮）-->
+    <!-- 页面顶部开始 （包括logo、导航、登录按钮、注册按钮）-->
   	<div class="top">
   		<div class="top-container">
   			<div class="header-logo">
@@ -48,38 +48,52 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   			</div>
   			
   	<!--导航开始 -->
-  			<div class="container2">	
+  	<div class="container2"> 
 	  			<div class="menu">  
 			   		<div class="nav">
 
   <ul>
- 	<li><a class="f1" href="song/song_showNewSong">原创音乐馆</a>
+ 	<li ><a class="f1" href="song/song_showNewSong">原创音乐馆</a>
     </li>
 	<li><a class="f1" href="customer/customer_showCustomer">歌手</a>
     </li>
-    <li><a class="f1" class="add-order">我的音乐</a>
+    <li class="active"><a class="fff" href="song/song_showSong1" class="add-order">我的音乐</a>
       <ul>
         <li><a href="song/song_showSong1">我上传的歌曲</a></li>
         <li><a href="order/order_showOrder?customer.name=<s:property value='#session.customer.name'/>">我购买的歌曲</a></li>
         <li><a href="song/song_showAdd?song.singer=<s:property value='#session.customer.name'/>">添加歌曲</a></li>
        </ul>
     </li>
-    <li><a class="f1" href="#">关于买歌</a></li>
+    <li><a class="f1" href="about.jsp">关于买歌</a></li>
 
   </ul>
 
 </div>
 	  			</div>
+
 	  <!-- 登录和注册按钮 -->
 		  		<div class="header-login">
-	  		   		<table class="top-table">  		   		
+		  		<c:choose>
+		       <c:when test="${customer.name ==null}"> 
+		       <table class="top-table">  		   		
 				   		<tr>
 		  		   			<td>
-		  		   				<a class="top-table-font1" href="login.jsp">注册</a>
-			  		   			<a class="top-table-font2" href="reg.jsp">登录</a>
+		  		   				<a class="top-table-font1" href="reg.jsp">注册</a>
+			  		   			<a class="top-table-font2" href="login.jsp">登录</a>
 			  		   		</td>
 			  		   	</tr>
 	  		  		</table> 
+				</c:when>
+		       <c:otherwise>
+		       <div class="top-login"> 		       	
+		       	<a href="customer/customer_showEdit?customer.customerid=${customer.customerid}&customer.sex=${customer.sex}&customer.country=${customer.country}">
+		       	<img src = "<%=basePath %>${customer.filepath}" style="width:30px; height:30px;"></a>		   
+		  	    <c:out value="${customer.name}"></c:out>, 欢迎您!
+			    <a href="logout.jsp">退出</a>	
+			    </div>		   
+		       </c:otherwise>
+		       </c:choose>
+	  		   		
 	  		    </div> 
   		    </div> 			              
   		</div>	

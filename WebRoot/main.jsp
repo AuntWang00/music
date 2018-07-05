@@ -45,23 +45,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  			<div class="menu">  
 			   		<div class="nav">
 
-  <ul>
- 	<li class="active"><a class="fff" href="song/song_showNewSong">原创音乐馆</a>
-    </li>
-	<li><a class="f1" href="customer/customer_showCustomer">歌手</a>
-    </li>
-    <li><a class="f1" class="add-order">我的音乐</a>
-      <ul>
-        <li><a href="song/song_showSong1">我上传的歌曲</a></li>
-        <li><a href="order/order_showOrder?customer.name=<s:property value='#session.customer.name'/>">我购买的歌曲</a></li>
-        <li><a href="song/song_showAdd?song.singer=<s:property value='#session.customer.name'/>">添加歌曲</a></li>
-       </ul>
-    </li>
-    <li><a class="f1" href="#">关于买歌</a></li>
+					  <ul>
+					 	<li class="active"><a class="fff" href="song/song_showNewSong">原创音乐馆</a>
+					    </li>
+						<li><a class="f1" href="customer/customer_showCustomer">歌手</a>
+					    </li>
+					    <li><a class="f1" class="add-order">我的音乐</a>
+					      <ul>
+					        <li><a href="song/song_showSong1">我上传的歌曲</a></li>
+					        <li><a href="order/order_showOrder?customer.name=<s:property value='#session.customer.name'/>">我购买的歌曲</a></li>
+					        <li><a href="song/song_showAdd?song.singer=<s:property value='#session.customer.name'/>">添加歌曲</a></li>
+					       </ul>
+					    </li>
+					    <li ><a class="f1" href="about.jsp">关于买歌</a></li>							
+					  </ul>
 
-  </ul>
-
-</div>
+					</div>
 	  			</div>
 
 	  <!-- 登录和注册按钮 -->
@@ -79,7 +78,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</c:when>
 		       <c:otherwise>
 		       <div class="top-login"> 		       	
-		       	<img src = "<%=basePath %>${customer.filepath}" style="width:30px; height:30px;">	   
+		       	<a href="customer/customer_showEdit?customer.customerid=${customer.customerid}&customer.sex=${customer.sex}&customer.country=${customer.country}">
+		       	<img src = "<%=basePath %>${customer.filepath}" style="width:30px; height:30px;"></a>	   
 		  	    <c:out value="${customer.name}"></c:out>, 欢迎您!
 			    <a href="logout.jsp">退出</a>	
 			    </div>		   
@@ -101,7 +101,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	           <button class="btn btn-info btn-search" type="submit"><i class="fa fa-search"></i></button>             
 	        </span>  
 	 	</div>  
-	 	
   	</div>
   	</s:form>
 	<!-- 搜索框语句结束 -->
@@ -110,8 +109,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    <div class="con5">
    		<div class="container5">
 	   		<div class="show-title">
-	   				<h3>最新单曲</h3>   				
+	   				<h3>最新单曲</h3>			
 	   		</div>
+	   		
+	   		<div class="show-songs">
+		   		<div class="allsong">
+		   			<a href="song/song_showSong2">查看所有歌曲</a>
+		   		</div> 
+	   		</div>  	
 	   		<!-- 单曲列表 -->
 	   		<s:form action="song/song_showNewSong" method="post">
 	   		
@@ -181,27 +186,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	   		</div>
    			<!-- 辣鸡轮播 -->
 	   		<div class="slideshow" style="height:500px; margin-top:15px;overflow: hidden">
-	<div class="slide"><img src="images/1.jpg"></div>
-	  <div class="slide"><img src="images/2.jpg"></div>
-	  <div class="slide"><img src="images/3.jpg"></div>
-	  <div class="slide"><img src="images/4.jpg"></div>
-	  <div class="slide"><img src="images/5.jpg"></div>
+	<div class="slide"><img src="images/album5.jpg"></div>
+	  <div class="slide"><img src="images/album3.jpg"></div>
+	  <div class="slide"><img src="images/album1.jpg"></div>
+	  <div class="slide"><img src="images/album2.jpg"></div>
+	  <div class="slide"><img src="images/album4.jpg"></div>
 </div>
-<!--<div class="slideshow-nocycle" style="height: 0; overflow: hidden">
-	  <div class="slide"><img src="./images/1000x400_b.png"></div>
-	  <div class="slide"><img src="./images/300x500_p.png"></div>
-	  <div class="slide"><img src="./images/500x300_y.png"></div>
-	  <div class="slide"><img src="./images/300x500_p.png"></div>
-	</div> -->
 
-<!--<div class="slideshow">
-
-	  <div class="slide" style="background: green;">Text 1</div>
-	  <div class="slide" style="background: red;">Text 2</div>
-	  <div class="slide" style="background: yellow;">Text 3</div>
-	  <div class="slide" style="background: blue;">Text 4</div>
-
-</div> -->
 
 <script src="js/jquery-1.11.0.min.js" type="text/javascript"></script>
 <script src="js/imagesloaded.js"></script>

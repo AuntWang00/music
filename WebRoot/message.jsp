@@ -60,7 +60,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <li><a href="song/song_showAdd?song.singer=<s:property value='#session.customer.name'/>">添加歌曲</a></li>
        </ul>
     </li>
-    <li><a class="f1" href="#">关于买歌</a></li>
+    <li><a class="f1" href="about.jsp">关于买歌</a></li>
 
   </ul>
 
@@ -94,7 +94,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		 	<c:choose>
 		       <c:when test="${customer.name ==null}"> 您还未登录，登录可开启更多功能！</c:when>
 		       <c:otherwise>
-		        <img src="<%=basePath%><s:property value='filepath'/>">
+		        <a href="customer/customer_showEdit?customer.customerid=${customer.customerid}&customer.sex=${customer.sex}&customer.country=${customer.country}">
+		       	<img src = "<%=basePath %>${customer.filepath}" style="width:30px; height:30px;"></a>
 		  	   <c:out value="${customer.name}"></c:out>, 欢迎您!
 		       </c:otherwise>
 		     </c:choose>

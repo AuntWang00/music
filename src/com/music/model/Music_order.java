@@ -1,5 +1,8 @@
 package com.music.model;
 
+import java.util.HashSet;
+import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -7,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -25,6 +29,8 @@ public class Music_order implements java.io.Serializable {
 	private Integer songnum;
 	private Double total;
 	private Integer song;
+	private Set<Comme> commes = new HashSet<Comme>(0);
+	private Set<Comme> commes_1 = new HashSet<Comme>(0);
 
 	// Constructors
 
@@ -39,12 +45,15 @@ public class Music_order implements java.io.Serializable {
 
 	/** full constructor */
 	public Music_order(Music_customer music_customer, Songs songs,
-			Integer songnum, Double total, Integer song) {
+			Integer songnum, Double total, Integer song, Set<Comme> commes,
+			Set<Comme> commes_1) {
 		this.music_customer = music_customer;
 		this.songs = songs;
 		this.songnum = songnum;
 		this.total = total;
 		this.song = song;
+		this.commes = commes;
+		this.commes_1 = commes_1;
 	}
 
 	// Property accessors
@@ -60,7 +69,7 @@ public class Music_order implements java.io.Serializable {
 		this.orderid = orderid;
 	}
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "customer")
 	public Music_customer getMusic_customer() {
 		return this.music_customer;
@@ -70,7 +79,7 @@ public class Music_order implements java.io.Serializable {
 		this.music_customer = music_customer;
 	}
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "songs", nullable = false)
 	public Songs getSongs() {
 		return this.songs;
@@ -105,6 +114,24 @@ public class Music_order implements java.io.Serializable {
 
 	public void setSong(Integer song) {
 		this.song = song;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "music_order")
+	public Set<Comme> getCommes() {
+		return this.commes;
+	}
+
+	public void setCommes(Set<Comme> commes) {
+		this.commes = commes;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "music_order")
+	public Set<Comme> getCommes_1() {
+		return this.commes_1;
+	}
+
+	public void setCommes_1(Set<Comme> commes_1) {
+		this.commes_1 = commes_1;
 	}
 
 }

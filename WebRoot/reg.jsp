@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@ taglib uri="/struts-tags" prefix="s"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -21,9 +22,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
 	<link rel="stylesheet" href="<%=basePath %>css/bootstrap.css">
-    <link rel="stylesheet" href="<%=basePath %>css/reg.css">
+    <link rel="stylesheet" href="<%=basePath %>css/main.css">
+    <link rel="shortcut icon" href="<%=basePath%>images/logo.png">
 	
-
+ <link href="http://cdn.bootcss.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+		
+		
+		<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>	
+			
+		<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+		<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	
+	
   </head>
   
   <body>
@@ -38,177 +48,120 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   		</div>
     </div>	
     <!--使用模态框的方式模拟一个登陆框-->
-    <div class="modal show" id="loginModal">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close">&times;</button>
-                    <h1 class="text-center text-primary">注册</h1>
-                </div>
-                <div class="modal-body">
-                    <form class="form col-md-12 center-block" id="defaultForm" action="customer/customer_reg" method="post" cssClass="form-horizontal"  enctype="multipart/form-data">                    
-                        <div class="form-group-lg"  id="accountDiv">
-                            <label class="sr-only" for="inputAccount">账号</label>
+   	<div class="add-contain">
+  	<main class="container-fluid" >
+	    <div class="row">
+		   <div class="col-md-12">
+		      <s:form action="customer/customer_reg" cssClass="form-horizontal" enctype="multipart/form-data">
+		     
+		      <div class="panel panel-success">
+			       <div class="panel-heading">
+		               <h4 class="panel-title">用 户 注 册</h4>
+		           </div>
+		           <div class="panel-body">
+				       <div class="form-group">
+			                <label class="control-label col-md-3">昵称</label>
+			                <div class="col-md-8">
+                              <input type="text" name="customer.name" class="form-control input-sm" 
+                               value="昵称" required>
+                           </div>
+			           </div>  
+			           <div class="form-group">
+			                <label class="control-label col-md-3">密码</label>
+			                <div class="col-md-8">
+                              <input type="text" name="customer.password" class="form-control input-sm" 
+                               value="密码"  required>
+                            </div>
+			           </div>
+			     
+			           <div class="form-group">
+                             <label class="control-label col-md-3">性别</label>
                             <div class="input-group">
-                                <div class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></div>                              
-                                <input type="text" name="customer.name" id="customername" onblur="checkName()"  placeholder="账号" class="form-control input-sm" required="required">
-                               <span id="span1"></span>                            
+                            <input type="radio" name="customer.sex" value="1" <c:if test="${param.customer.sex== '男'}">checked="checked"</c:if>/>男
+    						<input type="radio" name="customer.sex" value="2" <c:if test="${param.customer.sex== '女'}">checked="checked"</c:if>/>女
+    						<input type="radio" name="customer.sex" value="3" <c:if test="${param.customer.sex== '组合'}">checked="checked"</c:if>/>组合	                           
+                             <s:fielderror fieldName="customer.sex" cssClass="fielderror"/>                       
                             </div>
                         </div>
-                        <br>
-                        <div class="form-group-lg" id="pwdDiv">
-                            <label class="sr-only" for="inputPassword">密码</label>
-                            <div class="input-group">
-                                <div class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></div>                              
-                                <input type="password" name="customer.password" class="form-control input-sm" placeholder="密码"  required>                               
-                                <s:fielderror fieldName="customer.password" cssClass="fielderror"/>
-                            </div>
-                        </div>
-                        <br>
-                        <div class="form-group-lg" id="pwdDiv">
-                            <label class="sr-only" for="inputPassword">确认密码</label>
-                            <div class="input-group">
-                                <div class="input-group-addon"><span class="glyphicon glyphicon-exclamation-sign"></span></div>                              
-                                <input type="password" name="customer.repassword" class="form-control input-sm" placeholder="确认密码" >
-                                <s:fielderror fieldName="customer.repassword" cssClass="fielderror"/>                             
-                            </div>
-                        </div>
-                        <br>
-                        <div class="form-group-lg"  id="accountDiv">
-                            <label class="sr-only" for="inputAccount">真实姓名</label>
-                            <div class="input-group">
-                                <div class="input-group-addon"><span class="glyphicon glyphicon-check" aria-hidden="true"></span></div>                              
-                                <input type="text" name="customer.realname" id="customerrealname" onblur="checkName()"  placeholder="真实姓名" class="form-control input-sm" required="required"> 
-                                <s:fielderror fieldName="customer.realname" cssClass="fielderror"/>                       
-                            </div>
-                        </div>
-                        <br>
-                        <div class="form-group-lg"  id="accountDiv">
-                            <label class="sr-only" for="inputAccount">性别</label>
-                            <div class="input-group">
-                                <div class="input-group-addon"><span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span></div>                              
-                                <input type="text" name="customer.sex" id="customersex" onblur="checkName()"  placeholder="性别" class="form-control input-sm" required="required"> 
-                                <s:fielderror fieldName="customer.sex" cssClass="fielderror"/>                       
-                            </div>
-                        </div>
-                        <br>
-                        <div class="form-group-lg"  id="accountDiv">
-                            <label class="sr-only" for="inputAccount">国籍</label>
-                            <div class="input-group">
-                                <div class="input-group-addon"><span class="glyphicon glyphicon-link" aria-hidden="true"></span></div>                              
-                                <input type="text" name="customer.country" id="customercountry" onblur="checkName()"  placeholder="国籍" class="form-control input-sm" required="required"> 
-                                <s:fielderror fieldName="customer.country" cssClass="fielderror"/>                       
-                            </div>
-                        </div>
-                        <br>
-                        <div class="form-group-lg"  id="accountDiv">
-                            <label class="sr-only" for="inputAccount">出生日期</label>
-                            <div class="input-group">
-                                <div class="input-group-addon"><span class="glyphicon glyphicon-dashboard" aria-hidden="true"></span></div>                              
-                                <input type="text" name="customer.birthday" id="customerbirthday" onblur="checkName()"  placeholder="出生日期" class="form-control input-sm" required="required"> 
-                                <s:fielderror fieldName="customer.birthday" cssClass="fielderror"/>                       
-                            </div>
-                        </div>
-                        <br>
-                   <!--       <div class="form-group">
-				                <label class="control-label col-md-3">上传头像</label>
-				                
-				                <div class="col-md-4">
-	                              <div class="fileupload fileupload-new" data-provides="fileupload">
-	                                <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
-	                                   <img src="<%=basePath%>upload/demoUpload.jpg" alt="" />
-	                                  
-	                                </div>
-	                                <div class="fileupload-preview fileupload-exists thumbnail" 
-	                                   style="max-width: 200px; max-height:150px; line-height: 20px;">
-	                                </div>
-	                                <div>
-	                                   
-	                                   <span class="fileupload-exists">浏览</span><input type="file" name="custPhoto"/></span>
-	                                   <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload">取消</a>
-	                                   <p>（图片大小请勿超过2M！）</p>  
-	                                </div>
-	                              </div>
-	                            </div>
-				           </div>
-                        
-                        -->
-                        <div class="form-group-lg"  id="accountDiv">
-                            <label class="sr-only" for="inputAccount">头像</label>
-                            <div class="input-group">
-                                <div class="customerfilepath">                              
-                                   
-                                <div class="fileupload fileupload-new" data-provides="fileupload">
-                                <div class="fileupload-preview fileupload-exists thumbnail" 
-	                                   style="max-width: 200px; max-height:150px; line-height: 20px;">
-	                                </div>
-                                <span class="fileupload-exists"></span><input type="file" name="custPhoto" /></span>
-	                                   <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload">取消</a>                  
-	                                   </div>     
-                            </div>
-                            </div>
-                        </div> 
-                        
-                        <div class="checkbox">
-              <label> </label>
-            </div>
                         
                         <div class="form-group">
-                        <button class="btn btn-success col-md-6" type="submit"><a>注册</a></button>
+                             <label class="control-label col-md-3">地区</label>
+                            <div class="input-group">
+                            <input type="radio" name="customer.country" value="1" <c:if test="${param.customer.country== '内地'}">checked="checked"</c:if>/>内地
+    						<input type="radio" name="customer.country" value="2" <c:if test="${param.customer.country== '港台'}">checked="checked"</c:if>/>港台
+    						<input type="radio" name="customer.country" value="3" <c:if test="${param.customer.country== '欧美'}">checked="checked"</c:if>/>欧美	 
+    						<input type="radio" name="customer.country" value="4" <c:if test="${param.customer.country== '日韩'}">checked="checked"</c:if>/>日韩
+    						<input type="radio" name="customer.country" value="5" <c:if test="${param.customer.country== '其他'}">checked="checked"</c:if>/>其他	                           
+                             <s:fielderror fieldName="customer.country" cssClass="fielderror"/>                       
+                            </div>
                         </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- /container -->
- <script src="<%=basePath %>js/jquery-1.8.3.min.js"></script>
-    <script src="<%=basePath %>js/bootstrap.js"></script>
-    <script src="<%=basePath %>js/login.js"></script>
+			           <div class="form-group">
+			                <label class="control-label col-md-3">真实姓名</label>
+			                <div class="col-md-8">
+                              <input type="text" name="customer.realname" class="form-control input-sm"
+                               value="真实姓名"  required>
+                           </div>
+			           </div>  
+			           <div class="form-group">
+			                <label class="control-label col-md-3">生日</label>
+			                <div class="col-md-8">
+                              <input type="text" name="customer.birthday" class="form-control input-sm" 
+                               value="2000.1.1"  required>
+                            </div>
+			           </div>
+			           <div class="form-group">
+			                <label class="control-label col-md-3">联系方式</label>
+			                <div class="col-md-8">
+                              <input type="text" name="customer.number" class="form-control input-sm" 
+                               value="123456"  required>
+                            </div>
+			           </div>
+			           
+			           <div class="form-group">
+			                <label class="control-label col-md-3">Bab</label>
+			                <div class="col-md-8">
+                              <input type="text" name="customer.bab" class="form-control input-sm" 
+                               value="bab"  required>
+                            </div>
+			           </div>		     		
+			           
+			           <div class="form-group">
+			                <label class="control-label col-md-3">头像</label>
+			                <div class="col-md-4">
+			                  <div class="fileupload fileupload-new" data-provides="fileupload">
+                                  <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">               
+                                    <img src = "<%=basePath %><s:property value='customer.filepath'/>" style="max-width: 200px; max-height:150px; line-height: 20px;">
+                                  </div>
+                                  <div class="fileupload-preview fileupload-exists thumbnail" 
+                                   style="max-width: 200px; max-height:150px; line-height: 20px;">
+                                  </div>
+                                  <div>
+                                      <span class="btn btn-file btn-primary">
+                                        <span class="fileupload-new">换张图片</span>  
+                                         <span class="fileupload-exists">换张图片</span>
+                                         <input type="file" name="custPhoto"/>
+                                      </span>
+                                      <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload">取消</a>
+                                  </div>
+                              </div>
+                            </div>
+			           </div>   
+							
+			           <div class="form-group col-md-3">
+				          <button type="submit" class="btn btn-success pull-right">提  交 </button>
+				       </div>
+				   </div>
+				</div>
+		    </s:form>
+		  </div>
+	   </div>
+	</main>
+	</div>
+    <script src="<%=basePath%>js/jquery.min.js"></script>
+    <script src="<%=basePath%>js/bootstrap.min.js"></script>
 	<script src="<%=basePath%>js/bootstrap-fileupload.js"></script>
-	<script>
-function checkName(){  
-    //alert("name");  
-    var customername = document.getElementById("customername").value;  
-    //传统的ajax校验  
-    //1.创建异步交互对象，  
-    var xhr = createXmlHttp();  
-    //alert(xhr);  
-    //2设置监听  
-    xhr.onreadystatechange = function(){  
-        if(xhr.readyState == 4){  
-            if(xhr.status == 200){  
-                document.getElementById("span1").innerHTML = xhr.responseText;  
-            }  
-        }  
-    }  
-    //alert("sb");
-    //3打开连接//${pageContext.request.contextPath}
-    xhr.open("GET","/music/customer/customer_findByName1.action?&customername="+customername,true);  
-    //4发送 
-    //alert("sb!"); 
-    xhr.send(null);       
-    }     
-          
-    //创建XmlHttp对象  
-    function createXmlHttp(){  
-        var xmlHttp;  
-        try{  
-            xmlHttp= new XMLHttpRequest();  
-        }catch(e){  
-            try{  
-                xmlHttp=new ActiveXObject("Msxm12.XMLHTTP");  
-            }catch(e){  
-                try{  
-                    xmlHttp= new ActiveXObject("Microsoft.XMLHTTP");  
-                }catch(e){}  
-            }             
-        }  
-          
-         return xmlHttp;      
-    }  
-</script>
+               
+	
+
   </body>
 </html>

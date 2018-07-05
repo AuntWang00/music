@@ -59,7 +59,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <li><a href="song/song_showAdd?song.singer=<s:property value='#session.customer.name'/>">添加歌曲</a></li>
        </ul>
     </li>
-    <li><a class="f1" href="#">关于买歌</a></li>
+    <li><a class="f1" href="about.jsp">关于买歌</a></li>
 
   </ul>
 

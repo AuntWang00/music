@@ -33,8 +33,10 @@ public class Songs implements java.io.Serializable {
 	private Integer bofangliang;
 	private Set<Music_order> music_orders = new HashSet<Music_order>(0);
 	private Set<Music_order> music_orders_1 = new HashSet<Music_order>(0);
+	private Set<Comme> commes = new HashSet<Comme>(0);
 	private Set<Music_order> music_orders_2 = new HashSet<Music_order>(0);
 	private Set<Music_order> music_orders_3 = new HashSet<Music_order>(0);
+	private Set<Comme> commes_1 = new HashSet<Comme>(0);
 
 	// Constructors
 
@@ -51,8 +53,9 @@ public class Songs implements java.io.Serializable {
 	public Songs(String songname, Double price, String filepath, String album,
 			String language, String lyrics, String singer, String audiopath,
 			Integer bofangliang, Set<Music_order> music_orders,
-			Set<Music_order> music_orders_1, Set<Music_order> music_orders_2,
-			Set<Music_order> music_orders_3) {
+			Set<Music_order> music_orders_1, Set<Comme> commes,
+			Set<Music_order> music_orders_2, Set<Music_order> music_orders_3,
+			Set<Comme> commes_1) {
 		this.songname = songname;
 		this.price = price;
 		this.filepath = filepath;
@@ -64,8 +67,10 @@ public class Songs implements java.io.Serializable {
 		this.bofangliang = bofangliang;
 		this.music_orders = music_orders;
 		this.music_orders_1 = music_orders_1;
+		this.commes = commes;
 		this.music_orders_2 = music_orders_2;
 		this.music_orders_3 = music_orders_3;
+		this.commes_1 = commes_1;
 	}
 
 	// Property accessors
@@ -162,7 +167,7 @@ public class Songs implements java.io.Serializable {
 		this.bofangliang = bofangliang;
 	}
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "songs")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "songs")
 	public Set<Music_order> getMusic_orders() {
 		return this.music_orders;
 	}
@@ -171,7 +176,7 @@ public class Songs implements java.io.Serializable {
 		this.music_orders = music_orders;
 	}
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "songs")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "songs")
 	public Set<Music_order> getMusic_orders_1() {
 		return this.music_orders_1;
 	}
@@ -180,7 +185,16 @@ public class Songs implements java.io.Serializable {
 		this.music_orders_1 = music_orders_1;
 	}
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "songs")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "songs")
+	public Set<Comme> getCommes() {
+		return this.commes;
+	}
+
+	public void setCommes(Set<Comme> commes) {
+		this.commes = commes;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "songs")
 	public Set<Music_order> getMusic_orders_2() {
 		return this.music_orders_2;
 	}
@@ -189,13 +203,22 @@ public class Songs implements java.io.Serializable {
 		this.music_orders_2 = music_orders_2;
 	}
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "songs")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "songs")
 	public Set<Music_order> getMusic_orders_3() {
 		return this.music_orders_3;
 	}
 
 	public void setMusic_orders_3(Set<Music_order> music_orders_3) {
 		this.music_orders_3 = music_orders_3;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "songs")
+	public Set<Comme> getCommes_1() {
+		return this.commes_1;
+	}
+
+	public void setCommes_1(Set<Comme> commes_1) {
+		this.commes_1 = commes_1;
 	}
 
 }

@@ -17,7 +17,9 @@ import java.util.UUID;
 
 import com.music.dao.CustomerDao;
 import com.music.dao.SongsDao;
+import com.music.dao.ComDao;
 
+import com.music.model.Comme;
 import com.music.model.Music_customer;
 import com.music.model.Songs;
 import com.opensymphony.xwork2.ActionSupport;
@@ -31,6 +33,7 @@ public class SongsAction extends ActionSupport{
 	/*ҵ������ ��songsDaoע��*/
 	@Resource SongsDao songsDao;
 	@Resource CustomerDao customerDao;
+	@Resource ComDao comDao;
 	private Music_customer customer1;
 	private Songs song;
 	 private File songPhoto;
@@ -63,7 +66,7 @@ public class SongsAction extends ActionSupport{
 	}
 	
 	public String addSong() throws Exception{
-		String path = ServletActionContext.getServletContext().getRealPath("/upload"); 
+		String path = ServletActionContext.getServletContext().getRealPath("/images"); 
         /*����ͼƬ�ϴ�*/
         String SongPhotoFileName = ""; 
    	 	if(songPhoto!= null) {
@@ -88,11 +91,11 @@ public class SongsAction extends ActionSupport{
    			os.close();
    	 	}
         if(songPhoto != null)
-        	song.setFilepath("upload/" + songPhotoFileName);
+        	song.setFilepath("images/" + songPhotoFileName);
         else
-        	song.setFilepath("upload/NoImage.jpg");
+        	song.setFilepath("images/NoImage.jpg");
         
-        String path1 = ServletActionContext.getServletContext().getRealPath("/upload");
+        String path1 = ServletActionContext.getServletContext().getRealPath("/audio");
         /*处理音频上传*/
         String SongAudioFileName = ""; 
    	 	if(songAudio!= null) {
@@ -117,9 +120,9 @@ public class SongsAction extends ActionSupport{
    			os.close();
    	 	}
         if(songAudio != null)
-        	song.setAudiopath("upload/" + songAudioFileName);
+        	song.setAudiopath("audio/" + songAudioFileName);
         else
-        	song.setAudiopath("upload/produce101.mp3");
+        	song.setAudiopath("audio/produce101.mp3");
   
 		songsDao.addSong(song);
 		return "message";
@@ -154,8 +157,14 @@ public class SongsAction extends ActionSupport{
 		return "show_view1";
 	}	
 
+	public String showSong2(){
+		songslist = songsDao.QueryAllSongs();
+		return "song_view";
+	}	
+
 	public String showDetail(){
 		song =songsDao.GetSongById(song.getSongid());
+		commentList = comDao.QueryCommentInfo_g(song.getSongid());
 		return "detail_view";
 	}
 	
@@ -167,9 +176,19 @@ public class SongsAction extends ActionSupport{
 		songsDao.updateSong(song);
 		return "play_detail";
 	}
+	
+	public String playmusic2() throws Exception{
+		song =songsDao.GetSongById(song.getSongid());
+		int bofangliang = song.getBofangliang();
+		bofangliang++;
+		song.setBofangliang(bofangliang);
+		songsDao.updateSong(song);
+		return "play_detail2";
+	}
 		
 	public String showEdit() throws Exception{
 		song = songsDao.GetSongById(song.getSongid());
+		System.out.println(song.getSongid());
 		return "edit_view";		
 	}
 	
@@ -179,7 +198,7 @@ public class SongsAction extends ActionSupport{
 	}
 	
 	public String editSong() throws Exception{
-		String path = ServletActionContext.getServletContext().getRealPath("/upload"); 
+		String path = ServletActionContext.getServletContext().getRealPath("/images"); 
         /*����ͼƬ�ϴ�*/
         String SongPhotoFileName = ""; 
    	 	if(songPhoto!= null) {
@@ -204,10 +223,10 @@ public class SongsAction extends ActionSupport{
    			os.close();
    	 	}
         if(songPhoto != null)
-        	song.setFilepath("upload/" + songPhotoFileName);
+        	song.setFilepath("images/" + songPhotoFileName);
         else
-        	song.setFilepath("upload/NoImage.jpg");
-        String path1 = ServletActionContext.getServletContext().getRealPath("/upload");
+        	song.setFilepath("images/NoImage.jpg");
+        String path1 = ServletActionContext.getServletContext().getRealPath("/audio");
         /*处理音频上传*/
         String SongAudioFileName = ""; 
    	 	if(songAudio!= null) {
@@ -232,9 +251,9 @@ public class SongsAction extends ActionSupport{
    			os.close();
    	 	}
         if(songAudio != null)
-        	song.setAudiopath("upload/" + songAudioFileName);
+        	song.setAudiopath("audio/" + songAudioFileName);
         else
-        	song.setAudiopath("upload/produce101.mp3");
+        	song.setAudiopath("audio/produce101.mp3");
 		
 		songsDao.updateSong(song);
 		return "edit_message";
@@ -261,7 +280,13 @@ public class SongsAction extends ActionSupport{
 		return "show_view1";
 	}
 	*/
-	 
+	private List<Comme> commentList;
+	public List<Comme> getCommentList() {
+		return commentList;
+	}
+	public void setCommentList(List<Comme> commentList) {
+		this.commentList = commentList;
+	}
 	private String keywords;
 	
 	public String getKeywords() {

@@ -47,7 +47,9 @@
 	        	<result name="edit_message">/editsuc.jsp</result>
 	        	<result name="song_view1">/mymusic.jsp</result>	  
 	        	<result name="add_view">/add.jsp</result>	
-	        	<result name="play_detail">/listen.jsp</result>	          
+	        	<result name="play_detail">/listen.jsp</result>	
+	        	<result name="play_detail2">/listen2.jsp</result>	
+	        	<result name="song_view">/search.jsp</result>	           
 	        </action>  
 	 </package>
 	
@@ -55,17 +57,19 @@
      <package name="customer" namespace="/customer" extends="default,json-defalut" >
 	        <action name="customer_*" class="customerAction" method="{1}"> 
 	            <result name="show_view" type="chain">
-	              <param name="actionName">song_showSong</param> 
+	              <param name="actionName">song_showNewSong</param> 
                   <param name="namespace">/song</param>
                   <param name="param1">${customer.name}</param>       
                 </result>
-      			<result name="input">/reg.jsp</result>
+      			
                 <result name="logininput">/loginfail.jsp</result>
                 <result name="success">/loginsuc.jsp</result>
                    <result name="show_view1">/singers.jsp</result>
                      <result name="show_view2">/singers.jsp</result>
+                      <result name="show_view3">/search.jsp</result>
                     <result name="show_detail">/singerDetail.jsp</result>
-                    
+                    <result name="edit_suc">/cuseditcuc.jsp</result>
+                    <result name="show_edit">/cusedit.jsp</result>
 	        </action>  
 	 </package> 
 	 
@@ -78,5 +82,12 @@
             <result name="detail_view">/order_detail.jsp</result>
         </action>  
 	 </package> 
+	 
+	  <package name="com" namespace="/com" extends="default" >
+	     <action name="com_*" class="comAction" method="{1}">
+	         <result name="comment_success">/comDetail.jsp</result>
+	         <result name="detail_view">/comment.jsp</result>
+	     </action>  
+	 </package>
 	 
 </struts>

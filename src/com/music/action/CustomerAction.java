@@ -24,10 +24,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.HashMap;
 
 
 @Controller @Scope("prototype")
@@ -45,7 +44,9 @@ public class CustomerAction extends ActionSupport implements SessionAware{
 	private String prePage;
 	 private List<Music_customer> customerList;
 	 private String keyWords;
-private String result;
+	private String result;
+	
+	
 	public Music_customer getCustomer() {
 		return customer;
 	}
@@ -80,12 +81,52 @@ private String result;
 	public void setResult(String result) {
 		this.result = result;
 	}
+	public String showEdit() throws Exception{
+		System.out.println("customer_showEdit");
+		customer = customerDao.GetCustomerById(customer.getCustomerid());
+		System.out.println(customer.getCustomerid());
+		return "show_edit";		
+	}
+	
+	public String edit() throws Exception{
+		System.out.println("进入修改用户数据方法");
+		String path = ServletActionContext.getServletContext().getRealPath("/images"); 
+		if(custPhoto!= null) {
+   	 		InputStream is = new FileInputStream(custPhoto);
+   			String fileContentType = this.getCustPhotoContentType();
+   			System.out.println("fileContentType:"+fileContentType);
+   			if(fileContentType.equals("image/jpeg")  || fileContentType.equals("image/pjpeg"))
+   				custPhotoFileName = UUID.randomUUID().toString() +  ".jpg";
+   			else if(fileContentType.equals("image/gif"))
+   				custPhotoFileName = UUID.randomUUID().toString() +  ".gif";
+   			else if(fileContentType.equals("image/png"))
+   				custPhotoFileName = UUID.randomUUID().toString() +  ".png";
+
+   			File file = new File(path, custPhotoFileName);
+   			OutputStream os = new FileOutputStream(file);
+   			byte[] b = new byte[1024];
+   			int bs = 0;
+   			while ((bs = is.read(b)) > 0) {
+   				os.write(b, 0, bs);
+   			}
+   			is.close();
+   			os.close();
+   	 	}
+   	 	
+   	 	System.out.println("custPhoto:"+custPhoto);
+        if(custPhoto != null)
+        	customer.setFilepath("images/" + custPhotoFileName);
+        else
+        	customer.setFilepath("images/NoImage.jpg");
+		
+		customerDao.UpdateCustomer(customer);
+		return "edit_suc";
+		
+	}
 
 	public String reg() throws Exception{
 		System.out.println("进入reg方法");
-		String path = ServletActionContext.getServletContext().getRealPath("/upload"); 
-        /*����ͼƬ�ϴ�*/
-		
+		String path = ServletActionContext.getServletContext().getRealPath("/images"); 		
         String CustPhotoFileName = ""; 
    	 	if(custPhoto!= null) {
    	 		InputStream is = new FileInputStream(custPhoto);
@@ -111,9 +152,9 @@ private String result;
    	 	
    	 	System.out.println("custPhoto:"+custPhoto);
         if(custPhoto != null)
-        	customer.setFilepath("upload/" + custPhotoFileName);
+        	customer.setFilepath("images/" + custPhotoFileName);
         else
-        	customer.setFilepath("upload/NoImage.jpg");
+        	customer.setFilepath("images/NoImage.jpg");
         
 		customerDao.AddCustomer(customer);
 		session.put("customer", customer); //Map<String,Object> session;
@@ -133,10 +174,7 @@ private String result;
 		return "show_view2";
 	}
 	
-	public String showDetail(){
-		customer =customerDao.GetCustomerById(customer.getCustomerid());
-		return "show_detail";
-	}
+	
 	
 	public String login() {
 		System.out.println("into customerAction.login()");
@@ -198,7 +236,44 @@ private String result;
 	    }  
 	    return NONE;  
 	}  
+	
+	
+	public String SortCustomerByAll() throws IOException{  
+		System.out.println("0");
+		ArrayList<Music_customer> listCustomer = customerDao.QueryCustomerInfoByAll(customer.getShouzimu(),customer.getSex(),customer.getCountry());
+		System.out.println("1");
+	    HttpServletResponse response=  ServletActionContext.getResponse();  
+		System.out.println("2");
+	    response.setContentType("text/html;charset=UTF-8");  
+		System.out.println("3");
+	   
+	    return "show_view2";  
+	}  
+	
+	public String SortCustomerBySex() throws IOException{  
+		customerList = customerDao.QueryCustomerInfoBySex(customer.getSex());
+		System.out.println(customerList);
+	    return "show_view2";  
+	}  
+	
+	public String SortCustomerByCountry() throws IOException{
+		customerList = customerDao.QueryCustomerInfoByCountry(customer.getCountry());
+		System.out.println(customerList);
+	    return "show_view2";  
+	     
+	}  
+	
+	public String showDetail(){
+		customer =customerDao.GetCustomerById(customer.getCustomerid());
+		return "show_detail";
+	}
+	public String SortCustomerByShouzimu() throws IOException{  
+		customerList = customerDao.QueryCustomerInfoByShouzimu(customer.getShouzimu());
+		System.out.println(customerList);
+	    return "show_view2";  
+	}  
 
+	
 	public List<Music_customer> getCustomerList() {
 		return customerList;
 	}
@@ -266,5 +341,5 @@ private String result;
 	public void setCustomername(String customername) {
 		this.customername = customername;
 	}
-
+	
 }

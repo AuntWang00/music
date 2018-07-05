@@ -59,7 +59,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <li><a href="song/song_showAdd?song.singer=<s:property value='#session.customer.name'/>">添加歌曲</a></li>
        </ul>
     </li>
-    <li><a class="f1" href="#">关于买歌</a></li>
+    <li><a class="f1" href="about.jsp">关于买歌</a></li>
 
   </ul>
 
@@ -98,9 +98,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!-- 歌曲详情语句开始 -->
 	<div class="detail-contain">
 	
-	<!-- 图片 -->
+
 	<div class="above">
 	<div class="part1">
+	<!-- 图片 -->
 	<span class = "show-photo">
  		<!-- <img src = "<%=basePath %>${songs.filepath}" style="width:300px; height:300px;">  -->
  	 <img src = "<%=basePath %>${song.filepath}" style="width:300px; height:300px;">
@@ -108,6 +109,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <!-- 歌手信息 -->
     <div class="data-cont">
     <div class="data-name"> <p>歌曲名称：<c:out value="${song.songname}"></c:out></p></div>
+    <div class="data-name"> <p>歌手：<c:out value="${song.singer}"></c:out></p></div>
    
     <div class="data-singer"><i class="icon_singer sprite"></i>
    
@@ -123,43 +125,91 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</ul>
 	<div class="data__actions" role="toolbar">
 			    <a href="song/song_playmusic?song.songid=<s:property 
-	                  value="song.songid"/>" class="mod_btn_green js_all_play"><i class="mod_btn_green__icon_play"></i>试听</a>
+	                  value="song.songid"/>" class="mod_btn_green js_all_play"><i class="mod_btn_green__icon_play"></i>主播放页</a>
+	              <a href="song/song_playmusic2?song.songid=<s:property value="song.songid"/>" class="mod_btn_green js_all_play"><i class="mod_btn_green__icon_play"></i>副播放页</a>
 			   
 			    <a href="order/order_addOrder?song.songid=<s:property 
 	                  value="song.songid"/>&customer.name=<s:property value='#session.customer.name'/>" class="mod_btn_green js_all_play">
 	                  <i class="mod_btn_green__icon_play">购买</i></a>
-			   
-			    <a class="mod_btn js_into_comment" data-stat="y_new.song.gotocomment" href="#comment_box"><i class="mod_btn__icon_comment"></i>评论</a>
-			    <a href="javascript:;" class="mod_btn js_more" data-stat="y_new.song.header.more"  data-mid="001PfID21QGDh3"><i class="mod_btn__icon_menu"></i>更多</a>
 		
+			     
+			    <a href="javascript:;" class="mod_btn js_more" data-stat="y_new.song.header.more"  data-mid="001PfID21QGDh3"><i class="mod_btn__icon_menu"></i>更多</a>
+				<br/><br/>主播放页无法播放时，请点击副播放页。
 			  </div>   
 			</div>		
 		</div>
-		</div>
+		<!-- 这段是评论 -->
+    <div class="mod_comment" >
+    	<div class="part__hd">
+	    <h2 class="part__tit">评论<span class="c_mg_thin part__tit_desc js_all_comment_num"></span></h2>
+	    </div>
+    <div class="mod_comment1 js_cmt_input">
+      
+    <div class="comment__input">
+   		 <div class="comment__textarea js_comment__textarea c_bg_normal">
+   			 <div class="comment_textarea_inner ">
+			    <!-- c_mg_normal -->
+			    <!-- focus评论框的时候将。comment__textarea_default模块儿隐藏，同时显示。comment_textarea_input -->
+			    <textarea class="comment__textarea_default c_mg_thin js_reply_text_blur" name="comme" id="reply_text_blur" contenteditable="true" placeholder="期待你的评论...">
+			    	<s:property value='comment.comme'></s:property>
+			    </textarea>
+			    <div class="js_reply_text comment__textarea_input c_mg_narmal" id="reply_text" contenteditable="true" style="display:none;"></div>
+    		</div>  
+    	</div>  
+    	 
+	    <div class="comment__tool">
+	    	<button type="submit" class="mod_btn_red comment__tool_btn js_send_reply">发表评论</button>
+	    </div>
+    </div>
+    
+    </div>
+    <a name="comment_box"></a>
+   
+    </div>
+    </div>
 	<!-- 歌词 -->
 	<div class="detail-layout">
-	<div class="detail-layout-main">
-	<div class="mod_lyric">
+		<div class="detail-layout-main">
+			<div class="mod_lyric">
 			    <input id="copy_content" style="display:none;"></input>
 			    <div class="lyric__hd">
-				<h2 class="lyric__tit">歌词</h2>
+					<h2 class="lyric__tit">歌词</h2>
 			    </div>
 			    <div class="lyric__cont limit">
-				<div class="lyric__cont_box" id="lrc_content"></div>
-			    </div>
+					<div class="lyric__cont_box" id="lrc_content"></div>
+			   	</div>
 			</div>
-			</div>
-			
-			<div id="lyrics" style="height:500px; overflow-y:auto">${ song.lyrics }</div>
-		<script>
-		$("#lyrics").html($("#lyrics").html().replace(/\n/g,"<br/>"));
-		</script>
+		</div>			
+	<div id="lyrics" style="height:400px; overflow-y:auto">${ song.lyrics }</div>
+	
+<script>
+$("#lyrics").html($("#lyrics").html().replace(/\n/g,"<br/>"));
+</script>
 	<!-- 这段是歌词 -->
+	 <div class="mod_all_comment js_mod_all">
+    <div class="comment_type__title c_b_normal"><h2>评论</h2></div>
+    <ul class="comment_list js_all_list">
+    <!-- 最新评论部分 -->
+    <s:iterator value="commentList" status="status">
+        <tr>
+             <td><img src = "<%=basePath %>${customer.filepath}" style="width:50px; height:50px;"> </td>
+            
+	        <td><c:out value="${comme}"></c:out></td>
+	        <br>
+	        <br>
+        </tr>
+    </s:iterator>    
+    </ul>
+    <div class="mod_page_nav js_pager_comment">
+    <!-- 换页部分 -->
+      
+    </div>
+    </div>
 	</div>	
     </div>
 	<!-- 歌曲详情语句结束 -->
 	
-	</div>
+</div>
 	 	<!--  友情链接和footer -->
      <footer class="footer" role="footer">
    		<div class="footer-inner">

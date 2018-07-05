@@ -78,7 +78,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</c:when>
 		       <c:otherwise>
 		       <div class="top-login"> 		       	
-		       	<img src = "<%=basePath %>${customer.filepath}" style="width:30px; height:30px;">	   
+		       	<a href="customer/customer_showEdit?customer.customerid=${customer.customerid}&customer.sex=${customer.sex}&customer.country=${customer.country}">
+		       	<img src = "<%=basePath %>${customer.filepath}" style="width:30px; height:30px;"></a> 
 		  	    <c:out value="${customer.name}"></c:out>, 欢迎您!
 			    <a href="logout.jsp">退出</a>	
 			    </div>		   
@@ -113,7 +114,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							          <th>歌名</th>
 							          <th>数量</th> 
 							          <th>总价</th>  
-							          
+							          <th>评论</th>
 	                              </tr>
 	                          </thead>
 	                          <tbody>
@@ -125,6 +126,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                                      <td><s:property value="songs.songname"></s:property></td>
 	                                      <td class="center"><s:property value="songnum"></s:property></td>
 	                                      <td class="center"><s:property value="total"></s:property></td>
+	                                      <td><a class="fff1" href="com/com_showDetail?songs.songid=${songs.songid}&order.orderid=<s:property value="orderid"></s:property>&customer.name=<s:property value='#session.customer.name'/>">评论</a></td>
 	                                     </tr>
 	                              </s:iterator>
 	                          </tbody>

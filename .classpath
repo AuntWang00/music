@@ -41,5 +41,6 @@
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/tomcat-coyote.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/xwork-core-2.1.6.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/struts2-json-plugin-2.3.24.jar"/>
+	<classpathentry kind="lib" path="C:/Users/pink5/Downloads/pinyin4j-2.5.0/lib/pinyin4j-2.5.0.jar"/>
 	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>
 </classpath>
