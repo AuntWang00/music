@@ -1,91 +1,117 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@ taglib uri="/struts-tags" prefix="s"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 
-<!DOCTYPE HTML>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
     <base href="<%=basePath%>">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     
     <title>注册页面</title>
+    
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
-	<link rel="stylesheet" href="<%=basePath%>css/bootstrap.css">
-	<link rel="stylesheet" type="text/css" href="css/main.css">
-	<link rel="shortcut icon" href="<%=basePath%>images/logo.png">
-	
-	
- 	 <link rel="stylesheet" href="css/buttons.css">
- 	 <link href="http://cdn.bootcss.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-		<link type="text/css" rel="stylesheet" href="less/reset.css">
-		<link type="text/css" rel="stylesheet" href="less/slide.css">
-		 <link type="text/css" rel="stylesheet" href="less/index.css">
-		
-		
-		<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>	
-			
-		<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
-		<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	
+	<link rel="stylesheet" href="<%=basePath %>css/bootstrap.css">
+    <link rel="stylesheet" href="<%=basePath %>css/reg.css">
 	
 
   </head>
   
   <body>
-  	<!-- 页面顶部开始 （包括logo、导航、登录按钮、注册按钮）-->
+  <!-- 页面顶部开始 （包括logo）-->
   	<div class="top">
   		<div class="top-container">
   			<div class="header-logo">
   				<h1 class="maige-title">
-  					<a href="song/song_showSong"><img srcset="images/title.png" alt="title logo" class="maige-logo"></a>					
+  					<a href="song/song_showNewSong"><img srcset="images/title.png" alt="title logo" class="maige-logo"></a>					
   				</h1>				
   			</div>
-  		</div>	
-  	</div>
-  	<!-- 页面顶部结束 -->
-  	
- <div class="reg-contain">
-  		<main class="container-fluid">
-	    <div class="row">
-		   <div class="col-md-12">
-		       <s:form action="customer/customer_reg" id="defaultForm" method="post" cssClass="form-horizontal"  enctype="multipart/form-data">
-		       <div class="panel panel-success">
-			       <div class="panel-heading">
-		               <h4 class="panel-title">注 册 账 户</h4>
-		        
-		         <div class="panel-body">
-				       <div class="form-group">
-			                <label class="control-label col-md-3">用户名</label>
-			                <div class="col-md-4">
-                              <input type="text" name="customer.name"id="customername" onblur="checkName()" class="form-control input-sm" required="required">
-                                 <span id="span1"></span>  
-                           </div>
-                           <s:fielderror fieldName="customer.name" cssClass="fielderror"/>
-			           </div>  
-			           <div class="form-group">
-			                <label class="control-label col-md-3">输入密码</label>
-			                <div class="col-md-4">
-                              <input type="password" name="customer.password" class="form-control input-sm"  >
+  		</div>
+    </div>	
+    <!--使用模态框的方式模拟一个登陆框-->
+    <div class="modal show" id="loginModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close">&times;</button>
+                    <h1 class="text-center text-primary">注册</h1>
+                </div>
+                <div class="modal-body">
+                    <form class="form col-md-12 center-block" id="defaultForm" action="customer/customer_reg" method="post" cssClass="form-horizontal"  enctype="multipart/form-data">                    
+                        <div class="form-group-lg"  id="accountDiv">
+                            <label class="sr-only" for="inputAccount">账号</label>
+                            <div class="input-group">
+                                <div class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></div>                              
+                                <input type="text" name="customer.name" id="customername" onblur="checkName()"  placeholder="账号" class="form-control input-sm" required="required">
+                               <span id="span1"></span>                            
                             </div>
-                             <s:fielderror fieldName="customer.password" cssClass="fielderror"/>
-			           </div>
-			          <!--    <div class="form-group">
-			                <label class="control-label col-md-3">确认密码</label>
-			                <div class="col-md-4">
-                              <input type="password" name="customer.repassword" class="form-control input-sm" >
+                        </div>
+                        <br>
+                        <div class="form-group-lg" id="pwdDiv">
+                            <label class="sr-only" for="inputPassword">密码</label>
+                            <div class="input-group">
+                                <div class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></div>                              
+                                <input type="password" name="customer.password" class="form-control input-sm" placeholder="密码"  required>                               
+                                <s:fielderror fieldName="customer.password" cssClass="fielderror"/>
                             </div>
-                            <s:fielderror fieldName="customer.repassword" cssClass="fielderror"/>
-			           </div>
-			           
-				       <div class="form-group">
-				                <label class="control-label col-md-3">用户头像</label>
+                        </div>
+                        <br>
+                        <div class="form-group-lg" id="pwdDiv">
+                            <label class="sr-only" for="inputPassword">确认密码</label>
+                            <div class="input-group">
+                                <div class="input-group-addon"><span class="glyphicon glyphicon-exclamation-sign"></span></div>                              
+                                <input type="password" name="customer.repassword" class="form-control input-sm" placeholder="确认密码" >
+                                <s:fielderror fieldName="customer.repassword" cssClass="fielderror"/>                             
+                            </div>
+                        </div>
+                        <br>
+                        <div class="form-group-lg"  id="accountDiv">
+                            <label class="sr-only" for="inputAccount">真实姓名</label>
+                            <div class="input-group">
+                                <div class="input-group-addon"><span class="glyphicon glyphicon-check" aria-hidden="true"></span></div>                              
+                                <input type="text" name="customer.realname" id="customerrealname" onblur="checkName()"  placeholder="真实姓名" class="form-control input-sm" required="required"> 
+                                <s:fielderror fieldName="customer.realname" cssClass="fielderror"/>                       
+                            </div>
+                        </div>
+                        <br>
+                        <div class="form-group-lg"  id="accountDiv">
+                            <label class="sr-only" for="inputAccount">性别</label>
+                            <div class="input-group">
+                                <div class="input-group-addon"><span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span></div>                              
+                                <input type="text" name="customer.sex" id="customersex" onblur="checkName()"  placeholder="性别" class="form-control input-sm" required="required"> 
+                                <s:fielderror fieldName="customer.sex" cssClass="fielderror"/>                       
+                            </div>
+                        </div>
+                        <br>
+                        <div class="form-group-lg"  id="accountDiv">
+                            <label class="sr-only" for="inputAccount">国籍</label>
+                            <div class="input-group">
+                                <div class="input-group-addon"><span class="glyphicon glyphicon-link" aria-hidden="true"></span></div>                              
+                                <input type="text" name="customer.country" id="customercountry" onblur="checkName()"  placeholder="国籍" class="form-control input-sm" required="required"> 
+                                <s:fielderror fieldName="customer.country" cssClass="fielderror"/>                       
+                            </div>
+                        </div>
+                        <br>
+                        <div class="form-group-lg"  id="accountDiv">
+                            <label class="sr-only" for="inputAccount">出生日期</label>
+                            <div class="input-group">
+                                <div class="input-group-addon"><span class="glyphicon glyphicon-dashboard" aria-hidden="true"></span></div>                              
+                                <input type="text" name="customer.birthday" id="customerbirthday" onblur="checkName()"  placeholder="出生日期" class="form-control input-sm" required="required"> 
+                                <s:fielderror fieldName="customer.birthday" cssClass="fielderror"/>                       
+                            </div>
+                        </div>
+                        <br>
+                   <!--       <div class="form-group">
+				                <label class="control-label col-md-3">上传头像</label>
 				                
 				                <div class="col-md-4">
 	                              <div class="fileupload fileupload-new" data-provides="fileupload">
@@ -97,32 +123,53 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                                   style="max-width: 200px; max-height:150px; line-height: 20px;">
 	                                </div>
 	                                <div>
-	                                   <span class="btn btn-file btn-primary"><span class="fileupload-new">浏览</span>
+	                                   
 	                                   <span class="fileupload-exists">浏览</span><input type="file" name="custPhoto"/></span>
 	                                   <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload">取消</a>
-	                                   <p>（图片大小请勿超过2M！）</p> 
-	                                    
+	                                   <p>（图片大小请勿超过2M！）</p>  
 	                                </div>
 	                              </div>
 	                            </div>
 				           </div>
--->
-			           <div class="form-group col-md-3">
-				          <button type="submit" class="btn btn-success pull-right">提  交 </button>
-				       </div>
-				   </div>
-				</div>
-		    </s:form>
-		  </div>
-	   </div>
-	</main>
-	</div>
-    <script src="<%=basePath%>js/jquery.min.js"></script>
-    <script src="<%=basePath%>js/bootstrap.min.js"></script>
+                        
+                        -->
+                        <div class="form-group-lg"  id="accountDiv">
+                            <label class="sr-only" for="inputAccount">头像</label>
+                            <div class="input-group">
+                                <div class="customerfilepath">                              
+                                   
+                                <div class="fileupload fileupload-new" data-provides="fileupload">
+                                <div class="fileupload-preview fileupload-exists thumbnail" 
+	                                   style="max-width: 200px; max-height:150px; line-height: 20px;">
+	                                </div>
+                                <span class="fileupload-exists"></span><input type="file" name="custPhoto" /></span>
+	                                   <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload">取消</a>                  
+	                                   </div>     
+                            </div>
+                            </div>
+                        </div> 
+                        
+                        <div class="checkbox">
+              <label> </label>
+            </div>
+                        
+                        <div class="form-group">
+                        <button class="btn btn-success col-md-6" type="submit"><a>注册</a></button>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /container -->
+ <script src="<%=basePath %>js/jquery-1.8.3.min.js"></script>
+    <script src="<%=basePath %>js/bootstrap.js"></script>
+    <script src="<%=basePath %>js/login.js"></script>
 	<script src="<%=basePath%>js/bootstrap-fileupload.js"></script>
-	
-  		<script>
-	function checkName(){  
+	<script>
+function checkName(){  
     //alert("name");  
     var customername = document.getElementById("customername").value;  
     //传统的ajax校验  

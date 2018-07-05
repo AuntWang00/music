@@ -50,6 +50,7 @@
 	<bean id="txManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory"/>
 	</bean>
+	
 	<!--使用基于注解方式配置事务 -->
 	<tx:annotation-driven transaction-manager="txManager"/> 
 	  

@@ -50,6 +50,7 @@ public class LoginInterceptors extends AbstractInterceptor{
 			 
 			 String actionName = invocation.getProxy().getActionName();   
 			 Map <String,Object>  session = invocation.getInvocationContext().getSession(); //获取session
+			 System.out.println("session:"+session);
 			 System.out.println(list);
 		     if(list.contains(actionName)){          
 		    	System.out.println(actionName + "没有被拦截");

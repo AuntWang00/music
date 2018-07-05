@@ -13,7 +13,7 @@
       <package name = "default" extends="struts-default">
       	<interceptors>
       		<interceptor name = "LoginInterceptors" class = "com.music.util.LoginInterceptors">
-      			<param name="excludeName">customer_login,customer_reg,song_show_view,song_showSong,song_querySongs,customer_findByName，customer_findByName1</param>
+      			<param name="excludeName">customer_login,customer_reg,song_show_view,song_showNewSong,song_querySongs,customer_findByName,customer_findByName1</param>
       			<param name="sessionName">customer</param>
       		</interceptor>
       		
@@ -37,7 +37,8 @@
 	 <package name="song" namespace="/song" extends="default">
 	 
 	        <action name="song_*" class="songsAction" method="{1}">
-	        	<result name="show_view">/main.jsp</result>
+	        	<result name="show_newsong">/main.jsp</result>
+	        	
 	        	<result name="show_view1">/mymusic.jsp</result>
 	        	<result name="message">/addsuc.jsp</result>
 	        	<result name="detail_view">/detail.jsp</result>
@@ -45,7 +46,8 @@
 	        	<result name="delete_message">/deletesuc.jsp</result>
 	        	<result name="edit_message">/editsuc.jsp</result>
 	        	<result name="song_view1">/mymusic.jsp</result>	  
-	        	<result name="add_view">/add.jsp</result>	          
+	        	<result name="add_view">/add.jsp</result>	
+	        	<result name="play_detail">/listen.jsp</result>	          
 	        </action>  
 	 </package>
 	
@@ -59,7 +61,7 @@
                 </result>
       			<result name="input">/reg.jsp</result>
                 <result name="logininput">/loginfail.jsp</result>
-               
+                <result name="success">/loginsuc.jsp</result>
                    <result name="show_view1">/singers.jsp</result>
                      <result name="show_view2">/singers.jsp</result>
                     <result name="show_detail">/singerDetail.jsp</result>

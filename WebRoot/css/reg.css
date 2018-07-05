@@ -1,0 +1,34 @@
+#loginModal{
+  position: absolute;
+  top: 90%;
+  -webkit-transform: translateY(-50%);
+  -moz-transform:  translateY(-50%);
+  -ms-transform:  translateY(-50%);
+  -o-transform:  translateY(-50%);
+  transform:  translateY(-50%);
+  background-color: white;
+}
+
+.btn-success {
+    color: #fff;
+    background-color: #c4290D;
+    border-color: #c4290D;
+    text-align:center;
+}
+a{
+	color:#fff;
+}
+.text-primary {
+    color: #c4290D;
+}
+
+.modal{
+	height:1000px;
+}
+
+.btn{
+	margin-left:134.5px;
+}
+.input-group-addon{
+	height:46px;
+}

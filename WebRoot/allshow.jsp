@@ -26,9 +26,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
  	 <link rel="stylesheet" href="css/buttons.css">
  	 <link href="http://cdn.bootcss.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-		<link type="text/css" rel="stylesheet" href="less/reset.css">
-		<link type="text/css" rel="stylesheet" href="less/slide.css">
-		<link type="text/css" rel="stylesheet" href="less/index.css">
 		
 		
 		<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>	
@@ -46,20 +43,33 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   		<div class="top-container">
   			<div class="header-logo">
   				<h1 class="maige-title">
-  					<a href="song/song_showSong"><img srcset="images/title.png" alt="title logo" class="maige-logo"></a>					
+  					<a href="song/song_showNewSong"><img srcset="images/title.png" alt="title logo" class="maige-logo"></a>					
   				</h1>				
   			</div>
   			
   	<!--导航开始 -->
   			<div class="container2">	
 	  			<div class="menu">  
-			   		<ul>  					
-			  			<li class="active"><a class="fff" href="main.jsp">原创音乐馆</a></li>
-			  			<li><a class="f1" href="query.jsp">MV</a></li>
-			  			<li><a class="f1" href="order_main.jsp">我的音乐</a></li>
-			  			<li><a class="f1" href="#">关于买歌</a></li>			
-			  		</ul>
-	  			</div>	
+			   		<div class="nav">
+
+  <ul>
+ 	<li><a class="f1" href="song/song_showNewSong">原创音乐馆</a>
+    </li>
+	<li><a class="f1" href="customer/customer_showCustomer">歌手</a>
+    </li>
+    <li><a class="f1" class="add-order">我的音乐</a>
+      <ul>
+        <li><a href="song/song_showSong1">我上传的歌曲</a></li>
+        <li><a href="order/order_showOrder?customer.name=<s:property value='#session.customer.name'/>">我购买的歌曲</a></li>
+        <li><a href="song/song_showAdd?song.singer=<s:property value='#session.customer.name'/>">添加歌曲</a></li>
+       </ul>
+    </li>
+    <li><a class="f1" href="#">关于买歌</a></li>
+
+  </ul>
+
+</div>
+	  			</div>
 	  <!-- 登录和注册按钮 -->
 		  		<div class="header-login">
 	  		   		<table class="top-table">  		   		

@@ -11,6 +11,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
   <head>
     <base href="<%=basePath%>">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     
     <title>登录页面</title>
     
@@ -19,77 +22,74 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="expires" content="0">    
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
-	<link rel="stylesheet" href="<%=basePath%>css/bootstrap.css">
-	<link rel="stylesheet" type="text/css" href="css/main.css">
-	<link rel="shortcut icon" href="<%=basePath%>images/logo.png">
-
- 	 <link rel="stylesheet" href="css/buttons.css">
- 	 <link href="http://cdn.bootcss.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-		<link type="text/css" rel="stylesheet" href="less/reset.css">
-		<link type="text/css" rel="stylesheet" href="less/slide.css">
-		<link type="text/css" rel="stylesheet" href="less/index.css">
-		
-		
-		<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>	
-			
-		<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
-		<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	
-	
+	<link rel="stylesheet" href="<%=basePath %>css/bootstrap.css">
+    <link rel="stylesheet" href="<%=basePath %>css/login.css">
+    <link rel="shortcut icon" href="<%=basePath%>images/logo.png">
 	
 
   </head>
   
   <body>
-  	<!-- 页面顶部开始 （包括logo、导航、登录按钮、注册按钮）-->
+  	<!-- 页面顶部开始 （包括logo）-->
   	<div class="top">
   		<div class="top-container">
   			<div class="header-logo">
   				<h1 class="maige-title">
-  					<a href="song/song_showSong"><img srcset="images/title.png" alt="title logo" class="maige-logo"></a>					
+  					<a href="song/song_showNewSong"><img srcset="images/title.png" alt="title logo" class="maige-logo"></a>					
   				</h1>				
   			</div>
   		</div>
     </div>	
-  	
-	  <div class="reg-contain">
-  		<main class="container-fluid">
-	    <div class="row">
-		   <div class="col-md-10">
-		       <s:form action="customer/customer_login" id="defaultForm" method="post" cssClass="form-horizontal"  enctype="multipart/form-data">
-		      <div class="panel panel-success">
-			       <div class="panel-heading">
-		               <h4 class="panel-title">登 陆 账 户</h4>
-		         <div class="panel-body">
-		         <div class="part1">
-				       <div class="form-group">
-			                <label class="control-label col-md-4">用户名</label>
-			                <div class="col-md-6">
-                              <input type="text" name="customer.name" id="customername" onblur="checkName()" class="form-control input-sm" required="required">
+<!--使用模态框的方式模拟一个登陆框-->
+    <div class="modal show" id="loginModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close">&times;</button>
+                    <h1 class="text-center text-primary">登录</h1>
+                </div>
+                <div class="modal-body">
+                    <form class="form col-md-12 center-block" id="defaultForm" action="customer/customer_login" method="post" cssClass="form-horizontal"  enctype="multipart/form-data">
+                        <div class="form-group-lg"  id="accountDiv">
+                            <label class="sr-only" for="inputAccount">账号</label>
+                            <div class="input-group">
+                                <div class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></div>                              
+                                <input type="text" name="customer.name" id="customername" onblur="checkName()"  placeholder="账号" class="form-control input-sm" required="required">
                                <span id="span1"></span>  
-                           </div>
-			           </div>  
-			           <div class="form-group">
-			                <label class="control-label col-md-4">密码</label>
-			                <div class="col-md-6">
-                              <input type="password" name="customer.password" class="form-control input-sm"  required>
+                                
+                                
                             </div>
-			           </div>
-			           </div>
-			           <div class="part2">
-			           <div class="form-group col-md-1">
-				          <button type="submit" class="btn btn-success btn-login">提  交 </button>
-				          </div>
-				       </div>
-				   </div>
-				</div>
-		    </s:form>
-		  </div>
-	   </div>
-	</main>
-	</div>
-    <script src="<%=basePath%>js/jquery.min.js"></script>
-    <script src="<%=basePath%>js/bootstrap.min.js"></script>
+                        </div>
+                        <br>
+                        <div class="form-group-lg" id="pwdDiv">
+                            <label class="sr-only" for="inputPassword">密码</label>
+                            <div class="input-group">
+                                <div class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></div>                              
+                                <input type="password" name="customer.password" class="form-control input-sm" placeholder="密码"  required>                               
+                            </div>
+                        </div>
+                        
+                        <div class="checkbox">
+              <label> </label>
+            </div>
+                        
+                        <div class="form-group">
+                        <button class="btn btn-success col-md-6" ><a href="reg.jsp">未注册?</a></button>
+                        <button class="btn btn-success col-md-6 " id="btn_login" type="submit" >登录</button>                   
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                </div>
+                <br>
+            </div>
+        </div>
+    </div>
+    <!-- /container -->
+
+    <script src="<%=basePath %>js/jquery-1.8.3.min.js"></script>
+    <script src="<%=basePath %>js/bootstrap.js"></script>
+    <script src="<%=basePath %>js/login.js"></script>
 	<script src="<%=basePath%>js/bootstrap-fileupload.js"></script>
 	<script>
 	function checkName(){  

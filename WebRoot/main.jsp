@@ -22,24 +22,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" href="<%=basePath%>css/bootstrap.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 	<link rel="shortcut icon" href="<%=basePath%>images/logo.png">
+	<link rel="stylesheet" href="css/jquery.skidder.css">
 	
-	
-	
- 	 <link rel="stylesheet" href="css/buttons.css">
  	 <link href="http://cdn.bootcss.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-		<link type="text/css" rel="stylesheet" href="less/reset.css">
-		<link type="text/css" rel="stylesheet" href="less/slide.css">
-		<link type="text/css" rel="stylesheet" href="less/index.css">
-		
-		
-		<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>	
-			
+		<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>				
 		<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
 		<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	
-	
-	
-
   </head>
   
   <body>
@@ -48,23 +36,39 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   		<div class="top-container">
   			<div class="header-logo">
   				<h1 class="maige-title">
-  					<a href="song/song_showSong"><img srcset="images/title.png" alt="title logo" class="maige-logo"></a>					
+  					<a href="song/song_showNewSong"><img srcset="images/title.png" alt="title logo" class="maige-logo"></a>					
   				</h1>				
   			</div>
   			
   	<!--导航开始 -->
-  			<div class="container2">	
+  	<div class="container2"> 
 	  			<div class="menu">  
-			   		<ul>  					
-			  			<li class="active"><a class="fff" href="song/song_showSong">原创音乐馆</a></li>
-			  			<li><a class="f1" href="customer/customer_showCustomer.jsp">歌手</a></li>	  			
-			  			 <li><a class="f1" href="song/song_showSong1" class="add-order">我的音乐</a></li>
-			  			<li><a class="f1" href="#">关于买歌</a></li>			
-			  		</ul>
-	  			</div>	
+			   		<div class="nav">
+
+  <ul>
+ 	<li class="active"><a class="fff" href="song/song_showNewSong">原创音乐馆</a>
+    </li>
+	<li><a class="f1" href="customer/customer_showCustomer">歌手</a>
+    </li>
+    <li><a class="f1" class="add-order">我的音乐</a>
+      <ul>
+        <li><a href="song/song_showSong1">我上传的歌曲</a></li>
+        <li><a href="order/order_showOrder?customer.name=<s:property value='#session.customer.name'/>">我购买的歌曲</a></li>
+        <li><a href="song/song_showAdd?song.singer=<s:property value='#session.customer.name'/>">添加歌曲</a></li>
+       </ul>
+    </li>
+    <li><a class="f1" href="#">关于买歌</a></li>
+
+  </ul>
+
+</div>
+	  			</div>
+
 	  <!-- 登录和注册按钮 -->
 		  		<div class="header-login">
-	  		   		<table class="top-table">  		   		
+		  		<c:choose>
+		       <c:when test="${customer.name ==null}"> 
+		       <table class="top-table">  		   		
 				   		<tr>
 		  		   			<td>
 		  		   				<a class="top-table-font1" href="reg.jsp">注册</a>
@@ -72,54 +76,54 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			  		   		</td>
 			  		   	</tr>
 	  		  		</table> 
+				</c:when>
+		       <c:otherwise>
+		       <div class="top-login"> 		       	
+		       	<img src = "<%=basePath %>${customer.filepath}" style="width:30px; height:30px;">	   
+		  	    <c:out value="${customer.name}"></c:out>, 欢迎您!
+			    <a href="logout.jsp">退出</a>	
+			    </div>		   
+		       </c:otherwise>
+		       </c:choose>
+	  		   		
 	  		    </div> 
   		    </div> 			              
   		</div>	
   	</div>
   	<!-- 页面顶部结束 -->
   	
-  	<!-- 搜索框与登录状态判断语句开始 -->
-  	 <s:form action="customer/customer_queryCustomers" method="post">
+  	<!-- 搜索框语句开始 -->
+  	<s:form action="customer/customer_queryCustomers" method="post">
   	<div class="container1-1">
 	  	<div class="input-group col-md-3" style="margin-top:0px positon:relative">  
-	       <input type="text" class="form-control search clearable" title="关键词" name="keyWords" placeholder="请输入歌手名" / >  
+	       <input type="text" class="form-control search clearable" placeholder="请输入歌曲名或歌手名" title="关键词" name="keyWords" />  
 	       <span class="input-group-btn">  
 	           <button class="btn btn-info btn-search" type="submit"><i class="fa fa-search"></i></button>             
 	        </span>  
 	 	</div>  
-	 </s:form>
-	 	<div class="login-check">
-		 	<c:choose>
-		       <c:when test="${customer.name ==null}"> 您还未登录，登录可开启更多功能！</c:when>
-		       <c:otherwise>
-		       <img src = "<%=basePath %>${customer.filepath}" style="width:30px; height:30px;">
-		  	   <c:out value="${customer.name}"></c:out>, 欢迎您!
-		       </c:otherwise>
-		     </c:choose>
-	 	</div>
+	 	
   	</div>
-  	
-	<!-- 搜索框与登录状
-	<态判断语句结束 -->
+  	</s:form>
+	<!-- 搜索框语句结束 -->
 	
 	<!-- 最新单曲开始 -->
    <div class="con5">
    		<div class="container5">
 	   		<div class="show-title">
-	   				<h3><a href="new.jsp">最新单曲</a></h3>   				
+	   				<h3>最新单曲</h3>   				
 	   		</div>
 	   		<!-- 单曲列表 -->
-	   		<s:form action="song/song_showSong" method="post">
+	   		<s:form action="song/song_showNewSong" method="post">
 	   		
-	   		<s:iterator value = "songslist" status="status"  begin="15" end ="19"> 
+	   		<s:iterator value = "songslist" status="status" begin="0" end="4"> 
 		   		<ul class = "show-list">
 		   			<li class="show-item">
-		   				<div class="show-pic">
-		   					
+		   				<div class="show-pic">		   					
 		   					<img src = "<%=basePath %><s:property value='filepath'/>" style="width:236.5px; height:237px;">
 		   				</div>
 		   				<div class="show-info">
 		   					<s:a href="song/song_showDetail?song.songid=%{songid}"><s:property value ="songname"/></s:a>
+		   					<br><s:property value ="singer.name"/>
 		   				</div>
 		   			</li>
 		   		</ul>
@@ -141,17 +145,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	   	<!-- jQuery轮播开始 -->
    			<div class="demo-wrapper">
    			
-   				<s:form action="song/song_showSong" method="post">
+   				<s:form action="song/song_showNewSong" method="post" begin="5" end="17">
    				<ul class="portfolio-items">
-   					<s:iterator value = "songslist" status="status" begin="9" end="20">		
+   					<s:iterator value = "songslist" status="status">		
    							<li class="item">
    								<figure>
    									<div class="view">
    										<img src = "<%=basePath %><s:property value='filepath'/>">
    									</div>
    									 <figcaption>
-   										<p><span><s:property value ="songname"/></span></p>
-   									    <p><span>By Vlad Gerasimov</span></p>
+   										<p><span><s:a href="song/song_showDetail?song.songid=%{songid}"><s:property value ="songname"/></s:a></span></p>
+   									    <p><span>播放量：<s:property value ="bofangliang"/></span></p>
    									 </figcaption> 
    								</figure>
    							</li>  						
@@ -176,70 +180,86 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	   				<h3>专辑首发</h3>   				
 	   		</div>
    			<!-- 辣鸡轮播 -->
-	   		<div id="content">
-	<div id="main" class="clearfix">
-		<div id="index_b_hero">
-			<div class="hero-wrap">
-				<ul class="heros clearfix">
-					<li class="hero">
-					<a id="jdtpic1" href="#" target="_blank">
-					<img src="images/yiyangqianxi1.jpg"></a></li>
-					<li class="hero">
-					<a href="#" target="_blank">
-					<img src="images/wuyuetian.jpg"></a></li>
-					<li class="hero">
-					<a href="#" target="_blank">
-					<img src="images/zhangxueyou.jpg"></a></li>
-					<li class="hero">
-					<a href="#" target="_blank">
-					<img src="images/Taylor1.jpg"></a></li>
-					<li class="hero">
-					<a href="#" target="_blank">
-					<img src="images/Taylor2.jpg"></a></li>
-					<li class="hero">
-					<a href="#" target="_blank">
-					<img src="images/taiyan.jpg"></a></li>
-					<li class="hero">
-					<a href="#" target="_blank">
-					<img src="images/yiyangqianxi2.jpg"></a></li>
-					<li class="hero">
-					<a href="#" target="_blank">
-					<img src="images/xujun.jpg"></a></li>
-					<li class="hero">
-					<a href="#" target="_blank">
-					<img src="images/yanglaosan.jpg"></a></li>
-				</ul>
-			</div>
-			<div class="helper">
-				<a href="javascript:;" class="prev">
-					<div class="mask-left"></div>
-				</a>
-				<a href="javascript:;" class="next">
-					<div class="mask-right"></div>
-				</a>
-			</div>
-		</div>
-	</div>
+	   		<div class="slideshow" style="height:500px; margin-top:15px;overflow: hidden">
+	<div class="slide"><img src="images/1.jpg"></div>
+	  <div class="slide"><img src="images/2.jpg"></div>
+	  <div class="slide"><img src="images/3.jpg"></div>
+	  <div class="slide"><img src="images/4.jpg"></div>
+	  <div class="slide"><img src="images/5.jpg"></div>
 </div>
+<!--<div class="slideshow-nocycle" style="height: 0; overflow: hidden">
+	  <div class="slide"><img src="./images/1000x400_b.png"></div>
+	  <div class="slide"><img src="./images/300x500_p.png"></div>
+	  <div class="slide"><img src="./images/500x300_y.png"></div>
+	  <div class="slide"><img src="./images/300x500_p.png"></div>
+	</div> -->
 
-		<script type="text/javascript" src="js/if.Common.Banner.js"></script>
-		<script type="text/javascript" src="js/index.js"></script>
-		<script type="text/javascript">
-		jQuery(function(){
-			var len = jQuery(".heros li").length;
-			jQuery(".heros li").each(function(index, element) {
-			    len--;
-			    jQuery(this).css("z-index", len);
+<!--<div class="slideshow">
+
+	  <div class="slide" style="background: green;">Text 1</div>
+	  <div class="slide" style="background: red;">Text 2</div>
+	  <div class="slide" style="background: yellow;">Text 3</div>
+	  <div class="slide" style="background: blue;">Text 4</div>
+
+</div> -->
+
+<script src="js/jquery-1.11.0.min.js" type="text/javascript"></script>
+<script src="js/imagesloaded.js"></script>
+<script src="js/smartresize.js"></script>
+<script src="js/jquery.skidder.js"></script>
+<script type="text/javascript">
+	$('.slideshow').each( function() {
+		  var $slideshow = $(this);
+		  $slideshow.imagesLoaded( function() {
+			$slideshow.skidder({
+			  slideClass    : '.slide',
+			  animationType : 'css',
+			  scaleSlides   : true,
+			  maxWidth : 1300,
+			  maxHeight: 500,
+			  paging        : true,
+			  autoPaging    : true,
+			  pagingWrapper : ".skidder-pager",
+			  pagingElement : ".skidder-pager-dot",
+			  swiping       : true,
+			  leftaligned   : false,
+			  cycle         : true,
+			  jumpback      : false,
+			  speed         : 400,
+			  autoplay      : false,
+			  autoplayResume: false,
+			  interval      : 4000,
+			  transition    : "slide",
+			  afterSliding  : function() {},
+			  afterInit     : function() {}
 			});
-			jQuery(".hero").mousemove(function(){
-				jQuery(".mask-left, .mask-right").show();
-			});
-			jQuery("#main").mouseleave(function(){
-				jQuery(".mask-left, .mask-right").hide();
-			});
-		})
-		</script>
-		</div>
+		  });
+	});
+	// $('.slideshow-nocycle').each( function() {
+	//   var $slideshow = $(this);
+	//   $slideshow.imagesLoaded( function() {
+	//     $slideshow.skidder({
+	//       slideClass    : '.slide',
+	//       scaleSlides   : true,
+	//       maxWidth : 1300,
+	//       maxHeight: 500,
+	//       leftaligned   : true,
+	//       cycle         : false,
+	//       paging        : true,
+	//       swiping       : true,
+	//       jumpback      : false,
+	//       speed         : 400,
+	//       autoplay      : false,
+	//       interval      : 4000,
+	//       afterSliding  : function() {}
+	//     });
+	//   });
+	// });
+	$(window).smartresize(function(){
+		  $('.slideshow').skidder('resize');
+	});
+</script>
+	   		</div>
 	</div>
    
    	

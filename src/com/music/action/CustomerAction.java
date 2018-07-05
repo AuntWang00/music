@@ -82,7 +82,7 @@ private String result;
 	}
 
 	public String reg() throws Exception{
-		
+		System.out.println("进入reg方法");
 		String path = ServletActionContext.getServletContext().getRealPath("/upload"); 
         /*����ͼƬ�ϴ�*/
 		
@@ -117,6 +117,7 @@ private String result;
         
 		customerDao.AddCustomer(customer);
 		session.put("customer", customer); //Map<String,Object> session;
+		System.out.println("reg方法执行完成");
 		return "show_view";
 	}
 	
@@ -141,24 +142,22 @@ private String result;
 		System.out.println("into customerAction.login()");
 		System.out.println("customer.getName():"+customer.getName());
 		ArrayList<Music_customer> listCustomer = customerDao.QueryCustomerInfo(customer.getName());
-		if(listCustomer.size()==0) { 
-			
-			this.errMessage = " �˺Ų����� ";
+		if(listCustomer.size()==0) { 		
+			this.errMessage = "用户名不存在";
 			System.out.print(this.errMessage);
 			return "logininput";
 			
 		} 
 		else{			
 		    Music_customer db_customer = listCustomer.get(0);
-			if(!db_customer.getPassword().equals(customer.getPassword())) {
-			
-				this.errMessage = " ���벻��ȷ! ";
+			if(!db_customer.getPassword().equals(customer.getPassword())) {		
+				this.errMessage = " 密码不正确 ";
 				System.out.print(this.errMessage);
-				return "input";
+				return "logininput";
 			
 		    }else{			
 				session.put("customer", db_customer);
-				System.out.println("��¼��֤��ɣ�");
+				System.out.println("登录验证成功");
 				return "success";
 		    }
 		}
@@ -181,6 +180,7 @@ private String result;
 	    }  
 	    return NONE;  
 	}  
+	
 	public String findByName1() throws IOException{  
 		System.out.println("0");
 		ArrayList<Music_customer> listCustomer = customerDao.QueryCustomerInfo(customername);
@@ -197,6 +197,51 @@ private String result;
 	        response.getWriter().println("<font color='red'>用户名已存在，请重新输入</font>");  
 	    }  
 	    return NONE;  
+	}  
+	
+	public String SortCustomerByAll() throws IOException{  
+		System.out.println("0");
+		ArrayList<Music_customer> listCustomer = customerDao.QueryCustomerInfoByAll(customer.getShouzimu(),customer.getSex(),customer.getCountry());
+		System.out.println("1");
+	    HttpServletResponse response=  ServletActionContext.getResponse();  
+		System.out.println("2");
+	    response.setContentType("text/html;charset=UTF-8");  
+		System.out.println("3");
+	   
+	    return "show_view2";  
+	}  
+	public String SortCustomerBySex() throws IOException{  
+		System.out.println("0");
+		ArrayList<Music_customer> listCustomer = customerDao.QueryCustomerInfoBySex(customer.getSex());
+		System.out.println("1");
+	    HttpServletResponse response=  ServletActionContext.getResponse();  
+		System.out.println("2");
+	    response.setContentType("text/html;charset=UTF-8");  
+		System.out.println("3");
+	   
+	    return "show_view2";  
+	}  
+	public String SortCustomerByCountry() throws IOException{  
+		System.out.println("0");
+		ArrayList<Music_customer> listCustomer = customerDao.QueryCustomerInfoBySex(customer.getCountry());
+		System.out.println("1");
+	    HttpServletResponse response=  ServletActionContext.getResponse();  
+		System.out.println("2");
+	    response.setContentType("text/html;charset=UTF-8");  
+		System.out.println("3");
+	   
+	    return "show_view2";  
+	}  
+	public String SortCustomerByShouzimu() throws IOException{  
+		System.out.println("0");
+		ArrayList<Music_customer> listCustomer = customerDao.QueryCustomerInfoBySex(customer.getShouzimu());
+		System.out.println("1");
+	    HttpServletResponse response=  ServletActionContext.getResponse();  
+		System.out.println("2");
+	    response.setContentType("text/html;charset=UTF-8");  
+		System.out.println("3");
+	   
+	    return "show_view2";  
 	}  
 
 	public List<Music_customer> getCustomerList() {

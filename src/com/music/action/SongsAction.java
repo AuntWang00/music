@@ -28,7 +28,7 @@ import com.opensymphony.xwork2.ActionSupport;
 @Controller @Scope("prototype")
 public class SongsAction extends ActionSupport{
 	
-	/*ÒµÎñ²ã¶ÔÏó ½«songsDao×¢Èë*/
+	/*Òµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½songsDao×¢ï¿½ï¿½*/
 	@Resource SongsDao songsDao;
 	@Resource CustomerDao customerDao;
 	private Music_customer customer1;
@@ -38,6 +38,11 @@ public class SongsAction extends ActionSupport{
 	 private String songPhotoFileName;
 	 private String songPhotoContentType;
 	 private List<Songs> songslist;
+	 private List<Songs> songslist2;
+	 private File songAudio;
+	private String songAudioFileName;
+	private String songAudioContentType;
+		
 	
 	public Songs getSong() {
 		return song;
@@ -59,7 +64,7 @@ public class SongsAction extends ActionSupport{
 	
 	public String addSong() throws Exception{
 		String path = ServletActionContext.getServletContext().getRealPath("/upload"); 
-        /*´¦ÀíÍ¼Æ¬ÉÏ´«*/
+        /*ï¿½ï¿½ï¿½ï¿½Í¼Æ¬ï¿½Ï´ï¿½*/
         String SongPhotoFileName = ""; 
    	 	if(songPhoto!= null) {
    	 		InputStream is = new FileInputStream(songPhoto);
@@ -87,7 +92,35 @@ public class SongsAction extends ActionSupport{
         else
         	song.setFilepath("upload/NoImage.jpg");
         
-		
+        String path1 = ServletActionContext.getServletContext().getRealPath("/upload");
+        /*å¤„ç†éŸ³é¢‘ä¸Šä¼ */
+        String SongAudioFileName = ""; 
+   	 	if(songAudio!= null) {
+   	 		InputStream is = new FileInputStream(songAudio);
+   			String fileContentType = this.getSongAudioContentType();
+   			System.out.println(fileContentType);
+   			if(fileContentType.equals("audio/mp3"))
+   				songAudioFileName = UUID.randomUUID().toString() +  ".mp3";
+   			else if(fileContentType.equals("audio/mwa"))
+   				songAudioFileName = UUID.randomUUID().toString() +  ".mwa";
+   			else if(fileContentType.equals("audio/m4a"))
+   				songAudioFileName = UUID.randomUUID().toString() +  ".m4a";
+
+   			File file = new File(path1, songAudioFileName);
+   			OutputStream os = new FileOutputStream(file);
+   			byte[] c = new byte[1024];
+   			int cs = 0;
+   			while ((cs = is.read(c)) > 0) {
+   				os.write(c, 0, cs);
+   			}
+   			is.close();
+   			os.close();
+   	 	}
+        if(songAudio != null)
+        	song.setAudiopath("upload/" + songAudioFileName);
+        else
+        	song.setAudiopath("upload/produce101.mp3");
+  
 		songsDao.addSong(song);
 		return "message";
 	}
@@ -97,15 +130,20 @@ public class SongsAction extends ActionSupport{
 		return "show_view";
 	}
 	
-
+	public String showNewSong(){
+		songslist = songsDao.QueryNewSongs();
+		songslist2 = songsDao.QueryHotSongs();
+		songslist.addAll(songslist2);
+		return "show_newsong";
+	}
 		
 	/*
     public String showOrder() {
     	
-        //½«ÏµÍ³Éè¶¨ÎªÓÃ»§Ãû²»ÖØ¸´£¬Òò´ËÔÚÏµÍ³ÖÐ²éÑ¯µ½µÚÒ»¸ö¸ÃÃû³ÆÓÃ»§¼´¿É
+        //ï¿½ï¿½ÏµÍ³ï¿½è¶¨Îªï¿½Ã»ï¿½ï¿½ï¿½ï¿½Ø¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÏµÍ³ï¿½Ð²ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½
     	System.out.println(customer.getName());
         Customer cus= customerDao.QueryCustomerInfo(customer.getName()).get(0);
-        //×¢Òâ²»ÐèÒªfoodµÄ²éÑ¯Ìõ¼þÊ±£¬ÏÂÃæÓï¾äµÄÐ´·¨£¬Ö±½Ó½«foodµÄÌõ¼þÖÃÎªnull
+        //×¢ï¿½â²»ï¿½ï¿½Òªfoodï¿½Ä²ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð´ï¿½ï¿½ï¿½ï¿½Ö±ï¿½Ó½ï¿½foodï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªnull
         orderList = orderDao.QueryOrderInfo(cus,null);
 
         return "show_view";
@@ -121,6 +159,15 @@ public class SongsAction extends ActionSupport{
 		return "detail_view";
 	}
 	
+	public String playmusic() throws Exception{
+		song =songsDao.GetSongById(song.getSongid());
+		int bofangliang = song.getBofangliang();
+		bofangliang++;
+		song.setBofangliang(bofangliang);
+		songsDao.updateSong(song);
+		return "play_detail";
+	}
+		
 	public String showEdit() throws Exception{
 		song = songsDao.GetSongById(song.getSongid());
 		return "edit_view";		
@@ -133,7 +180,7 @@ public class SongsAction extends ActionSupport{
 	
 	public String editSong() throws Exception{
 		String path = ServletActionContext.getServletContext().getRealPath("/upload"); 
-        /*´¦ÀíÍ¼Æ¬ÉÏ´«*/
+        /*ï¿½ï¿½ï¿½ï¿½Í¼Æ¬ï¿½Ï´ï¿½*/
         String SongPhotoFileName = ""; 
    	 	if(songPhoto!= null) {
    	 		InputStream is = new FileInputStream(songPhoto);
@@ -160,7 +207,34 @@ public class SongsAction extends ActionSupport{
         	song.setFilepath("upload/" + songPhotoFileName);
         else
         	song.setFilepath("upload/NoImage.jpg");
-        
+        String path1 = ServletActionContext.getServletContext().getRealPath("/upload");
+        /*å¤„ç†éŸ³é¢‘ä¸Šä¼ */
+        String SongAudioFileName = ""; 
+   	 	if(songAudio!= null) {
+   	 		InputStream is = new FileInputStream(songAudio);
+   			String fileContentType = this.getSongAudioContentType();
+   			System.out.println(fileContentType);
+   			if(fileContentType.equals("audio/mp3"))
+   				songAudioFileName = UUID.randomUUID().toString() +  ".mp3";
+   			else if(fileContentType.equals("audio/mwa"))
+   				songAudioFileName = UUID.randomUUID().toString() +  ".mwa";
+   			else if(fileContentType.equals("audio/m4a"))
+   				songAudioFileName = UUID.randomUUID().toString() +  ".m4a";
+
+   			File file = new File(path1, songAudioFileName);
+   			OutputStream os = new FileOutputStream(file);
+   			byte[] c = new byte[1024];
+   			int cs = 0;
+   			while ((cs = is.read(c)) > 0) {
+   				os.write(c, 0, cs);
+   			}
+   			is.close();
+   			os.close();
+   	 	}
+        if(songAudio != null)
+        	song.setAudiopath("upload/" + songAudioFileName);
+        else
+        	song.setAudiopath("upload/produce101.mp3");
 		
 		songsDao.updateSong(song);
 		return "edit_message";
@@ -175,14 +249,14 @@ public class SongsAction extends ActionSupport{
 	
 	
 	public String querySongs() throws Exception{
-		System.out.println("À±¼¦£¬ÎÒÔÚ²é¸èÀ²");
+		System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú²ï¿½ï¿½ï¿½ï¿½");
 		songslist = songsDao.QuerySongsInfo(keywords);
 		return "show_view";
 	}
 	
 	/*
 	public String queryMySongs() throws Exception{
-		System.out.println("À±¼¦£¬ÎÒÔÚÄãµÄ²é¸èÀ²");
+		System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä²ï¿½ï¿½ï¿½ï¿½");
 		songslist = songsDao.QueryMySongsInfo(customer);
 		return "show_view1";
 	}
@@ -260,6 +334,30 @@ public class SongsAction extends ActionSupport{
 
 	public void setSession(Map<String, Object> session) {
 		this.session = session;
+	}
+
+	public File getSongAudio() {
+		return songAudio;
+	}
+
+	public void setSongAudio(File songAudio) {
+		this.songAudio = songAudio;
+	}
+
+	public String getSongAudioFileName() {
+		return songAudioFileName;
+	}
+
+	public void setSongAudioFileName(String songAudioFileName) {
+		this.songAudioFileName = songAudioFileName;
+	}
+
+	public String getSongAudioContentType() {
+		return songAudioContentType;
+	}
+
+	public void setSongAudioContentType(String songAudioContentType) {
+		this.songAudioContentType = songAudioContentType;
 	}
 		
 

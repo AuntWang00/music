@@ -55,7 +55,6 @@ public class CustomerDao {
         return customer;
     }
     
-   
     /*��ݲ�ѯ������ѯ*/
     @SuppressWarnings("unchecked")
 	public ArrayList<Music_customer> QueryCustomerInfo(String name) { 	
@@ -66,12 +65,75 @@ public class CustomerDao {
     		hql = hql + " and customer.name like '%" + name + "%'";
 	    	Query q = s.createQuery(hql);
 	    	customerList = q.list();
-	    	System.out.println("ok");
+	    	
     	}else{   		
     	    customerList =null;	   	
     	}   	
     	return (ArrayList<Music_customer>) customerList;
-    	
     }
+	
+	public ArrayList<Music_customer> QueryCustomerInfoBySex(String sex) { 	
+    	Session s = factory.getCurrentSession();
+    	List<Music_customer> customerList;
+    	String hql = "From Music_customer customer where 1=1";
+    	if(!sex.equals("")){ 
+    		hql = hql + " and customer.sex like '%" + sex + "%'";
+	    	Query q = s.createQuery(hql);
+	    	customerList = q.list();
+	    	
+    	}else{   		
+    	    customerList =null;	   	
+    	}   	
+    	return (ArrayList<Music_customer>) customerList;
+    }
+	
+	public ArrayList<Music_customer> QueryCustomerInfoByShouzimu(String shouzimu) { 	
+    	Session s = factory.getCurrentSession();
+    	List<Music_customer> customerList;
+    	String hql = "From Music_customer customer where 1=1";
+    	if(!shouzimu.equals("")){ 
+    		hql = hql + " and customer.shouzimu like '%" + shouzimu + "%'";
+	    	Query q = s.createQuery(hql);
+	    	customerList = q.list();
+	    	
+    	}else{   		
+    	    customerList =null;	   	
+    	}   	
+    	return (ArrayList<Music_customer>) customerList;
+    }
+
+	public ArrayList<Music_customer> QueryCustomerInfoByCountry(String country) { 	
+    	Session s = factory.getCurrentSession();
+    	List<Music_customer> customerList;
+    	String hql = "From Music_customer customer where 1=1";
+    	if(!country.equals("")){ 
+    		hql = hql + " and customer.country like '%" + country + "%'";
+	    	Query q = s.createQuery(hql);
+	    	customerList = q.list();
+	    	
+    	}else{   		
+    	    customerList =null;	   	
+    	}   	
+    	return (ArrayList<Music_customer>) customerList;
+    }
+	
+	public ArrayList<Music_customer> QueryCustomerInfoByAll(String shouzimu,String sex,String country) { 	
+    	Session s = factory.getCurrentSession();
+    	List<Music_customer> customerList;
+    	String hql = "From Music_customer customer where 1=1";
+    	if(!shouzimu.equals("")){ 
+    		hql = hql + " and customer.shouzimu like '%" + shouzimu + "%'";
+    		hql = hql + " and customer.sex like '%" + sex + "%'";
+    		hql = hql + " and customer.country like '%" + country + "%'";
+	    	Query q = s.createQuery(hql);
+	    	customerList = q.list();
+	    	
+    	}else{   		
+    	    customerList =null;	   	
+    	}   	
+    	return (ArrayList<Music_customer>) customerList;
+    }
+
+
 
 }
