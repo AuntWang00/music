@@ -152,21 +152,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </div>
     </div>
     <a name="comment_box"></a>
-    <div class="mod_all_comment js_mod_all">
-    <div class="comment_type__title c_b_normal"><h2>评论</h2></div>
-    <ul class="comment_list js_all_list">
-    <!-- 最新评论部分 -->
-    <s:iterator value="commentList" status="status">
-        <tr>
-            <td><c:out value="${comment.name}"></c:out> </td>
-	        <td><c:out value="${comment.comme}"></c:out> </td>
-        </tr>
-    </s:iterator>    
-    </ul>
-    <div class="mod_page_nav js_pager_comment">
-    <!-- 换页部分 -->
-      
-    </div>
+   
     </div>
     </div>
     </form>
@@ -185,12 +171,30 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</div>
 			</div>
 			
-			<div id="lyrics" style="height:970px; overflow-y:auto">${ songs.lyrics }</div>
+			<div id="lyrics" style="height:400px; overflow-y:auto">${ songs.lyrics }</div>
 		<script>
 		$("#lyrics").html($("#lyrics").html().replace(/\n/g,"<br/>"));
 		</script>
 	<!-- 这段是歌词 -->
 	</div>	
+	 <div class="mod_all_comment js_mod_all">
+    <div class="comment_type__title c_b_normal"><h2>评论</h2></div>
+    <ul class="comment_list js_all_list">
+    <!-- 最新评论部分 -->
+    <s:iterator value="commentList" status="status">
+        <tr>
+            <td><img src = "<%=basePath %>${customer.filepath}" style="width:50px; height:50px;"> </td>
+            
+	        <td><c:out value="${comme}"></c:out></td>
+	        <br>
+	        <br>
+        </tr>
+    </s:iterator>    
+    </ul>
+    <div class="mod_page_nav js_pager_comment">
+    <!-- 换页部分 -->
+      
+    </div>
     </div>
 	<!-- 歌曲详情语句结束 -->
 	

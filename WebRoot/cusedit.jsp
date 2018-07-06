@@ -104,15 +104,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		   <div class="col-md-12">
 		      <s:form action="customer/customer_edit?customer.customerid=customerid&customer.sex=sex&customer.country=country" cssClass="form-horizontal" enctype="multipart/form-data">
 		      <s:hidden name="customer.customerid" />
-		      <s:hidden name="customer.sex" />
-		      <s:hidden name="customer.country" />
+		      
 		      <div class="panel panel-success">
 			       <div class="panel-heading">
 		               <h4 class="panel-title">编 辑 用 户 信 息</h4>
 		           </div>
 		           <div class="panel-body">
 				       <div class="form-group">
-			                <label class="control-label col-md-3">昵称</label>
+			                <label class="control-label col-md-3">歌手名</label>
 			                <div class="col-md-8">
                               <input type="text" name="customer.name" class="form-control input-sm" 
                                value="<s:property value='customer.name'></s:property>" required>
@@ -138,16 +137,57 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                               <input type="text" name="customer.number" class="form-control input-sm" 
                                value="<s:property value='customer.number'></s:property>"  required>
                             </div>
-			           </div>
+			           </div>			       
 			           
-			           <div class="form-group">
-			                <label class="control-label col-md-3">Bab</label>
-			                <div class="col-md-8">
-                              <input type="text" name="customer.bab" class="form-control input-sm" 
-                               value="<s:property value='customer.bab'></s:property>"  required>
+			            <div class="form-group">
+                             <label class="control-label col-md-3">首字母:<s:property value='customer.shouzimu'></s:property></label>
+                            <div class="input-group">
+                           
+                            <input type="radio" name="customer.shouzimu" value="A" <c:if test="${param.customer.shouzimu== 'A'}">checked="checked"</c:if>/>A
+    						<input type="radio" name="customer.shouzimu" value="B" <c:if test="${param.customer.shouzimu== 'B'}">checked="checked"</c:if>/>B
+    						<input type="radio" name="customer.shouzimu" value="C" <c:if test="${param.customer.shouzimu== 'C'}">checked="checked"</c:if>/>C	 
+    						<input type="radio" name="customer.shouzimu" value="D" <c:if test="${param.customer.shouzimu== 'D'}">checked="checked"</c:if>/>D
+    						<input type="radio" name="customer.shouzimu" value="E" <c:if test="${param.customer.shouzimu== 'E'}">checked="checked"</c:if>/>E
+    						<input type="radio" name="customer.shouzimu" value="F" <c:if test="${param.customer.shouzimu== 'F'}">checked="checked"</c:if>/>F
+    						<input type="radio" name="customer.shouzimu" value="G" <c:if test="${param.customer.shouzimu== 'G'}">checked="checked"</c:if>/>G
+    						<input type="radio" name="customer.shouzimu" value="H" <c:if test="${param.customer.shouzimu== 'H'}">checked="checked"</c:if>/>H	 
+    						<input type="radio" name="customer.shouzimu" value="I" <c:if test="${param.customer.shouzimu== 'I'}">checked="checked"</c:if>/>I
+    						<input type="radio" name="customer.shouzimu" value="J" <c:if test="${param.customer.shouzimu== 'J'}">checked="checked"</c:if>/>J	    
+    						<input type="radio" name="customer.shouzimu" value="K" <c:if test="${param.customer.shouzimu== 'K'}">checked="checked"</c:if>/>K
+    						<input type="radio" name="customer.shouzimu" value="L" <c:if test="${param.customer.shouzimu== 'L'}">checked="checked"</c:if>/>L
+    						<input type="radio" name="customer.shouzimu" value="M" <c:if test="${param.customer.shouzimu== 'M'}">checked="checked"</c:if>/>M	 
+    						<input type="radio" name="customer.shouzimu" value="N" <c:if test="${param.customer.shouzimu== 'N'}">checked="checked"</c:if>/>N
+    						<input type="radio" name="customer.shouzimu" value="O" <c:if test="${param.customer.shouzimu== 'O'}">checked="checked"</c:if>/>O
+    						<input type="radio" name="customer.shouzimu" value="P" <c:if test="${param.customer.shouzimu== 'P'}">checked="checked"</c:if>/>P
+    						<input type="radio" name="customer.shouzimu" value="Q" <c:if test="${param.customer.shouzimu== 'Q'}">checked="checked"</c:if>/>Q
+    						<input type="radio" name="customer.shouzimu" value="R" <c:if test="${param.customer.shouzimu== 'R'}">checked="checked"</c:if>/>R	 
+    						<input type="radio" name="customer.shouzimu" value="S" <c:if test="${param.customer.shouzimu== 'S'}">checked="checked"</c:if>/>S
+    						<input type="radio" name="customer.shouzimu" value="T" <c:if test="${param.customer.shouzimu== 'T'}">checked="checked"</c:if>/>T	
+    						<input type="radio" name="customer.shouzimu" value="U" <c:if test="${param.customer.shouzimu== 'U'}">checked="checked"</c:if>/>U
+    						<input type="radio" name="customer.shouzimu" value="V" <c:if test="${param.customer.shouzimu== 'V'}">checked="checked"</c:if>/>V
+    						<input type="radio" name="customer.shouzimu" value="W" <c:if test="${param.customer.shouzimu== 'W'}">checked="checked"</c:if>/>W	 
+    						<input type="radio" name="customer.shouzimu" value="X" <c:if test="${param.customer.shouzimu== 'X'}">checked="checked"</c:if>/>X
+    						<input type="radio" name="customer.shouzimu" value="Y" <c:if test="${param.customer.shouzimu== 'Y'}">checked="checked"</c:if>/>Y
+    						<input type="radio" name="customer.shouzimu" value="Z" <c:if test="${param.customer.shouzimu== 'Z'}">checked="checked"</c:if>/>Z
+    						<input type="radio" name="customer.shouzimu" value="ZZ" <c:if test="${param.customer.shouzimu== 'ZZ'}">checked="checked"</c:if>/>其他	        	    
+    					                           
+                             <s:fielderror fieldName="customer.shouzimu" cssClass="fielderror"/>                       
                             </div>
-			           </div>
-			     
+                        </div>
+			     		 <div class="form-group">
+                             <label class="control-label col-md-3">地区:<s:property value='customer.country'></s:property></label>
+                            <div class="input-group">
+                           
+                            <input type="radio" name="customer.country" value="1" <c:if test="${param.customer.sex== '1'}">checked="checked"</c:if>/>中国内地
+    						<input type="radio" name="customer.country" value="2" <c:if test="${param.customer.sex== '2'}">checked="checked"</c:if>/>中国港澳台
+    						<input type="radio" name="customer.country" value="3" <c:if test="${param.customer.sex== '3'}">checked="checked"</c:if>/>日韩
+    						 <input type="radio" name="customer.country" value="4" <c:if test="${param.customer.sex== '4'}">checked="checked"</c:if>/>欧美
+    						<input type="radio" name="customer.country" value="5" <c:if test="${param.customer.sex== '5'}">checked="checked"</c:if>/>其他
+    					
+    						
+                             <s:fielderror fieldName="customer.sex" cssClass="fielderror"/>                       
+                            </div>
+                        </div> 
 			     		<div class="form-group">
 			                <label class="control-label col-md-3">密码</label>
 			                <div class="col-md-8">
@@ -155,10 +195,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                value="<s:property value='customer.password'></s:property>"  required>
                             </div>
 			           </div>
+			           
+			           <div class="form-group">
+			                <label class="control-label col-md-3">个人简介</label>
+			                <div class="col-md-8">
+                              <input type="text" name="customer.intro" class="form-control input-sm" 
+                               value="<s:property value='customer.intro'></s:property>"  required>
+                            </div>
+			           </div>
 			     
 			           
 			           <div class="form-group">
 			                <label class="control-label col-md-3">头像</label>
+			                <s:hidden name="customer.filepath" />
 			                <div class="col-md-4">
 			                  <div class="fileupload fileupload-new" data-provides="fileupload">
                                   <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">               
@@ -171,7 +220,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                       <span class="btn btn-file btn-primary">
                                         <span class="fileupload-new">换张图片</span>  
                                          <span class="fileupload-exists">换张图片</span>
-                                         <input type="file" name="custPhoto"/>
+                                         <input type="file" name="custPhoto" />
                                       </span>
                                       <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload">取消</a>
                                   </div>

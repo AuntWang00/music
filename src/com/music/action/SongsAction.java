@@ -224,8 +224,7 @@ public class SongsAction extends ActionSupport{
    	 	}
         if(songPhoto != null)
         	song.setFilepath("images/" + songPhotoFileName);
-        else
-        	song.setFilepath("images/NoImage.jpg");
+        
         String path1 = ServletActionContext.getServletContext().getRealPath("/audio");
         /*处理音频上传*/
         String SongAudioFileName = ""; 
@@ -252,8 +251,7 @@ public class SongsAction extends ActionSupport{
    	 	}
         if(songAudio != null)
         	song.setAudiopath("audio/" + songAudioFileName);
-        else
-        	song.setAudiopath("audio/produce101.mp3");
+        
 		
 		songsDao.updateSong(song);
 		return "edit_message";

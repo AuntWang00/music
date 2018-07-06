@@ -1351,7 +1351,7 @@ main table td{
 }
 
 .detail-layout {
-	
+	margin-bottom: 50px;
 	height:auto;
 	margin-right:30px;
 	width:500px;
@@ -1579,10 +1579,12 @@ li {
 
 .mod_all_comment {
     margin-bottom: 46px;
-    margin-top: 30px;
+    margin-top: 70px;
     overflow-y: auto;
+    width: 500px;
+    height: 400px;
 }
-}
+
 
 .mod_page_nav {
     clear: both;
@@ -1607,6 +1609,7 @@ li {
 }
 
 .comment_type__title h2 {
+	    margin-top: 30px;
     font-weight: 400;
     font-size: 16px;
     overflow: hidden;
@@ -1667,7 +1670,7 @@ li {
 
 .comment__tool {
 	padding-top: 30px;
-    margin-left: 520px;
+    margin-left: 495px;
     bottom: 10px;
     right: -5px;
 }

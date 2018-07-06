@@ -167,7 +167,7 @@ public class Songs implements java.io.Serializable {
 		this.bofangliang = bofangliang;
 	}
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "songs")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "songs")
 	public Set<Music_order> getMusic_orders() {
 		return this.music_orders;
 	}
@@ -176,7 +176,7 @@ public class Songs implements java.io.Serializable {
 		this.music_orders = music_orders;
 	}
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "songs")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "songs")
 	public Set<Music_order> getMusic_orders_1() {
 		return this.music_orders_1;
 	}
@@ -185,7 +185,7 @@ public class Songs implements java.io.Serializable {
 		this.music_orders_1 = music_orders_1;
 	}
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "songs")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "songs")
 	public Set<Comme> getCommes() {
 		return this.commes;
 	}
@@ -194,7 +194,7 @@ public class Songs implements java.io.Serializable {
 		this.commes = commes;
 	}
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "songs")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "songs")
 	public Set<Music_order> getMusic_orders_2() {
 		return this.music_orders_2;
 	}
@@ -203,7 +203,7 @@ public class Songs implements java.io.Serializable {
 		this.music_orders_2 = music_orders_2;
 	}
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "songs")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "songs")
 	public Set<Music_order> getMusic_orders_3() {
 		return this.music_orders_3;
 	}
@@ -212,7 +212,7 @@ public class Songs implements java.io.Serializable {
 		this.music_orders_3 = music_orders_3;
 	}
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "songs")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "songs")
 	public Set<Comme> getCommes_1() {
 		return this.commes_1;
 	}

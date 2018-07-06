@@ -148,6 +148,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			           
 			           <div class="form-group">
 			                <label class="control-label col-md-3">封面图片</label>
+			                <s:hidden name="song.filepath" />
 			                <div class="col-md-4">
 			                  <div class="fileupload fileupload-new" data-provides="fileupload">
                                   <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">               
@@ -169,6 +170,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			           </div>   
 							 <div class="form-group">
 						                <label class="control-label col-md-3">音频文件</label>
+						                <s:hidden name="song.audiopath" />
 						                <div class="col-md-4">
 			                              <div class="fileupload fileupload-new" data-provides="fileupload">
 			                                <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">

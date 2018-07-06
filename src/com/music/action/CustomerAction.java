@@ -116,8 +116,7 @@ public class CustomerAction extends ActionSupport implements SessionAware{
    	 	System.out.println("custPhoto:"+custPhoto);
         if(custPhoto != null)
         	customer.setFilepath("images/" + custPhotoFileName);
-        else
-        	customer.setFilepath("images/NoImage.jpg");
+       
 		
 		customerDao.UpdateCustomer(customer);
 		return "edit_suc";

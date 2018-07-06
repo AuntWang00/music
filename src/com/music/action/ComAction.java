@@ -146,6 +146,7 @@ public class ComAction extends ActionSupport{
 	public String showDetail() {
     	songs = songsDao.GetSongById(songs.getSongid());
     	order = orderDao.GetOrderById(order.getOrderid());
+    	commentList = comDao.QueryCommentInfo_g(songs.getSongid());
         return "detail_view";
     }
 }

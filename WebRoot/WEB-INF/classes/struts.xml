@@ -70,6 +70,7 @@
                     <result name="show_detail">/singerDetail.jsp</result>
                     <result name="edit_suc">/cuseditcuc.jsp</result>
                     <result name="show_edit">/cusedit.jsp</result>
+                     <result name="input">/reg.jsp</result>
 	        </action>  
 	 </package> 
 	 

@@ -126,7 +126,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                                      <td><s:property value="songs.songname"></s:property></td>
 	                                      <td class="center"><s:property value="songnum"></s:property></td>
 	                                      <td class="center"><s:property value="total"></s:property></td>
-	                                      <td><a class="fff1" href="com/com_showDetail?songs.songid=${songs.songid}&order.orderid=<s:property value="orderid"></s:property>&customer.name=<s:property value='#session.customer.name'/>">评论</a></td>
+	                                      <td><a href="com/com_showDetail?songs.songid=${songs.songid}&order.orderid=<s:property value="orderid"></s:property>&customer.name=<s:property value='#session.customer.name'/>">评论</a></td>
 	                                     </tr>
 	                              </s:iterator>
 	                          </tbody>

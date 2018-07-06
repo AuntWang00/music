@@ -81,7 +81,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</c:when>
 		       <c:otherwise>
 		       <div class="top-login"> 		       	
-		       	<img src = "<%=basePath %>${customer.filepath}" style="width:30px; height:30px;">	   
+		       	<a href="customer/customer_showEdit?customer.customerid=${customer.customerid}&customer.sex=${customer.sex}&customer.country=${customer.country}">
+		       	<img src = "<%=basePath %>${customer.filepath}" style="width:30px; height:30px;"></a>
 		  	    <c:out value="${customer.name}"></c:out>, 欢迎您!
 			    <a href="logout.jsp">退出</a>	
 			    </div>		   
@@ -131,25 +132,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			    <a href="order/order_addOrder?song.songid=<s:property 
 	                  value="song.songid"/>&customer.name=<s:property value='#session.customer.name'/>" class="mod_btn_green js_all_play">
 	                  <i class="mod_btn_green__icon_play">购买</i></a>
-		
-			     
-			    <a href="javascript:;" class="mod_btn js_more" data-stat="y_new.song.header.more"  data-mid="001PfID21QGDh3"><i class="mod_btn__icon_menu"></i>更多</a>
+	                    
+			   
 				<br/><br/>主播放页无法播放时，请点击副播放页。
+				<br/><br/>购买后可评论~
 			  </div>   
 			</div>		
 		</div>
 		<!-- 这段是评论 -->
     <div class="mod_comment" >
-    	<div class="part__hd">
-	    <h2 class="part__tit">评论<span class="c_mg_thin part__tit_desc js_all_comment_num"></span></h2>
-	    </div>
+    	
     <div class="mod_comment1 js_cmt_input">
-      
+    
+    <!--  
     <div class="comment__input">
    		 <div class="comment__textarea js_comment__textarea c_bg_normal">
    			 <div class="comment_textarea_inner ">
 			    <!-- c_mg_normal -->
 			    <!-- focus评论框的时候将。comment__textarea_default模块儿隐藏，同时显示。comment_textarea_input -->
+			    <!--  
 			    <textarea class="comment__textarea_default c_mg_thin js_reply_text_blur" name="comme" id="reply_text_blur" contenteditable="true" placeholder="期待你的评论...">
 			    	<s:property value='comment.comme'></s:property>
 			    </textarea>
@@ -161,7 +162,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    	<button type="submit" class="mod_btn_red comment__tool_btn js_send_reply">发表评论</button>
 	    </div>
     </div>
-    
+    -->
     </div>
     <a name="comment_box"></a>
    

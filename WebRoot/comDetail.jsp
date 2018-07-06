@@ -103,6 +103,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<div class="above">
 	<div class="part1">
 	<!-- 图片 -->
+	<form action="com/com_addComment?songs.songid=${songs.songid}&order.orderid=${order.orderid}&customer.name=<s:property value='#session.customer.name'/>" method="post">
 	<span class = "show-photo">
  		<!-- <img src = "<%=basePath %>${songs.filepath}" style="width:300px; height:300px;">  -->
  	 <img src = "<%=basePath %>${songs.filepath}" style="width:300px; height:300px;">
@@ -153,7 +154,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <!-- c_mg_normal -->
     <!-- focus评论框的时候将。comment__textarea_default模块儿隐藏，同时显示。comment_textarea_input -->
     <textarea class="comment__textarea_default c_mg_thin js_reply_text_blur"
-    name="comme" id="reply_text_blur" contenteditable="true">期待你的评论...</textarea>
+    name="comme" id="reply_text_blur" contenteditable="true" placeholder="期待你的评论..."><s:property value='comment.comme'></s:property></textarea>
     <div class="js_reply_text comment__textarea_input c_mg_narmal" name 
     id="reply_text" contenteditable="true" style="display:none;"></div>
     </div>  
@@ -165,7 +166,32 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     
     </div>
     <a name="comment_box"></a>
-    <div class="mod_all_comment js_mod_all">
+   
+    </div>
+    </div>
+    </form>
+    </div>
+	<!-- 歌词 -->
+	<div class="detail-layout">
+	<div class="detail-layout-main">
+	<div class="mod_lyric">
+			    <input id="copy_content" style="display:none;"></input>
+			    <div class="lyric__hd">
+				<h2 class="lyric__tit">歌词</h2>
+			    </div>
+			    <div class="lyric__cont limit">
+				<div class="lyric__cont_box" id="lrc_content"></div>
+			    </div>
+			</div>
+			</div>
+			
+			<div id="lyrics" style="height:400px; overflow-y:auto">${ songs.lyrics }</div>
+		<script>
+		$("#lyrics").html($("#lyrics").html().replace(/\n/g,"<br/>"));
+		</script>
+	<!-- 这段是歌词 -->
+	</div>	
+	 <div class="mod_all_comment js_mod_all">
     <div class="comment_type__title c_b_normal"><h2>评论</h2></div>
     <ul class="comment_list js_all_list">
     <!-- 最新评论部分 -->
@@ -183,29 +209,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <!-- 换页部分 -->
       
     </div>
-    </div>
-    </div>
-    </div>
-	<!-- 歌词 -->
-	<div class="detail-layout">
-	<div class="detail-layout-main">
-	<div class="mod_lyric">
-			    <input id="copy_content" style="display:none;"></input>
-			    <div class="lyric__hd">
-				<h2 class="lyric__tit">歌词</h2>
-			    </div>
-			    <div class="lyric__cont limit">
-				<div class="lyric__cont_box" id="lrc_content"></div>
-			    </div>
-			</div>
-			</div>
-			
-			<div id="lyrics" style="height:970px; overflow-y:auto">${ songs.lyrics }</div>
-		<script>
-		$("#lyrics").html($("#lyrics").html().replace(/\n/g,"<br/>"));
-		</script>
-	<!-- 这段是歌词 -->
-	</div>	
     </div>
 	<!-- 歌曲详情语句结束 -->
 	

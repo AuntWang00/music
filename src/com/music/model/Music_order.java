@@ -69,7 +69,7 @@ public class Music_order implements java.io.Serializable {
 		this.orderid = orderid;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "customer")
 	public Music_customer getMusic_customer() {
 		return this.music_customer;
@@ -79,7 +79,7 @@ public class Music_order implements java.io.Serializable {
 		this.music_customer = music_customer;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "songs", nullable = false)
 	public Songs getSongs() {
 		return this.songs;
@@ -116,7 +116,7 @@ public class Music_order implements java.io.Serializable {
 		this.song = song;
 	}
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "music_order")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "music_order")
 	public Set<Comme> getCommes() {
 		return this.commes;
 	}
@@ -125,7 +125,7 @@ public class Music_order implements java.io.Serializable {
 		this.commes = commes;
 	}
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "music_order")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "music_order")
 	public Set<Comme> getCommes_1() {
 		return this.commes_1;
 	}

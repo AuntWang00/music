@@ -22,6 +22,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <link rel="stylesheet" href="css/simple-line-icons.css" type="text/css" />
   <link rel="stylesheet" href="css/font.css" type="text/css" />
   <link rel="stylesheet" href="css/app.css" type="text/css" />  
+  <link rel="shortcut icon" href="<%=basePath%>images/logo.png">
     <!--[if lt IE 9]>
     <script src="js/ie/html5shiv.js"></script>
     <script src="js/ie/respond.min.js"></script>
