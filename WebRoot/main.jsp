@@ -78,9 +78,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</c:when>
 		       <c:otherwise>
 		       <div class="top-login"> 		       	
-		       	<a href="customer/customer_showEdit?customer.customerid=${customer.customerid}&customer.sex=${customer.sex}&customer.country=${customer.country}">
-		       	<img src = "<%=basePath %>${customer.filepath}" style="width:30px; height:30px;"></a>	   
-		  	    <c:out value="${customer.name}"></c:out>, 欢迎您!
+		       	<a href="customer/customer_showEdit?customer.customerid=${session.customer.customerid}">
+		       	<img src = "<%=basePath %>${session.customer.filepath}" style="width:30px; height:30px;"></a>	   
+		  	    <c:out value="${session.customer.name}"></c:out>, 欢迎您!
 			    <a href="logout.jsp">退出</a>	
 			    </div>		   
 		       </c:otherwise>
@@ -258,10 +258,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
      <footer class="footer" role="footer">
    		<div class="footer-inner">
    			<div class="footer-info">
-   			<p>不知道放什么就先空着吧</p>
+   			
+   			<ul>
+   			<li><img src = "<%=basePath %>images/rongrong.png" title="黄丽蓉"><br><a href="mailto:525807250@qq.com">黄丽蓉</a></li>
+   			<li><img src = "<%=basePath %>images/jiali.png" title="王佳丽"><br><a href="mailto:1092117078@qq.com">王佳丽</a></li>
+   			<li><img src = "<%=basePath %>images/junjun.png" title="尹一君"><br><a href="mailto:2362860676@qq.com">尹一君</a></li>
+   			<li><img src = "<%=basePath %>images/qiqi.png" title="齐国红"><br><a href="mailto:1823982150@qq.com">齐国红</a></li>
+   			<li><img src = "<%=basePath %>images/wangke.png" title="王珂"><br><a href="mailto:1007040724@qq.com">王珂</a></li>
+   			
+   			
+   			</ul>
+   			
+   			
    			</div>
    			<div class="footer-copyright">
-   			<p>2018买歌原创音乐版权所有</p>
+   			
+   			<p>©2018 买歌原创音乐版权所有</p>
+
    			</div>
    		</div>
    	</footer>

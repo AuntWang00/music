@@ -38,11 +38,6 @@ public class Music_order implements java.io.Serializable {
 	public Music_order() {
 	}
 
-	/** minimal constructor */
-	public Music_order(Songs songs) {
-		this.songs = songs;
-	}
-
 	/** full constructor */
 	public Music_order(Music_customer music_customer, Songs songs,
 			Integer songnum, Double total, Integer song, Set<Comme> commes,
@@ -80,7 +75,7 @@ public class Music_order implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "songs", nullable = false)
+	@JoinColumn(name = "songs",nullable=false)
 	public Songs getSongs() {
 		return this.songs;
 	}

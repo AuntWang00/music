@@ -14,15 +14,15 @@ import org.hibernate.annotations.GenericGenerator;
  * Comme entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "comment", catalog = "music")
+@Table(name = "comme", catalog = "music")
 public class Comme implements java.io.Serializable {
 
 	// Fields
 
 	private Integer comid;
 	private Music_order music_order;
-	private Music_customer music_customer;
 	private Songs songs;
+	private Music_customer music_customer;
 	private String comme;
 
 	// Constructors
@@ -32,11 +32,11 @@ public class Comme implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Comme(Music_order music_order, Music_customer music_customer,
-			Songs songs, String comme) {
+	public Comme(Music_order music_order, Songs songs,
+			Music_customer music_customer, String comme) {
 		this.music_order = music_order;
-		this.music_customer = music_customer;
 		this.songs = songs;
+		this.music_customer = music_customer;
 		this.comme = comme;
 	}
 
@@ -53,7 +53,7 @@ public class Comme implements java.io.Serializable {
 		this.comid = comid;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "ord", nullable = false)
 	public Music_order getMusic_order() {
 		return this.music_order;
@@ -63,17 +63,7 @@ public class Comme implements java.io.Serializable {
 		this.music_order = music_order;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "customer", nullable = false)
-	public Music_customer getMusic_customer() {
-		return this.music_customer;
-	}
-
-	public void setMusic_customer(Music_customer music_customer) {
-		this.music_customer = music_customer;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "songs", nullable = false)
 	public Songs getSongs() {
 		return this.songs;
@@ -81,6 +71,16 @@ public class Comme implements java.io.Serializable {
 
 	public void setSongs(Songs songs) {
 		this.songs = songs;
+	}
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "guke", nullable = false)
+	public Music_customer getMusic_customer() {
+		return this.music_customer;
+	}
+
+	public void setMusic_customer(Music_customer music_customer) {
+		this.music_customer = music_customer;
 	}
 
 	@Column(name = "comme", nullable = false, length = 1000)

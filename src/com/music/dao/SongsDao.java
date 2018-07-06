@@ -44,7 +44,7 @@ public class SongsDao {
         Session s = factory.getCurrentSession();
         String hql = "From Songs";
         Query q = s.createQuery(hql);
-        List songslist = q.list();
+        List<Songs> songslist = q.list();
         return (ArrayList<Songs>) songslist;
     }
     
@@ -52,7 +52,7 @@ public class SongsDao {
         Session s = factory.getCurrentSession();
         String hql = "From Songs";
         Query q = s.createQuery(hql);
-        List songslist = q.list();
+        List<Songs> songslist = q.list();
         while(songslist.size()>5)
         	songslist.remove(0);
         return (ArrayList<Songs>) songslist;

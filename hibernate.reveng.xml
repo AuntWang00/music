@@ -19,7 +19,13 @@
 			<generator class="increment"></generator>
 		</primary-key>
 	</table>
-<table name="comment" catalog="music" class="com.music.model.Comme">
+	<table name="comment" catalog="music"
+		class="com.music.model.Comme">
+		<primary-key>
+			<generator class="increment"></generator>
+		</primary-key>
+	</table>
+<table name="comme" catalog="music" class="com.music.model.Comme">
 	<primary-key>
 		<generator class="increment"></generator>
 	</primary-key>

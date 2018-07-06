@@ -22,6 +22,7 @@ public class Songs implements java.io.Serializable {
 	// Fields
 
 	private Integer songid;
+	private String audiopath;
 	private String songname;
 	private Double price;
 	private String filepath;
@@ -29,14 +30,13 @@ public class Songs implements java.io.Serializable {
 	private String language;
 	private String lyrics;
 	private String singer;
-	private String audiopath;
 	private Integer bofangliang;
 	private Set<Music_order> music_orders = new HashSet<Music_order>(0);
 	private Set<Music_order> music_orders_1 = new HashSet<Music_order>(0);
 	private Set<Comme> commes = new HashSet<Comme>(0);
+	private Set<Comme> commes_1 = new HashSet<Comme>(0);
 	private Set<Music_order> music_orders_2 = new HashSet<Music_order>(0);
 	private Set<Music_order> music_orders_3 = new HashSet<Music_order>(0);
-	private Set<Comme> commes_1 = new HashSet<Comme>(0);
 
 	// Constructors
 
@@ -50,12 +50,13 @@ public class Songs implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Songs(String songname, Double price, String filepath, String album,
-			String language, String lyrics, String singer, String audiopath,
-			Integer bofangliang, Set<Music_order> music_orders,
+	public Songs(String audiopath, String songname, Double price,
+			String filepath, String album, String language, String lyrics,
+			String singer, Integer bofangliang, Set<Music_order> music_orders,
 			Set<Music_order> music_orders_1, Set<Comme> commes,
-			Set<Music_order> music_orders_2, Set<Music_order> music_orders_3,
-			Set<Comme> commes_1) {
+			Set<Comme> commes_1, Set<Music_order> music_orders_2,
+			Set<Music_order> music_orders_3) {
+		this.audiopath = audiopath;
 		this.songname = songname;
 		this.price = price;
 		this.filepath = filepath;
@@ -63,14 +64,13 @@ public class Songs implements java.io.Serializable {
 		this.language = language;
 		this.lyrics = lyrics;
 		this.singer = singer;
-		this.audiopath = audiopath;
 		this.bofangliang = bofangliang;
 		this.music_orders = music_orders;
 		this.music_orders_1 = music_orders_1;
 		this.commes = commes;
+		this.commes_1 = commes_1;
 		this.music_orders_2 = music_orders_2;
 		this.music_orders_3 = music_orders_3;
-		this.commes_1 = commes_1;
 	}
 
 	// Property accessors
@@ -84,6 +84,15 @@ public class Songs implements java.io.Serializable {
 
 	public void setSongid(Integer songid) {
 		this.songid = songid;
+	}
+
+	@Column(name = "audiopath", length = 100)
+	public String getAudiopath() {
+		return this.audiopath;
+	}
+
+	public void setAudiopath(String audiopath) {
+		this.audiopath = audiopath;
 	}
 
 	@Column(name = "songname", length = 100)
@@ -149,15 +158,6 @@ public class Songs implements java.io.Serializable {
 		this.singer = singer;
 	}
 
-	@Column(name = "audiopath", length = 100)
-	public String getAudiopath() {
-		return this.audiopath;
-	}
-
-	public void setAudiopath(String audiopath) {
-		this.audiopath = audiopath;
-	}
-
 	@Column(name = "bofangliang")
 	public Integer getBofangliang() {
 		return this.bofangliang;
@@ -195,6 +195,15 @@ public class Songs implements java.io.Serializable {
 	}
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "songs")
+	public Set<Comme> getCommes_1() {
+		return this.commes_1;
+	}
+
+	public void setCommes_1(Set<Comme> commes_1) {
+		this.commes_1 = commes_1;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "songs")
 	public Set<Music_order> getMusic_orders_2() {
 		return this.music_orders_2;
 	}
@@ -210,15 +219,6 @@ public class Songs implements java.io.Serializable {
 
 	public void setMusic_orders_3(Set<Music_order> music_orders_3) {
 		this.music_orders_3 = music_orders_3;
-	}
-
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "songs")
-	public Set<Comme> getCommes_1() {
-		return this.commes_1;
-	}
-
-	public void setCommes_1(Set<Comme> commes_1) {
-		this.commes_1 = commes_1;
 	}
 
 }

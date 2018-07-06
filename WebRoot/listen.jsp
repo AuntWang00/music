@@ -39,9 +39,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<input type="text" class="searchTxt">
 			</div>
 			<div class="mainNav">
-			 <a href="customer/customer_showEdit?customer.customerid=${customer.customerid}&customer.sex=${customer.sex}&customer.country=${customer.country}">
-		       	<img src = "<%=basePath %>${customer.filepath}" style="width:30px; height:30px;"></a>   
-		  	    <c:out value="${customer.name}"></c:out>, 欢迎您!
+			<a href="customer/customer_showEdit?customer.customerid=${session.customer.customerid}">
+		       	<img src = "<%=basePath %>${session.customer.filepath}" style="width:30px; height:30px;"></a>	   
+		  	    <c:out value="${session.customer.name}"></c:out>, 欢迎您!
 			    <a href="logout.jsp">退出</a>	
 			</div>
 		</div>

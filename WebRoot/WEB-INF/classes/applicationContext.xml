@@ -18,8 +18,8 @@
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
 		<property name="driverClass" value="org.gjt.mm.mysql.Driver"/>
 		<property name="jdbcUrl" value="jdbc:mysql://localhost:3306/music?useUnicode=true&amp;characterEncoding=UTF-8"/>
-		<property name="user" value="root"/>
-		<property name="password" value=""/>
+		<property name="user" value="music_root"/>
+		<property name="password" value="tianyouyou20music"/>
 		<!--初始化时获取的连接数，取值应在minPoolSize与maxPoolSize之间。Default: 3 -->
 		<property name="initialPoolSize" value="1"/>
 		<!--连接池中保留的最小连接数。-->
